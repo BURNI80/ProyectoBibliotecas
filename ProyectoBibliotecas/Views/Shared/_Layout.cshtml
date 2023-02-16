@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/css/EstiloMainLayout.css">
+</head>
+
+<body>
+    <!-- *MENU MOVIL-->
+    <div class="menu-movil">
+        <svg class="ham hamRotate ham4" viewBox="0 0 100 100" width="60" onclick="this.classList.toggle('active')">
+            <path class="line top"
+                d="m 70,33 h -40 c 0,0 -8.5,-0.149796 -8.5,8.5 0,8.649796 8.5,8.5 8.5,8.5 h 20 v -20" />
+            <path class="line middle" d="m 70,50 h -40" />
+            <path class="line bottom"
+                d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20" />
+        </svg>
+    </div>
+
+
+    <nav class="menu">
+        <div class="fix-movil">
+            <!-- *BOTONES DEL MENU -->
+            <div class="botones-menu">
+                <div class="boton-menu">
+                    <p><a class="a-menu" asp-action="Index" asp-controller="Bibliotecas" >Bibliotecas</a></p>
+                </div>
+                <div class="boton-menu">
+                    <p>Libros</p>
+                </div>
+                <div class="boton-menu">
+                    <p>Autores</p>
+                </div>
+                <div class="boton-menu">
+                    <p>Editoriales</p>
+                </div>
+            </div>
+            <!-- *PARTE INFERIOR DEL MENU -->
+            <div class="menu-inferior">
+                <div class="separador-menu"></div>
+                <p class="menu-usuario">USUARIO</p>
+                <div class="mi-lista">
+                    <svg width="30" height="30" viewBox="0 0 189 217" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M38.2595 10H151.297C166.905 10 179.557 22.6522 179.557 38.2595V179.557C179.557 195.164 166.905 207.816 151.297 207.816H38.2595C22.6522 207.816 10 195.164 10 179.557V38.2595C10 22.6522 22.6522 10 38.2595 10Z"
+                            stroke="white" stroke-width="18.13" stroke-linecap="round" stroke-linejoin="round" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M52.3896 10H108.909V80.8183L80.6491 52.3892L52.3896 80.8183V10Z" stroke="white"
+                            stroke-width="18.13" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p>Mi Lista</p>
+                </div>
+                <div class="boton-logout">
+                    <svg width="30" height="30" viewBox="0 0 201 198" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M163.327 136.702C161.184 136.702 159.041 135.913 157.349 134.221C154.078 130.95 154.078 125.536 157.349 122.265L180.245 99.3681L157.349 76.4714C154.078 73.2009 154.078 67.787 157.349 64.516C160.62 61.2451 166.034 61.2451 169.305 64.516L198.179 93.3902C201.45 96.6611 201.45 102.075 198.179 105.346L169.305 134.221C167.613 135.913 165.47 136.702 163.327 136.702Z"
+                            fill="#FF3131" />
+                        <path
+                            d="M191.4 107.829H76.6908C72.0664 107.829 68.2314 103.994 68.2314 99.3699C68.2314 94.7454 72.0664 90.9105 76.6908 90.9105H191.4C196.024 90.9105 199.859 94.7454 199.859 99.3699C199.859 103.994 196.024 107.829 191.4 107.829Z"
+                            fill="#FF3131" />
+                        <path
+                            d="M99.2494 197.385C41.1615 197.385 0.556641 156.78 0.556641 98.6925C0.556641 40.6049 41.1615 0 99.2494 0C103.874 0 107.709 3.83491 107.709 8.45935C107.709 13.0838 103.874 16.9187 99.2494 16.9187C51.0872 16.9187 17.4753 50.5305 17.4753 98.6925C17.4753 146.854 51.0872 180.466 99.2494 180.466C103.874 180.466 107.709 184.301 107.709 188.926C107.709 193.55 103.874 197.385 99.2494 197.385Z"
+                            fill="#FF3131" />
+                    </svg>
+                    <p>Cerrar Session</p>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- *AQUI VA EL CONTENIDO -->
+    <div class="main scrollbar" id="style-1">
+           @RenderBody()
+    </div>
+
+
+</body>
+
+</html>
+
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script>
+    $(document).ready(main);
+    var contador = 1;
+
+    function main() {
+        $(window).on('resize', function () {
+            if ($(this).width() > 800) {
+                $(".menu").css('left', '0');
+            }
+            if ($(this).width() < 800) {
+                $(".menu").css('left', '-100%');
+            }
+        }).trigger('resize');
+
+        $(".menu-movil").click(function () {
+            if (contador == 1) {
+                contador = 0;
+                $(".menu").animate({
+                    left: '0'
+                })
+            } else {
+                contador = 1;
+                $(".menu").animate({
+                    left: '-100%'
+                })
+            }
+        });
+    };
+
+</script>

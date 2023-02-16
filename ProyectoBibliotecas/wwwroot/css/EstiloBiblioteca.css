@@ -1,0 +1,194 @@
+﻿/* #region CardBiblioteca */
+
+.card-biblioteca {
+    margin-top:40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    float:right;
+    gap: 10px;
+    width: 95%;
+    height: 176px;
+    background: rgba(38, 38, 38, 0.5);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 25px 0px 0px 25px;
+}
+
+    .card-biblioteca img {
+        width: 133px;
+        height: 133px;
+        margin-left: 20px;
+        object-fit: cover;
+        object-position: center;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        border-radius: 15px;
+    }
+
+.contenido-biblioteca {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 10px;
+    width: 70%;
+    height: 136px;
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.titulo-biblioteca {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 10px;
+    width: 100%;
+    height: 101px;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+    .titulo-biblioteca p {
+        max-height: 91px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 35px;
+        line-height: 43px;
+        color: #E8D7F1;
+        display: flex;
+        /* align-items: center; */
+        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        max-width: 100%;
+        text-overflow: ellipsis ;
+    }
+
+    .titulo-biblioteca div {
+        width: 100%;
+        height: 3px;
+        background: rgba(38, 38, 38, 0.4);
+    }
+
+.datos-biblioteca {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+    width: 100%;
+    height: 24px;
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 1;
+}
+
+.horario {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: left;
+    padding: 0px;
+    gap: 10px;
+    width: 33%;
+    height: 24px;
+}
+
+    .horario svg {
+        height: 24px;
+        width: 24px;
+    }
+
+    .horario p {
+        height: 24px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 200;
+        font-size: 20px;
+        line-height: 24px;
+        color: #D3B2FF;
+    }
+
+.web {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: left;
+    padding: 0px;
+    gap: 10px;
+    width: 33%;
+    height: 24px;
+}
+
+    .web svg {
+        height: 24px;
+        width: 24px;
+    }
+
+    .web p {
+        height: 24px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 200;
+        font-size: 20px;
+        line-height: 24px;
+        color: #D3B2FF;
+    }
+
+.direccion {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: left;
+    padding: 0px;
+    gap: 10px;
+    width: 33%;
+    height: 24px;
+}
+
+    .direccion svg {
+        height: 24px;
+        width: 24px;
+    }
+
+    .direccion p {
+        height: 24px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 200;
+        font-size: 20px;
+        line-height: 24px;
+        color: #D3B2FF;
+    }
+
+.flecha-biblioteca {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    /* Inside auto layout */
+    flex: none;
+    order: 2;
+    align-self: stretch;
+    flex-grow: 1;
+}
+
+    .flecha-biblioteca svg {
+        width: 55px;
+        height: 55px;
+        /* transform: matrix(1, 0, 0, -1, 0, 0); */
+    }
+
+
+/* #endregion */
