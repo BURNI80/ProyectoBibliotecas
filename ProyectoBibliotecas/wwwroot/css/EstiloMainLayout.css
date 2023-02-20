@@ -2,6 +2,13 @@
 .a-menu {
     text-decoration: none;
     color: white;
+    background-color: green;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 * {

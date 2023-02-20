@@ -2,9 +2,9 @@
 
 namespace ProyectoBibliotecas.Controllers
 {
-    public class BibliotecasController : Controller
+    public class LibrosController : Controller
     {
-        public IActionResult IndexBibliotecas()
+        public IActionResult IndexLibros()
         {
             return View();
         }
