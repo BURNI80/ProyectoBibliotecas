@@ -69,6 +69,9 @@ body {
     flex-grow: 0;
 }
 
+    .boton-menu:hover {
+        background-color: rgba(211, 178, 255, 0.3);
+    }
     .boton-menu p {
         width: 100%;
         height: auto;
@@ -100,6 +103,13 @@ body {
     flex-grow: 0;
 }
 
+.boton-logout:hover {
+    background: #666666;
+}
+
+.mi-lista:hover {
+    background: #666666;
+}
 .separador-menu {
     background-color: red;
     width: 100%;

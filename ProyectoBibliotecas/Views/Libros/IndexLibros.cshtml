@@ -1,5 +1,16 @@
 ﻿<link rel="stylesheet" href="~/css/EstiloLibros.css">
 
+<form method="post">
+    <div class="search">
+        <input type="text" placeholder="Buscar" />
+        <select id="filtro">
+            <option value="T">Título</option>
+            <option value="A">Autor</option>
+            <option value="E">Editorial</option>
+        </select>
+        <button id="send-search">Buscar</button>
+    </div>
+</form>
 
 <div style="margin-left:auto;margin-right:auto; width:90%;">
     <div class="card-libro">

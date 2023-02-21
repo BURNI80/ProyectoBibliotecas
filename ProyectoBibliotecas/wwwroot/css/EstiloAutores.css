@@ -1,0 +1,55 @@
+﻿.card-autor {
+    position: relative;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 70px;
+    border-radius: 15px;
+    width: 300px;
+    height: 230px;
+    border: 2px solid #000000;
+}
+
+    .card-autor img {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 100px;
+        position: absolute;
+        top: -70px;
+        left: 80px;
+    }
+
+    .card-autor p {
+        width: 100%;
+        height: 90px;
+        overflow-y: hidden;
+        text-overflow: ellipsis;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 35px;
+        line-height: 43px;
+        text-decoration-line: underline;
+        text-align: center;
+        color: #2C1A43;
+        max-height: 90px;
+        /* Altura máxima permitida */
+        display: grid;
+        place-items: center;
+    }
+
+        .card-autor p > span {
+            display: inline-block;
+            /* Hace que el contenido sea un bloque */
+            max-height: 100%;
+            /* Establece la altura máxima */
+            overflow-y: auto;
+            /* Añade una barra de desplazamiento vertical si el contenido supera la altura máxima */
+        }
