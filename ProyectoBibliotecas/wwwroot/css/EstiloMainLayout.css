@@ -1,4 +1,15 @@
-﻿
+﻿.titulo {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 55px;
+    line-height: 49px;
+    text-align: center;
+    color: #E8D7F1;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 40px;
+}
+
 .a-menu {
     text-decoration: none;
     color: white;
@@ -73,7 +84,6 @@ body {
         background-color: rgba(211, 178, 255, 0.3);
     }
     .boton-menu p {
-        width: 100%;
         height: auto;
         text-align: center;
         font-family: 'Montserrat';
@@ -83,6 +93,9 @@ body {
         line-height: 24px;
         text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         color: #FFFFFF;
+    }
+    .boton-menu svg {
+        width: 20%;
     }
 
 .menu-inferior {
@@ -306,11 +319,13 @@ body {
 
 #style-1::-webkit-scrollbar {
     width: 12px;
+    border-radius: 10px;
     background-color: #74747483;
 }
 
 #style-1::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: #87669E;
+    background-color: #dcaaff;
 }
 /*#endregion*/
+

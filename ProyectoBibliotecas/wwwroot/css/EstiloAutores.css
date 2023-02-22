@@ -1,18 +1,22 @@
-﻿.card-autor {
+﻿
+
+.parent-div {
+    text-align: center;
+}
+
+.card-autor {
     position: relative;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background-color: #FFFFFF;
+    border: 2px solid #000000;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
     padding-top: 70px;
     border-radius: 15px;
     width: 300px;
     height: 230px;
-    border: 2px solid #000000;
+    display: inline-block;
+    margin: 2%;
+    margin-top: 80px;
 }
 
     .card-autor img {
@@ -27,9 +31,10 @@
     }
 
     .card-autor p {
-        width: 100%;
+        max-width: 100%;
         height: 90px;
         overflow-y: hidden;
+        overflow-x: hidden;
         text-overflow: ellipsis;
         font-family: 'Montserrat';
         font-style: normal;
@@ -53,3 +58,4 @@
             overflow-y: auto;
             /* Añade una barra de desplazamiento vertical si el contenido supera la altura máxima */
         }
+
