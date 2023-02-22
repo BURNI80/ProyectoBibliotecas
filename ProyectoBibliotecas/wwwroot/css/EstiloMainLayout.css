@@ -41,7 +41,8 @@ body {
     box-sizing: border-box;
     background: rgba(0, 0, 0, 0.5);
     border-right: 1px solid rgba(38, 38, 38, 0.4);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     position: fixed;
     top: 0px;
     left: 0px;
@@ -83,6 +84,7 @@ body {
     .boton-menu:hover {
         background-color: rgba(211, 178, 255, 0.3);
     }
+
     .boton-menu p {
         height: auto;
         text-align: center;
@@ -94,6 +96,7 @@ body {
         text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         color: #FFFFFF;
     }
+
     .boton-menu svg {
         width: 20%;
     }
@@ -123,6 +126,7 @@ body {
 .mi-lista:hover {
     background: #666666;
 }
+
 .separador-menu {
     background-color: red;
     width: 100%;
@@ -207,13 +211,21 @@ body {
 }
 
 .main {
+    position: relative;
     float: right;
     width: 75%;
     height: 100vh;
-    /*nuevo---------------------*/
-    display: flex;
-    flex-direction: column;
     padding: 0px;
+    gap: 45px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+
+.imgFondo {
+    position: absolute;
+    width: 100%;
+    z-index: -1;
 }
 
 /* #endregion */

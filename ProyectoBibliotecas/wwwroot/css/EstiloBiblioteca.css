@@ -1,4 +1,4 @@
-﻿/* #region CardBiblioteca */
+﻿/* #region CARD BIBLIOTECA */
 
 .card-biblioteca {
     margin-top:40px;
@@ -192,3 +192,270 @@
 
 
 /* #endregion */
+
+/* #region DETALLE BIBLIOTECA */
+
+/* #region TARJETA SUPERIOR */
+.detalle-biblioteca {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    margin-top: 150px;
+    background: rgba(38, 38, 38, 0.5);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 15px;
+    justify-content: center;
+    display: flex;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+    .detalle-biblioteca img {
+        position: absolute;
+        border-radius: 100px;
+        top: -100px;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+    }
+
+.textos-biblioteca {
+    width: 90%;
+}
+
+    .textos-biblioteca .nombre {
+        position: relative;
+        width: 100%;
+        font-family: 'Montserrat';
+        text-align: center;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 35px;
+        line-height: 43px;
+        color: #E8D7F1;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        display: grid;
+        place-items: center;
+    }
+
+    .textos-biblioteca .separador {
+        position: relative;
+        margin: auto;
+        width: 70%;
+        height: 3px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background: rgba(38, 38, 38, 0.4);
+    }
+
+    .textos-biblioteca .direccion {
+        width: 60%;
+        height:fit-content;
+        margin: auto;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #D3B3FF;
+    }
+
+.info {
+    margin-top: 10px;
+    text-align: center;
+}
+
+    .info div {
+        display: inline-block;
+        width: 200px;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 5px;
+    }
+
+        .info div div {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .info div div svg {
+                width: 25px;
+                height: 25px;
+            }
+
+            .info div div p {
+                margin-left: 10px;
+                position: relative;
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 100;
+                font-size: 18px;
+                line-height: 24px;
+                color: #D3B2FF;
+            }
+
+/* #endregion */
+
+/* #region BUSCADOR */
+.search {
+    width: 80%;
+    margin: auto;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+    top: 40px;
+}
+
+    .search input {
+        border: 1px solid #ccc;
+        height: 40px;
+        padding: 0 10px;
+        width: 60%;
+        min-width: 230px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        font-size: 15px;
+    }
+
+    .search select {
+        border: 1px solid #ccc;
+        height: 40px;
+        padding: 0 10px;
+        width: 150px;
+        border-radius: 10px;
+        font-size: 15px;
+    }
+
+    .search #send-search {
+        border: 1px solid #ccc;
+        height: 40px;
+        padding: 0 10px;
+        width: 20%;
+        border-radius: 10px;
+        font-size: 15px;
+    }
+
+    .search #send-search {
+        cursor: pointer;
+        width: 100px;
+    }
+
+        .search input:hover,
+        .search select:hover,
+        .search #send-search:hover {
+            border: 1px solid #a7d7f9;
+        }
+
+/* #endregion */
+
+
+.libros {
+    margin: auto;
+    margin-top: 40px;
+    width: 90%;
+}
+
+    .libros > p {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 49px;
+        text-align: center;
+        color: #E8D7F1;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+.leyenda {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .leyenda > div {
+        position: relative;
+        float: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 20px;
+    }
+
+        .leyenda > div > p {
+            position: relative;
+            float: left;
+            margin-right: 10px;
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 24px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+.estado-libro-leyenda-verde {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background: #7AFF64;
+    box-shadow: 0px 0px 10px rgba(20, 255, 0, 0.6);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.estado-libro-leyenda-rojo {
+    width: 20px;
+    height: 20px;
+    font-size: 100px;
+    border-radius: 100%;
+    background: #FF6464;
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.6);
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Standard */
+}
+
+.list-libros {
+    padding: 20px 0px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    background: rgba(38, 38, 38, 0.5);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+@media (max-width:850px) {
+    .detalle-biblioteca {
+        margin-top: 100px;
+    }
+
+        .detalle-biblioteca img {
+            height: 150px;
+            width: 150px;
+            top: -70px;
+        }
+}
+/* #endregion */
+

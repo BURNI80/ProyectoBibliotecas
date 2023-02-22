@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <img class="imgFondo" src="~/imgs/fondoDef.png" alt="">
     <!-- *MENU MOVIL-->
     <div class="menu-movil">
         <svg class="ham hamRotate ham4" viewBox="0 0 100 100" width="60" onclick="this.classList.toggle('active')">
@@ -98,7 +99,7 @@
     var contador = 1;
 
     function main() {
-        $(window).on('resize', function() {
+        $(window).on('resize', function () {
             if ($(this).width() > 800) {
                 $(".menu").css('left', '0');
             }
@@ -107,7 +108,7 @@
             }
         }).trigger('resize');
 
-        $(".menu-movil").click(function() {
+        $(".menu-movil").click(function () {
             if (contador == 1) {
                 contador = 0;
                 $(".menu").animate({
