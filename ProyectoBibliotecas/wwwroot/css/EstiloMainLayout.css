@@ -1,19 +1,53 @@
-﻿.titulo {
-    font-family: 'Montserrat';
+﻿:root {
+    --bg-global: linear-gradient(
+        0deg,
+        #ffffff -12.02%,
+        #78397c 74.15%,
+        #78397c 103.77%
+    );
+    --encabezados-pagina: #e8d7f1;
+    --top-bar: #7b3d7e;
+    --bg-button-menu: rgba(212, 179, 255, 0.5);
+    --bg-button-menu-hover: rgba(211, 178, 255, 0.3);
+    --bg-button-inferior-hover: #666666;
+    --bg-card: #ffffff;
+    --title: #2c1a43;
+    --subtitle-1: #262626;
+    --separator: #26262666;
+
+    --icons: #000000;
+}
+
+[data-theme="dark"] {
+    --bg-global: linear-gradient(
+        0deg,
+        #161616 -12.02%,
+        #552958 74.15%,
+        #552958 103.77%
+    );
+    --top-bar: #552958;
+    --icons: #ffffff;
+    --bg-card: #262626;
+    --title: #a867fd;
+    --subtitle-1: #a5a5a5;
+    --separator: #83838366;
+}
+
+
+.titulo {
+    font-family: "Montserrat";
     font-style: normal;
     font-weight: 700;
     font-size: 55px;
     line-height: 49px;
     text-align: center;
-    color: #E8D7F1;
+    color: var(--encabezados-pagina);
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     margin-top: 40px;
 }
 
 .a-menu {
     text-decoration: none;
-    color: white;
-    background-color: green;
     width: 100%;
     height: 100%;
     display: flex;
@@ -28,7 +62,7 @@
 }
 
 body {
-    background: linear-gradient(0deg, #FFFFFF -12.02%, #78397C 74.15%, #78397C 103.77%);
+    background: var(--bg-global);
     background-attachment: fixed;
 }
 
@@ -41,11 +75,12 @@ body {
     box-sizing: border-box;
     background: rgba(0, 0, 0, 0.5);
     border-right: 1px solid rgba(38, 38, 38, 0.4);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
     position: fixed;
     top: 0px;
     left: 0px;
+    overflow-x: hidden;
 }
 
 .botones-menu {
@@ -55,8 +90,8 @@ body {
     padding: 0px;
     gap: 20px;
     width: 100%;
-    height: 298px;
     margin-top: 20px;
+    padding-bottom: 80px;
     /* Inside auto layout */
     flex: none;
     order: 0;
@@ -72,8 +107,9 @@ body {
     margin: auto;
     width: 85%;
     height: 60px;
-    background: rgba(211, 178, 255, 0.5);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: var(--bg-button-menu);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     /* Inside auto layout */
     flex: none;
@@ -81,25 +117,26 @@ body {
     flex-grow: 0;
 }
 
-    .boton-menu:hover {
-        background-color: rgba(211, 178, 255, 0.3);
-    }
+.boton-menu:hover {
+    background-color: var(--bg-button-menu-hover);
+}
 
-    .boton-menu p {
-        height: auto;
-        text-align: center;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 24px;
-        line-height: 24px;
-        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        color: #FFFFFF;
-    }
+.boton-menu p {
+    height: auto;
+    text-align: center;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 24px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+}
 
-    .boton-menu svg {
-        width: 20%;
-    }
+.boton-menu svg {
+    width: 20%;
+    color: white;
+}
 
 .menu-inferior {
     display: flex;
@@ -120,30 +157,29 @@ body {
 }
 
 .boton-logout:hover {
-    background: #666666;
+    background: var(--bg-button-inferior-hover);
 }
 
 .mi-lista:hover {
-    background: #666666;
+    background: var(--bg-button-inferior-hover);
 }
 
 .separador-menu {
-    background-color: red;
     width: 100%;
     height: 2px;
-    background: rgba(38, 38, 38, 0.4);
+    background: var(--separator);
 }
 
 .menu-usuario {
     width: 85%;
     height: 20px;
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-style: normal;
     font-weight: 500;
     font-size: 17px;
     line-height: 21px;
     text-align: center;
-    color: #FFFFFF;
+    color: #ffffff;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -156,25 +192,26 @@ body {
     width: 85%;
     height: 60px;
     background: #262626;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
 }
 
-    .mi-lista svg {
-        width: 20%;
-    }
+.mi-lista svg {
+    width: 20%;
+}
 
-    .mi-lista p {
-        height: 50px;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 21px;
-        display: flex;
-        align-items: center;
-        color: #FFFFFF;
-    }
+.mi-lista p {
+    height: 50px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+}
 
 .boton-logout {
     display: flex;
@@ -184,7 +221,8 @@ body {
     width: 85%;
     height: 60px;
     background: #262626;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     /* Inside auto layout */
     flex: none;
@@ -192,19 +230,19 @@ body {
     flex-grow: 0;
 }
 
-    .boton-logout p {
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
-        text-align: center;
-        color: #FF3131;
-    }
+.boton-logout p {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #ff3131;
+}
 
-    .boton-logout svg {
-        width: 20%;
-    }
+.boton-logout svg {
+    width: 20%;
+}
 
 .menu-movil {
     display: none;
@@ -221,33 +259,23 @@ body {
     overflow-y: scroll;
 }
 
-
 .imgFondo {
     position: absolute;
     width: 100%;
     z-index: -1;
 }
 
-/* #endregion */
-
 /*#region MEDIA QUERYS*/
-@media (max-width:800px) {
-
+@media (max-width: 800px) {
     .menu-movil {
         display: block;
         height: 60px;
         border-bottom: 2px solid black;
-        background-color: #7b3d7e;
+        background-color: var(--top-bar);
         width: 100%;
         z-index: 1;
         position: fixed;
         top: 0px;
-    }
-
-    .fix-movil {
-        position: absolute;
-        width: 100%;
-        height: 80%;
     }
 
     .menu {
@@ -258,13 +286,14 @@ body {
         z-index: 1;
         position: fixed;
         top: 0px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
 
     /* SI SE QUIERE DEJAR COMO ERSTABA: SE BORRA EL FIX Y ESTE ESTILO */
     .menu-inferior {
-        position: fixed;
-        margin-top: 50%;
-        bottom: 10%;
+        position: relative;
+        padding-bottom: 60px;
     }
 
     .main {
@@ -273,7 +302,10 @@ body {
         top: 60px;
     }
 }
+
 /*#endregion*/
+
+/* #endregion */
 
 /* #region HAM MENU */
 .ham {
@@ -297,7 +329,7 @@ body {
 .line {
     fill: none;
     transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-    stroke: #000;
+    stroke: var(--icons);
     stroke-width: 5.5;
     stroke-linecap: round;
 }
@@ -341,3 +373,136 @@ body {
 }
 /*#endregion*/
 
+/* #region CHECK */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-right: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--bg-color);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+[data-theme="dark"] .slider:before {
+    background-color: #fff;
+}
+
+[data-theme="dark"] input:checked + .slider {
+    background-color: #555;
+}
+
+[data-theme="dark"] input:checked + .slider:before {
+    background-color: #222;
+}
+
+[data-theme="light"] .slider:before {
+    background-color: #fff;
+}
+
+[data-theme="light"] input:checked + .slider {
+    background-color: #2196f3;
+}
+
+[data-theme="light"] input:checked + .slider:before {
+    background-color: #ccc;
+}
+
+/* #endregion */
+
+/* #region BUSCADOR */
+.search {
+    width: 80%;
+    margin: auto;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+    top: 40px;
+}
+
+.search input {
+    border: 1px solid #0c0c0c;
+    height: 40px;
+    padding: 0 10px;
+    width: 60%;
+    min-width: 230px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: "Montserrat";
+}
+
+.search select {
+    border: 1px solid #ccc;
+    height: 40px;
+    padding: 0 10px;
+    width: 150px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: "Montserrat";
+}
+
+.search #send-search {
+    border: 1px solid #ccc;
+    height: 40px;
+    padding: 0 10px;
+    width: 20%;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: "Montserrat";
+}
+
+.search #send-search {
+    cursor: pointer;
+    width: 100px;
+}
+
+.search input:hover,
+.search select:hover,
+.search #send-search:hover {
+    border: 1px solid #a7d7f9;
+}
+
+/* #endregion */

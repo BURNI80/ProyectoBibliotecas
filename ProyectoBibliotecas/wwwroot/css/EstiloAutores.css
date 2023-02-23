@@ -7,16 +7,15 @@
 .card-autor {
     position: relative;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background-color: #FFFFFF;
-    border: 2px solid #000000;
+    background-color: var(--bg-card);
     box-sizing: border-box;
     padding-top: 70px;
     border-radius: 15px;
     width: 300px;
-    height: 230px;
+    height: 200px;
     display: inline-block;
     margin: 2%;
-    margin-top: 80px;
+    margin-top: 100px;
 }
 
     .card-autor img {
@@ -41,9 +40,8 @@
         font-weight: 400;
         font-size: 35px;
         line-height: 43px;
-        text-decoration-line: underline;
         text-align: center;
-        color: #2C1A43;
+        color: var(--title);
         max-height: 90px;
         /* Altura máxima permitida */
         display: grid;

@@ -1,57 +1,4 @@
-﻿/*#region BUSCADOR*/
-.search {
-    width: 80%;
-    margin: auto;
-    margin-top: 0px;
-    margin-bottom: 40px;
-    text-align: center;
-    position: relative;
-    top: 40px;
-}
-
-    .search input {
-        border: 1px solid #ccc;
-        height: 40px;
-        padding: 0 10px;
-        width: 60%;
-        min-width: 230px;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        font-size: 15px;
-    }
-
-    .search select {
-        border: 1px solid #ccc;
-        height: 40px;
-        padding: 0 10px;
-        width: 150px;
-        border-radius: 10px;
-        font-size: 15px;
-    }
-
-    .search #send-search {
-        border: 1px solid #ccc;
-        height: 40px;
-        padding: 0 10px;
-        width: 20%;
-        border-radius: 10px;
-        font-size: 15px;
-    }
-
-    .search #send-search {
-        cursor: pointer;
-        width: 100px;
-    }
-
-        .search input:hover,
-        .search select:hover,
-        .search #send-search:hover {
-            border: 1px solid #a7d7f9;
-        }
-/*#endregion*/
-
-/* #region CARD LIBRO */
-
+﻿/* #region CARD LIBRO */
 .card-libro {
     display: flex;
     align-items: center;
@@ -60,10 +7,9 @@
     margin: auto;
     width: 90%;
     height: fit-content;
-    margin-top: 40px;
     background-color: #FFFFFF;
     border-radius: 15px;
-    background: url("./img/fondoDef.png"), linear-gradient(0deg, #FFFFFF -12.02%, #78397C 74.15%, #78397C 103.77%);
+    background: url("./img/fondoDef.png"), var(--bg-global);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -72,7 +18,7 @@
 }
 
 .card-libro-bg-white {
-    background-color: #FFFFFF;
+    background-color: var(--bg-card);
 }
 
 .imagen-libro {
@@ -80,7 +26,7 @@
     justify-content: center;
     align-items: center;
     margin-left: 20px;
-    width: 10%;
+    width: 133px;
     height: 133px;
 }
 
@@ -90,10 +36,10 @@
         width: 100%;
         height: 100%;
         max-height: 133px;
-        object-fit: cover;
-        object-position: center;
         background: url(image.png);
         border-radius: 10px;
+        object-fit:cover;
+        object-position:center;
     }
 
 .estado-libro-verde {
@@ -141,14 +87,13 @@
 }
 
 .titulo-libro {
-    text-align: left;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
     font-size: 35px;
     line-height: 43px;
     margin: 0;
-    color: #2C1A43;
+    color: var(--title);
 }
 
 .autor-libro {
@@ -158,13 +103,13 @@
     font-size: 23px;
     line-height: 28px;
     margin: 5px 0px;
-    color: #262626;
+    color: var(--subtitle-1);
 }
 
 .separator-card {
     width: 100%;
     height: 2px;
-    background: rgba(38, 38, 38, 0.4);
+    background: var(--separator);
 }
 
 .paginas-valoracion {
@@ -179,7 +124,7 @@
     font-weight: 300;
     font-size: 19px;
     line-height: 23px;
-    color: #262626;
+    color: var(--subtitle-1);
     position: relative;
     float: left;
     margin: 0;
@@ -191,11 +136,16 @@
     align-items: center;
     position: relative;
     float: right;
+    margin-top: 10px;
 }
 
-    .valoracion > img {
+    .valoracion > svg {
         width: 23px;
         height: 23px;
+    }
+
+    .valoracion > svg > path {
+        fill: var(--icons);
     }
 
     .valoracion > p {
@@ -204,7 +154,7 @@
         font-weight: 300;
         font-size: 19px;
         line-height: 23px;
-        color: #262626;
+        color: var(--subtitle-1);
         margin: 0;
         margin-left: 10px;
     }
@@ -216,18 +166,30 @@
     width: 10%;
 }
 
-    .info-libro img {
+    .info-libro svg {
         width: 55px;
         height: 55px;
     }
 
-@media (max-width:850px) {
-    .list-libros {
-        margin-bottom: 150px;
+    .info-libro > svg > path {
+        fill: var(--icons);
     }
 
+@media (max-width:800px) {
     .card-libro {
         flex-direction: column;
+    }
+
+    .imagen-libro {
+        margin: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contenido-libro {
+        margin: 0;
     }
 
     .titulo-libro {
@@ -237,6 +199,19 @@
     .titulo-autor {
         text-align: center;
     }
+
+    .info-libro {
+        padding-top: 10px;
+        margin: 0;
+        width: 100%;
+        display: block;
+    }
+
+        .info-libro > svg {
+            display: block;
+            margin: auto;
+        }
 }
 
 /* #endregion */
+
