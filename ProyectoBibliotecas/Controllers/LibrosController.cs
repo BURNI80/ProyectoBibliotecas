@@ -8,5 +8,10 @@ namespace ProyectoBibliotecas.Controllers
         {
             return View();
         }
+
+        public IActionResult DetailsLibro()
+        {
+            return View();
+        }
     }
 }

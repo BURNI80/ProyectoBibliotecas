@@ -104,7 +104,9 @@
     </nav>
     <!-- *AQUI VA EL CONTENIDO -->
     <div class="main scrollbar" id="style-1">
-        @RenderBody()
+        <div class="movil-bottom">
+            @RenderBody()
+        </div>
     </div>
 
 
@@ -173,6 +175,14 @@
             document.getElementById("imgFondo").src = "/imgs/fondoDefClaro.png";
 
         }
+
+        $('a.like-button').on('click', function (e) {
+            $(this).toggleClass('liked');
+
+            setTimeout(() => {
+                $(e.target).removeClass('liked')
+            }, 1000)
+        });
     };
 
 </script>
