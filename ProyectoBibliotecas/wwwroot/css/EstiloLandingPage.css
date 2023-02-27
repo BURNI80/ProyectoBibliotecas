@@ -1,4 +1,16 @@
-﻿html {
+﻿:root {
+    --bg-global: white;
+    --bg-card: #e2bbe4;
+    --text: black;
+}
+
+[data-theme="dark"] {
+    --bg-global: #161616;
+    --bg-card: #331f34;
+    --text: white;
+}
+
+html {
     overflow-x: hidden;
     max-width: 100vw;
 }
@@ -9,11 +21,93 @@
 }
 
 body {
-    background: linear-gradient(0deg, #77397c2f -12.02%, #77397cbe 35%, #77397c 103.77%);
+    background: var(--bg-global);
     background-size: 100% 100vh;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+/* #region CHECK */
+
+.switch {
+    margin-top: 20px;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-right: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    height: 34px;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--bg-color);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+[data-theme="dark"] .slider:before {
+    background-color: #fff;
+}
+
+[data-theme="dark"] input:checked + .slider {
+    background-color: #555;
+}
+
+[data-theme="dark"] input:checked + .slider:before {
+    background-color: #222;
+}
+
+[data-theme="light"] .slider:before {
+    background-color: #fff;
+}
+
+[data-theme="light"] input:checked + .slider {
+    background-color: #2196f3;
+}
+
+[data-theme="light"] input:checked + .slider:before {
+    background-color: #ccc;
+}
+
+/* #endregion */
+
+/* #region LANDING */
 
 .img-fondo {
     width: 100%;
@@ -24,7 +118,6 @@ body {
     top: 0;
     left: 0;
 }
-
 
 .landing-page-main {
     width: 100%;
@@ -37,7 +130,7 @@ body {
 
 .encabezado {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 50px;
@@ -51,20 +144,20 @@ body {
     flex-grow: 0;
 }
 
-    .encabezado p {
-        height: auto;
-        text-align: center;
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 4vw;
-        line-height: 75px;
-        /* identical to box height */
-        display: flex;
-        align-items: center;
-        color: #FFFFFF;
-        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    }
+.encabezado p {
+    height: auto;
+    text-align: center;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 4vw;
+    line-height: 75px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+    color: var(--text);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
 
 .contenido1 {
     display: flex;
@@ -90,32 +183,28 @@ body {
     gap: 20px;
     max-width: 350px;
     height: 100%;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--bg-card);
     border-radius: 15px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
     /* Inside auto layout */
-
     flex: none;
     order: 0;
     flex-grow: 1;
 }
 
-    .card-1 p {
-        width: 309.44px;
-        height: 193.75px;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 18px;
-        display: flex;
-        align-items: center;
-        text-align: justify;
-        color: #000000;
-    }
+.card-1 p {
+    width: 309.44px;
+    height: 193.75px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    color: var(--text);
+}
 
 .card-2 {
     display: flex;
@@ -126,32 +215,28 @@ body {
     gap: 20px;
     max-width: 350px;
     height: 100%;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--bg-card);
     border-radius: 15px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
     /* Inside auto layout */
     flex: none;
     order: 2;
     flex-grow: 1;
 }
 
-    .card-2 p {
-        width: 309.44px;
-        height: 170px;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 18px;
-        display: flex;
-        align-items: center;
-        text-align: justify;
-        color: #000000;
-    }
-
+.card-2 p {
+    width: 309.44px;
+    height: 170px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    color: var(--text);
+}
 
 .contenido2 {
     display: flex;
@@ -168,21 +253,21 @@ body {
     flex-grow: 0;
 }
 
-    .contenido2 .svgL {
-        flex: none;
-        order: 0;
-        flex-grow: 0;
-        position: relative;
-        top: 90px;
-    }
+.contenido2 .svgL {
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    position: relative;
+    top: 90px;
+}
 
-    .contenido2 .svgR {
-        position: relative;
-        top: -80px;
-        flex: none;
-        order: 2;
-        flex-grow: 0;
-    }
+.contenido2 .svgR {
+    position: relative;
+    top: -80px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
 
 .card-3 {
     display: flex;
@@ -193,30 +278,27 @@ body {
     gap: 20px;
     max-width: 350px;
     height: 350px;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--bg-card);
     border-radius: 15px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
     /* Inside auto layout */
     flex: none;
     order: 1;
     flex-grow: 0;
 }
 
-    .card-3 p {
-        width: 80%;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 18px;
-        display: flex;
-        align-items: center;
-        text-align: justify;
-        color: #000000;
-    }
+.card-3 p {
+    width: 80%;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    color: var(--text);
+}
 
 .contenido3 {
     display: flex;
@@ -241,31 +323,28 @@ body {
     gap: 20px;
     width: 710px;
     height: 165px;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--bg-card);
     border-radius: 15px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
     /* Inside auto layout */
     flex: none;
     order: 0;
     flex-grow: 0;
 }
 
-    .card-4 p {
-        width: 446px;
-        height: 125px;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 18px;
-        display: flex;
-        align-items: center;
-        text-align: justify;
-        color: #000000;
-    }
+.card-4 p {
+    width: 446px;
+    height: 125px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    color: var(--text);
+}
 
 .card-5 {
     box-sizing: border-box;
@@ -278,12 +357,10 @@ body {
     gap: 10px;
     width: 60%;
     height: auto;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--bg-card);
     border-radius: 15px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 3px dashed #FFD363;
+    border: 3px dashed #ffd363;
     border-radius: 15px;
     /* Inside auto layout */
     flex: none;
@@ -291,19 +368,19 @@ body {
     flex-grow: 0;
 }
 
-    .card-5 p {
-        width: 829px;
-        height: 120px;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 24px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        color: #000000;
-    }
+.card-5 p {
+    width: 829px;
+    height: 120px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--text);
+}
 
 .contenido4 {
     display: flex;
@@ -334,61 +411,61 @@ a {
     position: relative;
     margin: auto;
     padding: 19px 22px;
-    transition: all .2s ease;
+    transition: all 0.2s ease;
 }
 
-    .cta:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: block;
-        border-radius: 28px;
-        background: #FFD363;
-        width: 56px;
-        height: 56px;
-        transition: all .3s ease;
-    }
+.cta:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 28px;
+    background: #ffd363;
+    width: 56px;
+    height: 56px;
+    transition: all 0.3s ease;
+}
 
-    .cta span {
-        position: relative;
-        font-size: 16px;
-        line-height: 18px;
-        font-weight: 900;
-        letter-spacing: .25em;
-        text-transform: uppercase;
-        vertical-align: middle;
-    }
+.cta span {
+    position: relative;
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    vertical-align: middle;
+    color: var(--text);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+}
 
-    .cta svg {
-        position: relative;
-        top: 0;
-        margin-left: 10px;
-        fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke: #111;
-        stroke-width: 2;
-        transform: translateX(-5px);
-        transition: all .3s ease;
-    }
+.cta svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #111;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+}
 
-    .cta:hover:before {
-        width: 100%;
-        background: #FFD363;
-    }
+.cta:hover:before {
+    width: 100%;
+    background: #ffd363;
+}
 
-    .cta:hover svg {
-        transform: translateX(0);
-    }
+.cta:hover svg {
+    transform: translateX(0);
+}
 
-    .cta:active {
-        transform: scale(0.96);
-    }
+.cta:active {
+    transform: scale(0.96);
+}
 
-
-@media (max-width:850px) {
-
+@media (max-width: 850px) {
     .svg-flechas {
         display: none;
     }
@@ -415,27 +492,27 @@ a {
         width: 80%;
     }
 
-        .card-1 p {
-            width: 80%;
-        }
+    .card-1 p {
+        width: 80%;
+    }
 
     .card-2 {
         width: 80%;
         height: 50%;
     }
 
-        .card-2 p {
-            width: 80%;
-            height: auto;
-        }
+    .card-2 p {
+        width: 80%;
+        height: auto;
+    }
 
     .card-3 {
         width: 70%;
     }
 
-        .card-3 p {
-            width: 80%;
-        }
+    .card-3 p {
+        width: 80%;
+    }
 
     .card-4 {
         flex-direction: column;
@@ -444,18 +521,230 @@ a {
         max-width: 350px;
     }
 
-        .card-4 p {
-            width: 80%;
-            height: auto;
-        }
+    .card-4 p {
+        width: 80%;
+        height: auto;
+    }
 
     .card-5 {
         width: 100%;
         padding: 10px;
     }
 
-        .card-5 p {
-            width: 80%;
-            height: auto;
-        }
+    .card-5 p {
+        width: 80%;
+        height: auto;
+    }
 }
+/* #endregion */
+
+/* #region SWITCH CLARO/OSCURO */
+
+.toggleWrapper {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    /* top: 50%; */
+    left: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    margin-top: 20px;
+    /* padding: 0 200px; */
+    transform: translate3d(-50%, -50%, 0);
+}
+.toggleWrapper input {
+    position: absolute;
+}
+.toggle {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    width: 90px;
+    height: 50px;
+    background-color: #83d8ff;
+    border-radius: 84px;
+    transition: background-color 200ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+/* .toggle:before {
+	 content: 'CLARO';
+	 position: absolute;
+	 left: -90px;
+	 top: 15px;
+	 font-size: 18px;
+}
+ .toggle:after {
+	 content: 'OSCURO';
+	 position: absolute;
+	 right: -98px;
+	 top: 15px;
+	 font-size: 18px;
+	 color: #749ed7;
+} */
+.toggle__handler {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    top: 3px;
+    left: 3px;
+    width: 44px;
+    height: 44px;
+    background-color: #ffcf96;
+    border-radius: 50px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: all 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform: rotate(-45deg);
+}
+
+.toggle__handler .crater {
+    position: absolute;
+    background-color: #e8cda5;
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+    border-radius: 100%;
+}
+
+.toggle__handler .crater--1 {
+    top: 18px;
+    left: 10px;
+    width: 4px;
+    height: 4px;
+}
+
+.toggle__handler .crater--2 {
+    top: 28px;
+    left: 22px;
+    width: 6px;
+    height: 6px;
+}
+
+.toggle__handler .crater--3 {
+    top: 10px;
+    left: 25px;
+    width: 8px;
+    height: 8px;
+}
+
+.star {
+    position: absolute;
+    background-color: #fff;
+    transition: all 300ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    border-radius: 50%;
+}
+
+.star--1 {
+    top: 10px;
+    left: 35px;
+    z-index: 0;
+    width: 30px;
+    height: 3px;
+}
+
+.star--2 {
+    top: 18px;
+    left: 28px;
+    z-index: 1;
+    width: 30px;
+    height: 3px;
+}
+
+.star--3 {
+    top: 27px;
+    left: 40px;
+    z-index: 0;
+    width: 30px;
+    height: 3px;
+}
+
+.star--4,
+.star--5,
+.star--6 {
+    opacity: 0;
+    transition: all 300ms 0 cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.star--4 {
+    top: 16px;
+    left: 11px;
+    z-index: 0;
+    width: 2px;
+    height: 2px;
+    transform: translate3d(3px, 0, 0);
+}
+
+.star--5 {
+    top: 32px;
+    left: 17px;
+    z-index: 0;
+    width: 3px;
+    height: 3px;
+    transform: translate3d(3px, 0, 0);
+}
+
+.star--6 {
+    top: 36px;
+    left: 28px;
+    z-index: 0;
+    width: 2px;
+    height: 2px;
+    transform: translate3d(3px, 0, 0);
+}
+
+input:checked + .toggle {
+    background-color: #749dd6;
+}
+
+input:checked + .toggle:before {
+    color: #749ed7;
+}
+
+input:checked + .toggle:after {
+    color: #fff;
+}
+
+input:checked + .toggle .toggle__handler {
+    background-color: #ffe5b5;
+    transform: translate3d(40px, 0, 0) rotate(0);
+}
+
+input:checked + .toggle .toggle__handler .crater {
+    opacity: 1;
+}
+
+input:checked + .toggle .star--1 {
+    width: 2px;
+    height: 2px;
+}
+
+input:checked + .toggle .star--2 {
+    width: 4px;
+    height: 4px;
+    transform: translate3d(-5px, 0, 0);
+}
+
+input:checked + .toggle .star--3 {
+    width: 2px;
+    height: 2px;
+    transform: translate3d(-7px, 0, 0);
+}
+
+input:checked + .toggle .star--4,
+input:checked + .toggle .star--5,
+input:checked + .toggle .star--6 {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+input:checked + .toggle .star--4 {
+    transition: all 300ms 200ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+input:checked + .toggle .star--5 {
+    transition: all 300ms 300ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+input:checked + .toggle .star--6 {
+    transition: all 300ms 400ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+/* #endregion */

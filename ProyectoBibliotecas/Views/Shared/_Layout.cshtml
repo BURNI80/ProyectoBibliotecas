@@ -6,11 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/EstiloMainLayout.css">
 </head>
 
 <body>
-    <img class="imgFondo" src="~/imgs/fondoDef.png" alt="">
+
+    <img class="imgFondo" id="imgFondo" src="~/imgs/fondoDefClaro.png" />
+
     <!-- *MENU MOVIL-->
     <div class="menu-movil">
         <svg class="ham hamRotate ham4" viewBox="0 0 100 100" width="60" onclick="this.classList.toggle('active')">
@@ -56,10 +59,22 @@
         <div class="menu-inferior">
             <div class="separador-menu"></div>
 
-            <label class="switch">
-                <input type="checkbox" id="dark-mode-toggle">
-                <span class="slider"></span>
-            </label>
+            <div class="toggleWrapper switch">
+                <input type="checkbox" class="dn" id="dn" />
+                <label for="dn" class="toggle">
+                    <span class="toggle__handler">
+                        <span class="crater crater--1"></span>
+                        <span class="crater crater--2"></span>
+                        <span class="crater crater--3"></span>
+                    </span>
+                    <span class="star star--1"></span>
+                    <span class="star star--2"></span>
+                    <span class="star star--3"></span>
+                    <span class="star star--4"></span>
+                    <span class="star star--5"></span>
+                    <span class="star star--6"></span>
+                </label>
+            </div>
 
             <p class="menu-usuario">USUARIO</p>
 
@@ -104,7 +119,7 @@
     var contador = 1;
 
     function main() {
-        $(window).on('resize', function() {
+        $(window).on('resize', function () {
             if ($(this).width() > 800) {
                 $(".menu").css('left', '0');
             }
@@ -113,7 +128,7 @@
             }
         }).trigger('resize');
 
-        $(".menu-movil").click(function() {
+        $(".menu-movil").click(function () {
             if (contador == 1) {
                 contador = 0;
                 $(".menu").animate({
@@ -128,16 +143,19 @@
         });
 
 
-        const toggleSwitch = document.querySelector('#dark-mode-toggle');
+        const toggleSwitch = document.querySelector('#dn');
         const currentTheme = localStorage.getItem('theme');
 
         function switchTheme(event) {
             if (event.target.checked) {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
+                document.getElementById("imgFondo").src = "/imgs/fondoDef.png";
             } else {
                 document.documentElement.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
+                document.getElementById("imgFondo").src = "/imgs/fondoDefClaro.png";
+
             }
         }
 
@@ -148,9 +166,12 @@
 
             if (currentTheme === 'dark') {
                 toggleSwitch.checked = true;
+                document.getElementById("imgFondo").src = "/imgs/fondoDef.png";
             }
         } else {
             document.documentElement.setAttribute('data-theme', 'light');
+            document.getElementById("imgFondo").src = "/imgs/fondoDefClaro.png";
+
         }
     };
 

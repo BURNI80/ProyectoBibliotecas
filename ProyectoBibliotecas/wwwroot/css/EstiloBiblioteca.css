@@ -89,7 +89,7 @@
                 margin-left: 10px;
                 font-family: 'Montserrat';
                 font-style: normal;
-                font-weight: 100;
+                font-weight: 200;
                 font-size: 18px;
                 line-height: 24px;
                 color: #D3B2FF;
@@ -262,7 +262,7 @@
                 height: 25px;
             }
 
-            .info div > div > svg > path{
+            .info div > div > svg  path{
                 fill: var(--icons);
             }
 
@@ -362,7 +362,7 @@
     width: 100%;
     margin-bottom: 40px;
     margin-top: 40px;
-    background: rgba(38, 38, 38, 0.5);
+    background-color: var(--list-libros) ;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     backdrop-filter: blur(5px);

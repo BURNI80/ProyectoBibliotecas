@@ -1,4 +1,6 @@
-﻿:root {
+﻿
+/* #region SEARCH BAR ANIM */
+:root {
     font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1920 - 320));
 }
 
@@ -9,7 +11,7 @@ input {
 }
 
 input {
-    color: #3d3d3d;
+    color: var(--search-bar-color);
 }
 
 .search-bar {
@@ -56,7 +58,7 @@ input {
 .search-bar input {
     background: transparent;
     border-radius: 1.5em;
-    box-shadow: 0 0 0 0.4em #3d3d3d inset;
+    box-shadow: 0 0 0 0.4em var(--search-bar) inset;
     border: 0px solid #78397c;
     padding: 0.75em;
     transform: translate(0.5em, 0.5em) scale(0.5);
@@ -72,9 +74,9 @@ input {
 
 .search-bar input:focus,
 .search-bar input:valid {
-    background: #fff;
+    background: var(--search-bar);
     border-radius: 0.375em 0 0 0.375em;
-    box-shadow: 0 0 0 0.1em #d9d9d9 inset;
+    box-shadow: 0 0 0 0.1em var(--search-bar) inset;
     transform: scale(1);
 }
 
@@ -150,9 +152,6 @@ input {
 }
 
 @media screen and (prefers-color-scheme: dark) {
-    input {
-        color: #f1f1f1;
-    }
 
     .search-bar input {
         box-shadow: 0 0 0 0.4em #f1f1f1 inset;
@@ -160,11 +159,12 @@ input {
 
     .search-bar input:focus,
     .search-bar input:valid {
-        background: #3d3d3d;
-        box-shadow: 0 0 0 0.1em #3d3d3d inset;
+        background: var(--search-bar);;
+        box-shadow: 0 0 0 0.1em var(--search-bar) inset;
     }
 
     .search-btn {
         background: #f1f1f1;
     }
 }
+/* #endregion */
