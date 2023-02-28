@@ -153,10 +153,12 @@
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
                 document.getElementById("imgFondo").src = "/imgs/fondoDef.png";
+                $(".comment-box").addClass("dark")
             } else {
                 document.documentElement.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
                 document.getElementById("imgFondo").src = "/imgs/fondoDefClaro.png";
+                $(".comment-box").removeClass("dark")
 
             }
         }
@@ -169,10 +171,14 @@
             if (currentTheme === 'dark') {
                 toggleSwitch.checked = true;
                 document.getElementById("imgFondo").src = "/imgs/fondoDef.png";
+                $(".comment-box").addClass("dark")
+
             }
         } else {
             document.documentElement.setAttribute('data-theme', 'light');
             document.getElementById("imgFondo").src = "/imgs/fondoDefClaro.png";
+                $(".comment-box").removeClass("dark")
+
 
         }
 
