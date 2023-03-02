@@ -13,10 +13,9 @@
     <div class="menu-admin">
         <div>
             <a asp-action="Index" asp-controller="Home">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 40C8.96744 40 0 31.0326 0 20C0 8.96744 8.96744 0 20 0C31.0326 0 40 8.96744 40 20C40 31.0326 31.0326 40 20 40ZM20 2.7907C10.5116 2.7907 2.7907 10.5116 2.7907 20C2.7907 29.4884 10.5116 37.2093 20 37.2093C29.4884 37.2093 37.2093 29.4884 37.2093 20C37.2093 10.5116 29.4884 2.7907 20 2.7907Z" fill="#393939" />
-                    <path d="M26.5113 21.3953H15.3485C14.5857 21.3953 13.9531 20.7628 13.9531 20C13.9531 19.2372 14.5857 18.6046 15.3485 18.6046H26.5113C27.2741 18.6046 27.9066 19.2372 27.9066 20C27.9066 20.7628 27.2741 21.3953 26.5113 21.3953Z" fill="#393939" />
-                    <path d="M19.0689 26.9766C18.7154 26.9766 18.3619 26.8464 18.0828 26.5673L12.5013 20.9859C11.9618 20.4464 11.9618 19.5533 12.5013 19.0138L18.0828 13.4325C18.6224 12.8929 19.5154 12.8929 20.0549 13.4325C20.5944 13.972 20.5944 14.865 20.0549 15.4046L15.4595 19.9999L20.0549 24.5952C20.5944 25.1347 20.5944 26.0278 20.0549 26.5673C19.7758 26.8464 19.4224 26.9766 19.0689 26.9766Z" fill="#393939" />
+                <svg width="40" height="40" viewBox="0 0 71 71" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M54.7974 70.7786H17.0343C8.09894 70.7786 0.859375 63.5065 0.859375 54.5711V30.4067C0.859375 25.9715 3.59867 20.3951 7.12062 17.6558L24.6978 3.95934C29.9807 -0.149591 38.4268 -0.345255 43.9054 3.50279L64.0588 17.6232C67.9395 20.3299 70.9722 26.1346 70.9722 30.8632V54.6038C70.9722 63.5065 63.7327 70.7786 54.7974 70.7786ZM27.6979 7.80739L10.1208 21.5039C7.80544 23.3301 5.75097 27.4716 5.75097 30.4067V54.5711C5.75097 60.7998 10.8056 65.887 17.0343 65.887H54.7974C61.026 65.887 66.0806 60.8324 66.0806 54.6038V30.8632C66.0806 27.7325 63.8305 23.3953 61.2543 21.6343L41.1009 7.5139C37.3833 4.90504 31.2525 5.03549 27.6979 7.80739Z" fill="#292D32" />
+                    <path d="M35.9155 57.7344C34.5785 57.7344 33.4697 56.6256 33.4697 55.2886V45.5054C33.4697 44.1683 34.5785 43.0596 35.9155 43.0596C37.2526 43.0596 38.3613 44.1683 38.3613 45.5054V55.2886C38.3613 56.6256 37.2526 57.7344 35.9155 57.7344Z" fill="#292D32" />
                 </svg>
             </a>
             <a asp-action="Info" asp-controller="Administracion">
@@ -50,7 +49,7 @@
                           fill="#393939" />
                 </svg>
             </a>
-                <input id="toggle" class="toggle" type="checkbox" name="Dark mode" role="switch" value="on">
+            <input id="toggle" class="toggle" type="checkbox" name="Dark mode" role="switch" value="on">
             <a class="bottom">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M32.5415 27.7026C32.1131 27.7026 31.6847 27.5427 31.3464 27.1998C30.6925 26.5369 30.6925 25.4398 31.3464 24.7769L35.924 20.1369L31.3464 15.4969C30.6925 14.8342 30.6925 13.737 31.3464 13.0742C32.0004 12.4113 33.0827 12.4113 33.7367 13.0742L39.5094 18.9255C40.1633 19.5884 40.1633 20.6855 39.5094 21.3484L33.7367 27.1998C33.3984 27.5427 32.97 27.7026 32.5415 27.7026Z"
@@ -77,14 +76,20 @@
 <script>
     const toggleSwitch = document.querySelector('#toggle');
     const currentTheme = localStorage.getItem('theme');
+    const root = document.querySelector(":root");
+
 
     function switchTheme(event) {
+        $("body").addClass("transi");
+        $(".card-perfil").addClass("transi");
+        $(".boton").addClass("transi");
         if (event.target.checked) {
             document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
             document.getElementById("imgFondo").src = "/imgs/fondoDef.png";
 
         } else {
+
             document.documentElement.setAttribute('data-theme', 'light');
             localStorage.setItem('theme', 'light');
             document.getElementById("imgFondo").src = "/imgs/fondoDefClaro.png";
@@ -94,12 +99,14 @@
 
     toggleSwitch.addEventListener('change', switchTheme, false);
 
+
+
     if (currentTheme) {
         document.documentElement.setAttribute('data-theme', currentTheme);
-
         if (currentTheme === 'dark') {
             toggleSwitch.checked = true
             document.getElementById("imgFondo").src = "/imgs/fondoDef.png";
+
 
         }
     } else {

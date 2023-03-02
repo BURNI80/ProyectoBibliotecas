@@ -58,25 +58,9 @@
         <!-- *PARTE INFERIOR DEL MENU -->
         <div class="menu-inferior">
             <div class="separador-menu"></div>
-
-            <div class="toggleWrapper switch">
-                <input type="checkbox" class="dn" id="dn" />
-                <label for="dn" class="toggle">
-                    <span class="toggle__handler">
-                        <span class="crater crater--1"></span>
-                        <span class="crater crater--2"></span>
-                        <span class="crater crater--3"></span>
-                    </span>
-                    <span class="star star--1"></span>
-                    <span class="star star--2"></span>
-                    <span class="star star--3"></span>
-                    <span class="star star--4"></span>
-                    <span class="star star--5"></span>
-                    <span class="star star--6"></span>
-                </label>
-            </div>
-
-            <p class="menu-usuario"><a asp-action="Info" asp-controller="Administracion" >USUARIO</a></p>
+            <p class="menu-usuario">Dia / Noche</p>
+            <input id="toggle" class="toggle" type="checkbox" name="Dark mode" role="switch" value="on">
+            <p><a class="menu-usuario" asp-action="Info" asp-controller="Administracion">USUARIO</a></p>
 
             <div class="mi-lista">
                 <svg width="30" height="30" viewBox="0 0 189 217" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +105,7 @@
     var contador = 1;
 
     function main() {
-        $(window).on('resize', function () {
+        $(window).on('resize', function() {
             if ($(this).width() > 800) {
                 $(".menu").css('left', '0');
             }
@@ -130,7 +114,7 @@
             }
         }).trigger('resize');
 
-        $(".menu-movil").click(function () {
+        $(".menu-movil").click(function() {
             if (contador == 1) {
                 contador = 0;
                 $(".menu").animate({
@@ -145,50 +129,44 @@
         });
 
 
-        const toggleSwitch = document.querySelector('#dn');
+        const toggleSwitch = document.querySelector('#toggle');
         const currentTheme = localStorage.getItem('theme');
+        const root = document.querySelector(":root");
+
 
         function switchTheme(event) {
+            $("body, *, svg").addClass("transi");
             if (event.target.checked) {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
                 document.getElementById("imgFondo").src = "/imgs/fondoDef.png";
-                $(".comment-box").addClass("dark")
+
             } else {
+
                 document.documentElement.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
                 document.getElementById("imgFondo").src = "/imgs/fondoDefClaro.png";
-                $(".comment-box").removeClass("dark")
 
             }
         }
 
         toggleSwitch.addEventListener('change', switchTheme, false);
 
+
+
         if (currentTheme) {
             document.documentElement.setAttribute('data-theme', currentTheme);
-
             if (currentTheme === 'dark') {
-                toggleSwitch.checked = true;
+                toggleSwitch.checked = true
                 document.getElementById("imgFondo").src = "/imgs/fondoDef.png";
-                $(".comment-box").addClass("dark")
+
 
             }
         } else {
             document.documentElement.setAttribute('data-theme', 'light');
             document.getElementById("imgFondo").src = "/imgs/fondoDefClaro.png";
-                $(".comment-box").removeClass("dark")
-
 
         }
-
-        $('a.like-button').on('click', function (e) {
-            $(this).toggleClass('liked');
-
-            setTimeout(() => {
-                $(e.target).removeClass('liked')
-            }, 1000)
-        });
     };
 
 </script>

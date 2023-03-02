@@ -6,6 +6,7 @@
     --icons-i: white;
     --text: #393939;
     --button: #be5bc4;
+    --dur: 0s;
 }
 
 [data-theme="dark"] {
@@ -23,7 +24,11 @@ body {
     background-attachment: fixed;
     margin: 0px;
     padding: 0px;
-    transition: all 0.5s ease-in-out !important;
+    /*    transition: all 0.5s ease-in-out !important;*/
+}
+
+.transi {
+    transition: background-color 0.3s ease-in-out;
 }
 
 .imgFondo {
@@ -46,14 +51,12 @@ body {
     padding: 5vh 0px;
 }
 
-a{
+a {
     text-decoration: none;
     color: white;
 }
 
 /* #region MENUADMIN */
-
-
 .menu-admin {
     position: fixed;
     width: 85px;
@@ -74,36 +77,36 @@ a{
     flex-wrap: wrap;
 }
 
-.menu-admin > div {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 20px;
-}
+    .menu-admin > div {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
 
-.menu-admin > div > a > svg{
-    transition: all 0.1s ease-in-out;
-}
+        .menu-admin > div > a > svg {
+            transition: all 0.1s ease-in-out;
+        }
 
-.menu-admin > div > a > svg:hover{
-    transform: scale(0.9);
-}
+            .menu-admin > div > a > svg:hover {
+                transform: scale(1.2);
+            }
 
-.menu-admin > div > a > svg > path {
-    fill: var(--text);
-}
+            .menu-admin > div > a > svg > path {
+                fill: var(--text);
+            }
 
 .bottom {
     bottom: 30px;
     position: absolute;
 }
 
-.bottom > svg > path {
-    fill: #ff3131 !important;
-}
+    .bottom > svg > path {
+        fill: #ff3131 !important;
+    }
 
 .card-perfil {
     max-width: 600px;
@@ -119,29 +122,29 @@ a{
     padding: 30px 40px;
 }
 
-.card-perfil > .title {
-    width: 100%;
-    height: min-content;
-    margin: 0px;
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 50px;
-    line-height: 75px;
-    color: var(--text);
-}
+    .card-perfil > .title {
+        width: 100%;
+        height: min-content;
+        margin: 0px;
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 75px;
+        color: var(--text);
+    }
 
-.card-perfil > p {
-    width: 100%;
-    margin: 2px;
-    height: min-content;
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 30px;
-    color: var(--text);
-}
+    .card-perfil > p {
+        width: 100%;
+        margin: 2px;
+        height: min-content;
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 30px;
+        color: var(--text);
+    }
 
 .boton {
     border: 0px;
@@ -161,13 +164,13 @@ a{
     align-items: center;
     justify-content: center;
     color: white;
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 
-.boton:hover {
-    background: #4b4b4b;
-    transform: scale(1.1);
-}
+    .boton:hover {
+        background: #4b4b4b;
+        transform: scale(1.1);
+    }
 
 .card-perfil > label {
     width: 70%;
@@ -192,6 +195,7 @@ a{
     background: var(--bg-card);
     box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
+    margin-top: 5px;
     margin-bottom: 20px;
 }
 
@@ -205,21 +209,21 @@ a{
         z-index: 1;
     }
 
-    .menu-admin > div {
-        margin: 0;
-        padding: 10px 0;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-        margin-left: 20px;
-        width: 100%;
-    }
+        .menu-admin > div {
+            margin: 0;
+            padding: 10px 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            margin-left: 20px;
+            width: 100%;
+        }
 
-    .menu-admin > div > a > svg {
-        height: 35px;
-        height: 35px;
-    }
+            .menu-admin > div > a > svg {
+                height: 35px;
+                height: 35px;
+            }
 
     .bottom {
         position: absolute;
@@ -254,6 +258,7 @@ a{
     .card-perfil > label {
         width: 100%;
     }
+
     .card-perfil > input {
         width: 100%;
     }
@@ -286,16 +291,16 @@ a{
 
 /* #region DARKLIGHT */
 
-:root {
-    --dur: 0.3s;
-    /* font-size: calc(40px + (80 - 40) * (100vw - 320px) / (2560 - 320)); */
-}
-
 #toggle {
     outline: 1px solid var(--border);
     color: var(--icons-i);
     font: 15px sans-serif;
+    transition: transform 0.1s ease-in-out;
 }
+
+    #toggle:hover {
+        transform: scale(1.2);
+    }
 
 form,
 .toggle:before,
@@ -319,12 +324,6 @@ form {
 .toggle:before,
 .toggle:after {
     position: absolute;
-}
-
-.curtain,
-.toggle:before,
-.toggle:after {
-    transition: transform var(--dur);
 }
 
 .curtain,
@@ -355,42 +354,41 @@ form {
     -webkit-tap-highlight-color: transparent;
 }
 
-.toggle:before,
-.toggle:after {
-    border-radius: 50%;
-    content: "";
-    display: block;
-    top: 0.25em;
-    left: 0.25em;
-    width: 1em;
-    height: 1em;
-}
+    .toggle:before,
+    .toggle:after {
+        border-radius: 50%;
+        content: "";
+        display: block;
+        top: 0.25em;
+        left: 0.25em;
+        width: 1em;
+        height: 1em;
+    }
 
-.toggle:before,
-.toggle:checked:after {
-    transition-delay: 0s;
-}
+    .toggle:before,
+    .toggle:checked:after {
+        transition-delay: 0s;
+    }
 
-.toggle:checked:before,
-.toggle:after {
-    transition-delay: calc(var(--dur) * 0.75);
-    transition-timing-function: cubic-bezier(0.3, 1.6, 0.5, 0.7);
-}
+    .toggle:checked:before,
+    .toggle:after {
+        transition-timing-function: cubic-bezier(0.3, 1.6, 0.5, 0.7);
+    }
 
-.toggle:before {
-    transform: translateX(-1.5em);
-}
+    .toggle:before {
+        transform: translateX(-1.5em);
+    }
 
-.toggle:checked:before {
-    transform: translateX(1.5em);
-}
+    .toggle:checked:before {
+        transform: translateX(1.5em);
+    }
 
-.toggle:checked:after {
-    transform: translateX(3em);
-}
+    .toggle:checked:after {
+        transform: translateX(3em);
+    }
 
-.toggle:checked ~ .curtain {
-    transform: scaleX(1);
-}
+    .toggle:checked ~ .curtain {
+        transform: scaleX(1);
+    }
 
 /* #endregion */
