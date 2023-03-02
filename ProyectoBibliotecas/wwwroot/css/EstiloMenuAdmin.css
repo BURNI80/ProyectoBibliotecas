@@ -7,16 +7,19 @@
     --text: #393939;
     --button: #be5bc4;
     --dur: 0s;
+    --bg-table-stripp:rgba(163, 163, 163, 0.4);
 }
 
 [data-theme="dark"] {
     --bg-global: rgb(12, 0, 15);
     --bg-card: hsla(0, 0%, 15%, 0.8);
-    --border: rgba(65, 65, 65,0.5);
+    --border: rgba(65, 65, 65, 0.5);
     --icons: white;
     --icons-i: hsla(0, 0%, 15%, 0.8);
     --text: rgb(235, 235, 235);
     --button: #602e63;
+    --bg-table-stripp:rgba(58, 58, 58,0.4);
+
 }
 
 body {
@@ -77,36 +80,36 @@ a {
     flex-wrap: wrap;
 }
 
-    .menu-admin > div {
-        margin-top: 30px;
-        margin-bottom: 30px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
+.menu-admin > div {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
-        .menu-admin > div > a > svg {
-            transition: all 0.1s ease-in-out;
-        }
+.menu-admin > div > a > svg {
+    transition: all 0.1s ease-in-out;
+}
 
-            .menu-admin > div > a > svg:hover {
-                transform: scale(1.2);
-            }
+.menu-admin > div > a > svg:hover {
+    transform: scale(1.2);
+}
 
-            .menu-admin > div > a > svg > path {
-                fill: var(--text);
-            }
+.menu-admin > div > a > svg > path {
+    fill: var(--text);
+}
 
 .bottom {
     bottom: 30px;
     position: absolute;
 }
 
-    .bottom > svg > path {
-        fill: #ff3131 !important;
-    }
+.bottom > svg > path {
+    fill: #ff3131 !important;
+}
 
 .card-perfil {
     max-width: 600px;
@@ -117,34 +120,77 @@ a {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     display: flex;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 30px 40px;
+    overflow-x: hidden;
 }
 
-    .card-perfil > .title {
-        width: 100%;
-        height: min-content;
-        margin: 0px;
-        font-family: "Poppins";
-        font-style: normal;
-        font-weight: 700;
-        font-size: 50px;
-        line-height: 75px;
-        color: var(--text);
-    }
+.card-info {
+    background: var(--bg-card);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.svg-leyenda {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
 
-    .card-perfil > p {
-        width: 100%;
-        margin: 2px;
-        height: min-content;
-        font-family: "Poppins";
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 30px;
-        color: var(--text);
-    }
+
+.card-info svg {
+    margin: 0px 10px;
+}
+
+.card-info svg > path {
+    fill: var(--icons);
+}
+.card-info .activo > path {
+    fill: rgb(156 163 175);
+}
+
+.card-info a {
+    color: var(--text);
+}
+.card-info a:hover {
+    color: var(--icons);
+}
+
+.title {
+    width: 100%;
+    height: min-content;
+    margin: 0px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 75px;
+    color: var(--text);
+}
+
+.card-perfil > p {
+    width: 100%;
+    margin: 2px;
+    height: min-content;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    color: var(--text);
+}
 
 .boton {
     border: 0px;
@@ -167,10 +213,10 @@ a {
     transition: transform 0.3s ease-in-out;
 }
 
-    .boton:hover {
-        background: #4b4b4b;
-        transform: scale(1.1);
-    }
+.boton:hover {
+    background: #4b4b4b;
+    transform: scale(1.1);
+}
 
 .card-perfil > label {
     width: 70%;
@@ -209,21 +255,21 @@ a {
         z-index: 1;
     }
 
-        .menu-admin > div {
-            margin: 0;
-            padding: 10px 0;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 10px;
-            margin-left: 20px;
-            width: 100%;
-        }
+    .menu-admin > div {
+        margin: 0;
+        padding: 10px 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        margin-left: 20px;
+        width: 100%;
+    }
 
-            .menu-admin > div > a > svg {
-                height: 35px;
-                height: 35px;
-            }
+    .menu-admin > div > a > svg {
+        height: 35px;
+        height: 35px;
+    }
 
     .bottom {
         position: absolute;
@@ -232,6 +278,11 @@ a {
         right: 20px;
     }
 
+    .card-info {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    
     .contenido-perfil {
         width: calc(100%);
         height: calc(90% - 60px);
@@ -298,9 +349,9 @@ a {
     transition: transform 0.1s ease-in-out;
 }
 
-    #toggle:hover {
-        transform: scale(1.2);
-    }
+#toggle:hover {
+    transform: scale(1.2);
+}
 
 form,
 .toggle:before,
@@ -354,41 +405,134 @@ form {
     -webkit-tap-highlight-color: transparent;
 }
 
-    .toggle:before,
-    .toggle:after {
-        border-radius: 50%;
-        content: "";
-        display: block;
-        top: 0.25em;
-        left: 0.25em;
-        width: 1em;
-        height: 1em;
-    }
+.toggle:before,
+.toggle:after {
+    border-radius: 50%;
+    content: "";
+    display: block;
+    top: 0.25em;
+    left: 0.25em;
+    width: 1em;
+    height: 1em;
+}
 
-    .toggle:before,
-    .toggle:checked:after {
-        transition-delay: 0s;
-    }
+.toggle:before,
+.toggle:checked:after {
+    transition-delay: 0s;
+}
 
-    .toggle:checked:before,
-    .toggle:after {
-        transition-timing-function: cubic-bezier(0.3, 1.6, 0.5, 0.7);
-    }
+.toggle:checked:before,
+.toggle:after {
+    transition-timing-function: cubic-bezier(0.3, 1.6, 0.5, 0.7);
+}
 
-    .toggle:before {
-        transform: translateX(-1.5em);
-    }
+.toggle:before {
+    transform: translateX(-1.5em);
+}
 
-    .toggle:checked:before {
-        transform: translateX(1.5em);
-    }
+.toggle:checked:before {
+    transform: translateX(1.5em);
+}
 
-    .toggle:checked:after {
-        transform: translateX(3em);
-    }
+.toggle:checked:after {
+    transform: translateX(3em);
+}
 
-    .toggle:checked ~ .curtain {
-        transform: scaleX(1);
-    }
+.toggle:checked ~ .curtain {
+    transform: scaleX(1);
+}
 
+/* #endregion */
+
+/* #region CARD COMENTARIO */
+.card-comentaro {
+    background-color: var(--border);
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    margin-top: 40px;
+}
+
+.datos-comentario {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usuario-comentario {
+    font-family: "Montserrat";
+    max-width: 330px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: var(--text);
+}
+
+.fecha-comentario {
+    margin-left: 10px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #676767;
+    width: 100%;
+    text-align: left;
+}
+
+.card-comentaro .separador {
+    width: 100%;
+    height: 2px;
+    background: #78397c;
+}
+
+.likes {
+    display: flex;
+    position: relative;
+    float: right;
+    align-items: center;
+    margin: 0px 20px;
+}
+
+.likes > p {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    color: var(--text);
+    margin: 0px;
+    margin-right: 5px;
+}
+
+.card-comentaro > .descripcion {
+    margin-top: 10px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: var(--icons);
+    text-align: justify;
+}
+
+@media (max-width: 800px) {
+    .card-comentaro {
+        padding: 10px;
+    }
+}
+.likes > svg > path {
+    fill: #ff6e6f;
+}
 /* #endregion */

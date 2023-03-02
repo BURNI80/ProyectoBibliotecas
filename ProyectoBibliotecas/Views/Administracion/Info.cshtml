@@ -1,7 +1,36 @@
 ﻿@{
     Layout = "_LayoutAdministrador";
 }
-<div class="contenido-perfil">
+
+<div class="contenido-perfil temp">
+    <div style="width:100%; display:flex;justify-content:center;align-items:center;">
+        <div class="card-info">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a class="inline-flex items-center text-sm font-medium" asp-action="Index" asp-controller="Home">
+                            <svg class="svg-leyenda" width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M30.7721 39.9564H9.22791C4.13023 39.9564 0 35.8076 0 30.7099V16.9238C0 14.3935 1.56279 11.2122 3.57209 9.64936L13.6 1.83541C16.614 -0.508767 21.4326 -0.620395 24.5581 1.57495L36.0558 9.63076C38.2698 11.1749 40 14.4866 40 17.1843V30.7285C40 35.8076 35.8698 39.9564 30.7721 39.9564ZM15.3116 4.03076L5.28372 11.8447C3.96279 12.8866 2.7907 15.2494 2.7907 16.9238V30.7099C2.7907 34.2634 5.67442 37.1657 9.22791 37.1657H30.7721C34.3256 37.1657 37.2093 34.282 37.2093 30.7285V17.1843C37.2093 15.3982 35.9256 12.9238 34.4558 11.9191L22.9581 3.86332C20.8372 2.37495 17.3395 2.44936 15.3116 4.03076Z" fill="#292D32" />
+                                <path d="M19.9998 32.5144C19.2371 32.5144 18.6045 31.8819 18.6045 31.1191V25.5377C18.6045 24.7749 19.2371 24.1423 19.9998 24.1423C20.7626 24.1423 21.3952 24.7749 21.3952 25.5377V31.1191C21.3952 31.8819 20.7626 32.5144 19.9998 32.5144Z" fill="#292D32" />
+                            </svg>
+                            Inicio
+                        </a>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                            <svg class="svg-leyenda activo" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.2239 22.8465C20.1867 22.8465 20.1308 22.8465 20.0936 22.8465C20.0378 22.8465 19.9634 22.8465 19.9076 22.8465C15.6843 22.7163 12.5215 19.4233 12.5215 15.3674C12.5215 11.2372 15.8889 7.86975 20.0192 7.86975C24.1494 7.86975 27.5169 11.2372 27.5169 15.3674C27.4983 19.4419 24.3169 22.7163 20.2797 22.8465C20.2425 22.8465 20.2425 22.8465 20.2239 22.8465ZM20.0006 10.6418C17.396 10.6418 15.2936 12.7628 15.2936 15.3488C15.2936 17.8977 17.2843 19.9628 19.8146 20.0558C19.8704 20.0372 20.0564 20.0372 20.2425 20.0558C22.7355 19.9256 24.689 17.8791 24.7076 15.3488C24.7076 12.7628 22.6053 10.6418 20.0006 10.6418Z" fill="#393939" />
+                                <path d="M20.002 40.0001C14.9973 40.0001 10.2159 38.1396 6.51362 34.7536C6.17873 34.4559 6.0299 34.0094 6.0671 33.5815C6.30897 31.3675 7.68571 29.3024 9.97408 27.7768C15.5183 24.0931 24.5043 24.0931 30.0299 27.7768C32.3183 29.321 33.695 31.3675 33.9369 33.5815C33.9927 34.028 33.8252 34.4559 33.4903 34.7536C29.788 38.1396 25.0066 40.0001 20.002 40.0001ZM8.98804 33.2094C12.0764 35.7954 15.9648 37.2094 20.002 37.2094C24.0392 37.2094 27.9276 35.7954 31.0159 33.2094C30.681 32.0745 29.788 30.9768 28.4671 30.0838C23.8903 27.0326 16.1322 27.0326 11.5183 30.0838C10.1973 30.9768 9.32292 32.0745 8.98804 33.2094Z" fill="#393939" />
+                                <path d="M20 40C8.96744 40 0 31.0326 0 20C0 8.96744 8.96744 0 20 0C31.0326 0 40 8.96744 40 20C40 31.0326 31.0326 40 20 40ZM20 2.7907C10.5116 2.7907 2.7907 10.5116 2.7907 20C2.7907 29.4884 10.5116 37.2093 20 37.2093C29.4884 37.2093 37.2093 29.4884 37.2093 20C37.2093 10.5116 29.4884 2.7907 20 2.7907Z" fill="#393939" />
+                            </svg>
+                            <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">Perfil</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
     <div class="card-perfil" style="margin-top: 0;">
         <h1 class="title">Perfil Personal</h1>
         <p>DNI: 123456789</p>
@@ -22,12 +51,23 @@
         <p>Reseñas: <strong>22</strong>
         <p>
             <div style="width: 100%;">
-                <a class="boton" href="">Mis prestamos</a>
+                <a class="boton" asp-action="Reservas" asp-controller="Administracion">Mis reservas</a>
             </div>
             <div style="width: 100%;">
-                <a class="boton" href="">Mis Comentarios</a>
+                <a class="boton" asp-action="Comentarios" asp-controller="Administracion">Mis Comentarios</a>
             </div>
     </div>
 
 
 </div>
+
+<style>
+
+    .temp {
+        height: 90vh;
+        margin: 0px;
+        padding: 0px;
+        margin-top: 5vh;
+        overflow: auto;
+    }
+</style>

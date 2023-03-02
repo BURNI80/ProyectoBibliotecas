@@ -12,5 +12,15 @@ namespace ProyectoBibliotecas.Controllers
         {
             return View();
         }
+
+        public IActionResult Comentarios()
+        {
+            return View();
+        }
+
+        public IActionResult Reservas()
+        {
+            return View();
+        }
     }
 }

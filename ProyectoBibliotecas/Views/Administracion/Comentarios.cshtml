@@ -1,0 +1,109 @@
+﻿@{
+    Layout = "_LayoutAdministrador";
+}
+
+<div class="contenido-perfil temp">
+    <div class="card-info">
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a class="inline-flex items-center text-sm font-medium" asp-action="Index" asp-controller="Home">
+                        <svg class="svg-leyenda" width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M30.7721 39.9564H9.22791C4.13023 39.9564 0 35.8076 0 30.7099V16.9238C0 14.3935 1.56279 11.2122 3.57209 9.64936L13.6 1.83541C16.614 -0.508767 21.4326 -0.620395 24.5581 1.57495L36.0558 9.63076C38.2698 11.1749 40 14.4866 40 17.1843V30.7285C40 35.8076 35.8698 39.9564 30.7721 39.9564ZM15.3116 4.03076L5.28372 11.8447C3.96279 12.8866 2.7907 15.2494 2.7907 16.9238V30.7099C2.7907 34.2634 5.67442 37.1657 9.22791 37.1657H30.7721C34.3256 37.1657 37.2093 34.282 37.2093 30.7285V17.1843C37.2093 15.3982 35.9256 12.9238 34.4558 11.9191L22.9581 3.86332C20.8372 2.37495 17.3395 2.44936 15.3116 4.03076Z" fill="#292D32" />
+                            <path d="M19.9998 32.5144C19.2371 32.5144 18.6045 31.8819 18.6045 31.1191V25.5377C18.6045 24.7749 19.2371 24.1423 19.9998 24.1423C20.7626 24.1423 21.3952 24.7749 21.3952 25.5377V31.1191C21.3952 31.8819 20.7626 32.5144 19.9998 32.5144Z" fill="#292D32" />
+                        </svg>
+                        Inicio
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                        <a class="inline-flex items-center text-sm font-medium" asp-action="Info" asp-controller="Administracion">
+                            <svg class="svg-leyenda" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.2239 22.8465C20.1867 22.8465 20.1308 22.8465 20.0936 22.8465C20.0378 22.8465 19.9634 22.8465 19.9076 22.8465C15.6843 22.7163 12.5215 19.4233 12.5215 15.3674C12.5215 11.2372 15.8889 7.86975 20.0192 7.86975C24.1494 7.86975 27.5169 11.2372 27.5169 15.3674C27.4983 19.4419 24.3169 22.7163 20.2797 22.8465C20.2425 22.8465 20.2425 22.8465 20.2239 22.8465ZM20.0006 10.6418C17.396 10.6418 15.2936 12.7628 15.2936 15.3488C15.2936 17.8977 17.2843 19.9628 19.8146 20.0558C19.8704 20.0372 20.0564 20.0372 20.2425 20.0558C22.7355 19.9256 24.689 17.8791 24.7076 15.3488C24.7076 12.7628 22.6053 10.6418 20.0006 10.6418Z" fill="#393939" />
+                                <path d="M20.002 40.0001C14.9973 40.0001 10.2159 38.1396 6.51362 34.7536C6.17873 34.4559 6.0299 34.0094 6.0671 33.5815C6.30897 31.3675 7.68571 29.3024 9.97408 27.7768C15.5183 24.0931 24.5043 24.0931 30.0299 27.7768C32.3183 29.321 33.695 31.3675 33.9369 33.5815C33.9927 34.028 33.8252 34.4559 33.4903 34.7536C29.788 38.1396 25.0066 40.0001 20.002 40.0001ZM8.98804 33.2094C12.0764 35.7954 15.9648 37.2094 20.002 37.2094C24.0392 37.2094 27.9276 35.7954 31.0159 33.2094C30.681 32.0745 29.788 30.9768 28.4671 30.0838C23.8903 27.0326 16.1322 27.0326 11.5183 30.0838C10.1973 30.9768 9.32292 32.0745 8.98804 33.2094Z" fill="#393939" />
+                                <path d="M20 40C8.96744 40 0 31.0326 0 20C0 8.96744 8.96744 0 20 0C31.0326 0 40 8.96744 40 20C40 31.0326 31.0326 40 20 40ZM20 2.7907C10.5116 2.7907 2.7907 10.5116 2.7907 20C2.7907 29.4884 10.5116 37.2093 20 37.2093C29.4884 37.2093 37.2093 29.4884 37.2093 20C37.2093 10.5116 29.4884 2.7907 20 2.7907Z" fill="#393939" />
+                            </svg>
+                            Perfil
+                        </a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                        <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">Mis comentarios</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </div>
+    <div class="card-perfil" style="text-align: center; margin-top:auto">
+        <h1 class="title">Mis comentarios</h1>
+        @for (int i = 0; i < 5; i++)
+        {
+            <div class="card-comentaro">
+                <div class="datos-comentario">
+                    <p class="fecha-comentario">14/09/2001</p>
+                    <div class="likes">
+                        <p>124</p>
+                        <svg width="20" height="20" viewBox="0 0 148 133" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M78.5031 126.907C76.1819 127.726 72.3588 127.726 70.0376 126.907C50.2392 120.148 6 91.9525 6 44.1631C6 23.0676 22.9993 6 43.9583 6C56.3835 6 67.375 12.0078 74.2703 21.2926C81.1657 12.0078 92.2255 6 104.582 6C125.541 6 142.541 23.0676 142.541 44.1631C142.541 91.9525 98.3015 120.148 78.5031 126.907Z" fill="#78397C" stroke="black" stroke-width="10.2406" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                        <svg style="margin-left:10px" width="20" height="20" viewBox="0 0 35 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M33.6652 9.8373C33.6293 9.8373 33.5754 9.8373 33.5216 9.8373C24.0253 8.88588 14.547 8.52685 5.15845 9.47827L1.49638 9.8373C0.742426 9.9091 0.0782276 9.37056 0.00642241 8.61661C-0.0653828 7.86265 0.473157 7.21641 1.20916 7.1446L4.87123 6.78557C14.4214 5.8162 24.0971 6.19318 33.7908 7.1446C34.5268 7.21641 35.0654 7.8806 34.9936 8.61661C34.9397 9.31671 34.3473 9.8373 33.6652 9.8373Z" fill="#FF3131" />
+                            <path d="M11.2276 8.02424C11.1558 8.02424 11.084 8.02424 10.9942 8.00628C10.2761 7.88063 9.77351 7.18052 9.89917 6.46247L10.2941 4.11085C10.5813 2.38752 10.9762 0 15.1588 0H19.8621C24.0627 0 24.4576 2.47728 24.7269 4.1288L25.1218 6.46247C25.2475 7.19848 24.7448 7.89858 24.0268 8.00628C23.2908 8.13194 22.5907 7.62931 22.483 6.91125L22.088 4.57758C21.8367 3.01582 21.7829 2.71065 19.88 2.71065H15.1768C13.274 2.71065 13.2381 2.96197 12.9688 4.55963L12.556 6.8933C12.4483 7.5575 11.8738 8.02424 11.2276 8.02424Z" fill="#FF3131" />
+                            <path d="M23.2722 38.5954H11.7474C5.4824 38.5954 5.23108 35.1308 5.03362 32.3304L3.86678 14.2534C3.81293 13.5174 4.38737 12.8712 5.12337 12.8173C5.87733 12.7814 6.50562 13.3379 6.55948 14.0739L7.72631 32.1509C7.92378 34.8795 7.99558 35.9027 11.7474 35.9027H23.2722C27.0419 35.9027 27.1137 34.8795 27.2933 32.1509L28.4601 14.0739C28.514 13.3379 29.1602 12.7814 29.8962 12.8173C30.6322 12.8712 31.2066 13.4994 31.1528 14.2534L29.986 32.3304C29.7885 35.1308 29.5372 38.5954 23.2722 38.5954Z" fill="#FF3131" />
+                            <path d="M20.4892 28.722H14.5114C13.7754 28.722 13.165 28.1116 13.165 27.3756C13.165 26.6396 13.7754 26.0293 14.5114 26.0293H20.4892C21.2252 26.0293 21.8356 26.6396 21.8356 27.3756C21.8356 28.1116 21.2252 28.722 20.4892 28.722Z" fill="#FF3131" />
+                            <path d="M21.9978 21.5416H13.0221C12.2861 21.5416 11.6758 20.9312 11.6758 20.1952C11.6758 19.4592 12.2861 18.8489 13.0221 18.8489H21.9978C22.7338 18.8489 23.3441 19.4592 23.3441 20.1952C23.3441 20.9312 22.7338 21.5416 21.9978 21.5416Z" fill="#FF3131" />
+                        </svg>
+
+                </div>
+                <div class="separador"></div>
+                <p class="descripcion">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                    the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                    type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also
+                    the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the
+                    1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                    desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .temp {
+        height: 90vh;
+        margin: 0px;
+        padding: 0px;
+        margin-top: 5vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-perfil {
+        display: block;
+        max-width: 1000px;
+    }
+
+    @@media(max-width: 600px) {
+        .card-perfil {
+            width: 90%;
+            padding: 40px 10px;
+        }
+
+        .title {
+            font-size: 40px;
+            width: 90%;
+        }
+    }
+</style>
