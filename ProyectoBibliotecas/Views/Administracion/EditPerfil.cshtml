@@ -1,0 +1,44 @@
+﻿@{
+    Layout = "_LayoutAdministrador";
+}
+
+<div class="contenido-perfil temp">
+    <form method="post">
+        <div class="card-perfil" style="margin-top: 0; text-align: center;">
+            <h1 class="title">Editar Perfil</h1>
+            <label for="">Nombre:</label>
+            <input type="text">
+            <label for="">Apellidos:</label>
+            <input type="text">
+            <label for="">Email:</label>
+            <input type="email">
+            <label for="">Telefono:</label>
+            <input type="number">
+            <label for="">Usuario:</label>
+            <input type="text">
+            <label for="">Contraseña:</label>
+            <input type="password">
+            <button class="boton">Confirmar Edicion</button>
+        </div>
+    </form>
+
+</div>
+
+<style>
+    .temp {
+        height: 90vh;
+        margin: 0px;
+        padding: 0px;
+        margin-top: 5vh;
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    form{
+        width: 100%;
+        height: fit-content;
+        background-color: transparent;
+    }
+</style>
