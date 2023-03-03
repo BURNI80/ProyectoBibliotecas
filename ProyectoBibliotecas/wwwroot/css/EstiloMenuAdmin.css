@@ -293,9 +293,14 @@ a {
         overflow-x: hidden;
         /*        background-color:red;*/
     }
+    .card-perfil{
+        width: 90%;
+    }
 
     .card-perfil:last-child {
         position: relative;
+    margin-bottom: 60px;
+        
     }
 
     .scrollbar > {
@@ -317,28 +322,6 @@ a {
 
 /* #endregion */
 
-/*#region SCROLLBAR*/
-.scrollbar {
-    overflow-y: auto;
-}
-
-#style-1::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: #74747483;
-}
-
-#style-1::-webkit-scrollbar {
-    width: 12px;
-    border-radius: 10px;
-    background-color: #74747483;
-}
-
-#style-1::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #dcaaff;
-}
-
-/*#endregion*/
 
 /* #region DARKLIGHT */
 

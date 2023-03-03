@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "_LayoutAdministrador";
+}
+
+<div class="card-perfil" style="margin-top: 0;">
+    <h1>Mi lista</h1>
+
+    <div class="menu-botones-lista">
+        <div class="boton">
+            <a href="">Favoritos</a>
+        </div>
+        <div class="boton">
+            <a href="">Leidos</a>
+        </div>
+    </div>
+
+    @RenderBody()
+</div>
+
+<style>
+     .main {
+        position: relative;
+        float: right;
+        width: calc(100% - 85px - 20px);
+        height: 90vh;
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        text-align: center;
+    }
+
+    .menu-botones-lista {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .menu-botones-lista>.boton {
+        width: 100%;
+        max-width: 150px;
+    }
+
+    .card-fav {
+        margin-top: 40px !important;
+    }
+</style>

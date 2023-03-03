@@ -22,5 +22,10 @@ namespace ProyectoBibliotecas.Controllers
         {
             return View();
         }
+
+        public IActionResult LibrosFavoritos()
+        {
+            return View();
+        }
     }
 }

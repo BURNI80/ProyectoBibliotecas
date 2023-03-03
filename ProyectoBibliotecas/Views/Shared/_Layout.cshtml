@@ -64,7 +64,8 @@
             </div>
             <p><a class="menu-usuario" asp-action="Info" asp-controller="Administracion">USUARIO</a></p>
 
-            <div class="boton-logout">
+            <a asp-action="Index" asp-controller="Managed" class="boton-logout" style="text-decoration:none">
+
                 <svg width="30" height="30" viewBox="0 0 201 198" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M163.327 136.702C161.184 136.702 159.041 135.913 157.349 134.221C154.078 130.95 154.078 125.536 157.349 122.265L180.245 99.3681L157.349 76.4714C154.078 73.2009 154.078 67.787 157.349 64.516C160.62 61.2451 166.034 61.2451 169.305 64.516L198.179 93.3902C201.45 96.6611 201.45 102.075 198.179 105.346L169.305 134.221C167.613 135.913 165.47 136.702 163.327 136.702Z"
                           fill="#FF3131" />
@@ -74,7 +75,7 @@
                           fill="#FF3131" />
                 </svg>
                 <p>Cerrar Session</p>
-            </div>
+            </a>
         </div>
     </nav>
     <!-- *AQUI VA EL CONTENIDO -->
