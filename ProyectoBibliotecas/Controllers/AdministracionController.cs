@@ -27,5 +27,10 @@ namespace ProyectoBibliotecas.Controllers
         {
             return View();
         }
+
+        public IActionResult LibrosLeidos()
+        {
+            return View();
+        }
     }
 }
