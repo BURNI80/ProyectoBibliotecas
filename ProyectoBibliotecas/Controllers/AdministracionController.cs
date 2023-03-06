@@ -4,7 +4,7 @@ namespace ProyectoBibliotecas.Controllers
 {
     public class AdministracionController : Controller
     {
-        public IActionResult Info()
+        public IActionResult Perfil_Info()
         {
             return View();
         }
@@ -13,22 +13,27 @@ namespace ProyectoBibliotecas.Controllers
             return View();
         }
 
-        public IActionResult Comentarios()
+        public IActionResult Perfil_Comentarios()
         {
             return View();
         }
 
-        public IActionResult Reservas()
+        public IActionResult Perfil_Reservas()
         {
             return View();
         }
 
-        public IActionResult LibrosFavoritos()
+        public IActionResult Lista_LibrosFavoritos()
         {
             return View();
         }
 
-        public IActionResult LibrosLeidos()
+        public IActionResult Lista_LibrosLeidos()
+        {
+            return View();
+        }
+
+        public IActionResult Admin_Panel()
         {
             return View();
         }
