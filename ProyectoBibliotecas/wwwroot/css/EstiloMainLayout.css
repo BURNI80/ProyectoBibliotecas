@@ -293,7 +293,7 @@ body {
 
     .menu {
         left: -100%;
-        width: 100%;
+        width: 100% !important;
         height: 100%;
         margin-top: 60px;
         z-index: 1;
@@ -301,6 +301,7 @@ body {
         top: 0px;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
+        max-width:none;
     }
 
     /* SI SE QUIERE DEJAR COMO ERSTABA: SE BORRA EL FIX Y ESTE ESTILO */
