@@ -1,4 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using ProyectoBibliotecas.Data;
+using ProyectoBibliotecas.Repositorys;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddTransient<BibliotecasRepository>();
+builder.Services.AddDbContext<BibliotecasContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
