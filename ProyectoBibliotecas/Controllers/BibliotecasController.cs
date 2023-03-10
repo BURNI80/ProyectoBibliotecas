@@ -23,8 +23,17 @@ namespace ProyectoBibliotecas.Controllers
             return View(this.repo.SearchBiblioteca(search));
         }
 
+
         public IActionResult DetailsBiblioteca(int id)
         {
+            ViewData["LISTALIBROS"] = this.repo.GetLibrosBiblioteca(id);
+            return View(this.repo.GetDatosBiblioteca(id));
+        }
+
+        [HttpPost]
+        public IActionResult DetailsBiblioteca(int id, string input, char option)
+        {
+            ViewData["LISTALIBROS"] = this.repo.SearchLibroBiblioteca(id,input,option);
             return View(this.repo.GetDatosBiblioteca(id));
         }
     }

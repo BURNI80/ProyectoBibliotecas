@@ -1,27 +1,35 @@
-﻿<link rel="stylesheet" href="~/css/EstiloLibros.css">
+﻿@model Libro
+
+@{
+    List<Comentario> comentarios = ViewData["COMENTARIOS"] as List<Comentario>;
+}
+
+<link rel="stylesheet" href="~/css/EstiloLibros.css">
 <link href="~/lib/flowbite.min.css" rel="stylesheet" />
 
 
 <div class="imagen-fondo-libro">
-
-    <img src="~/imgs/si.jpg" alt="Imagen de fondo">
+    @if (Model.IMAGEN != null)
+    {
+        <img src="~/imgs/si.jpg" alt="Imagen de fondo">
+    }
     <div class="degradado"></div>
     <div class="contenido-libro-biblio">
-        <h1>Mi página con degradado y fondo de imagen</h1>
-        <p>¡Bienvenido a mi sitio web!</p>
+        <h1>@Model.NOMBRE_LIBRO</h1>
+        <p>@Model.NOMBRE_AUTOR</p>
         <div class="separador"></div>
         <p class="descripcion">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-            leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-            publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            @Model.DESCRIPCION
         </p>
         <div class="details">
             <details>
                 <summary>Detalles</summary>
-                Something small enough to escape casual notice.
+                <ul>
+                    <li>Paginas: @Model.NUM_PAGINAS</li>
+                    <li>Fecha de publicacion: @Model.FECHA_PUBLICACION.Value.ToShortDateString()</li>
+                    <li>Idioma: @Model.IDIOMA</li>
+                    <li><a style="text-decoration:underline !important;" href="@Model.URL_COMPRA" target="_blank">Comprar</a></li>
+                </ul>
             </details>
         </div>
         <div class="valoraciones">
@@ -31,11 +39,11 @@
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                 </path>
             </svg>
-            <p class="nota">4.95</p>
+            <p class="nota">@Model.VALORACION_MEDIA</p>
             <div class="separador"></div>
-            <p class="comentarios">73 valoraciones</p>
+            <p class="comentarios">@ViewData["VALORACIONES"] valoraciones</p>
             <div class="separador"></div>
-            <p class="comentarios">45 comentarios</p>
+            <p class="comentarios">@comentarios.Count comentarios</p>
         </div>
     </div>
 
@@ -57,16 +65,16 @@
                             Publicar
                         </button>
                         <div style="width:100%;">
-                        <fieldset>
-                            <span class="star-cb-group">
-                                <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
-                                <input type="radio" id="rating-4" name="rating" value="4" /><label for="rating-4">4</label>
-                                <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
-                                <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
-                                <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
-                                <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
-                            </span>
-                        </fieldset>
+                            <fieldset>
+                                <span class="star-cb-group">
+                                    <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
+                                    <input type="radio" id="rating-4" name="rating" value="4" /><label for="rating-4">4</label>
+                                    <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
+                                    <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
+                                    <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
+                                    <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
+                                </span>
+                            </fieldset>
                         </div>
                         <div class="flex pl-0 space-x-1 sm:pl-2">
                         </div>
@@ -74,40 +82,40 @@
                 </div>
             </form>
         </div>
-        @for (int i = 0; i <5; i++)
+        @for (int i = 0; i < 5; i++)
         {
-             <div class="card-comentaro">
-            <div class="datos-comentario">
-                <p class="usuario-comentario">Usuarioccccccccccccccccccccccccccccccc</p>
-                <p class="fecha-comentario">14/09/2001</p>
-                <div class="likes">
+            <div class="card-comentaro">
+                <div class="datos-comentario">
+                    <p class="usuario-comentario">Usuarioccccccccccccccccccccccccccccccc</p>
+                    <p class="fecha-comentario">14/09/2001</p>
+                    <div class="likes">
 
-                    <a class='like-button'>
-                        <span class='like-icon'>
-                            <div class='heart-animation-1'></div>
-                            <div class='heart-animation-2'></div>
-                        </span>
-                    </a>
-                    <p>124</p>
+                        <a class='like-button'>
+                            <span class='like-icon'>
+                                <div class='heart-animation-1'></div>
+                                <div class='heart-animation-2'></div>
+                            </span>
+                        </a>
+                        <p>124</p>
+                    </div>
                 </div>
+                <div class="separador"></div>
+                <p class="descripcion">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                    the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                    type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also
+                    the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the
+                    1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                    desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
             </div>
-            <div class="separador"></div>
-            <p class="descripcion">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                type
-                and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-                the
-                leap into electronic typesetting, remaining essentially unchanged. It was popularised in the
-                1960s
-                with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-                desktop
-                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-        </div>
         }
-       
+
     </div>
 </div>
 

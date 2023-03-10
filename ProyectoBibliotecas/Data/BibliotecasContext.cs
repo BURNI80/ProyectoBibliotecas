@@ -14,6 +14,14 @@ namespace ProyectoBibliotecas.Data
 
         public DbSet<Usuario> Usuarios { get; set; }
 
+        public DbSet<LibroDisponibilidad> LibroDisponibilidad { get; set; }
+
+        public DbSet<Valoracion> Valoraciones { get; set; }
+
+        public DbSet<Comentario> Comentarios { get; set; }
+
+
+
 
     }
 }

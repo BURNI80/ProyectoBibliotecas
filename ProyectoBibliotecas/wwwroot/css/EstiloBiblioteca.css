@@ -11,8 +11,8 @@
     align-items: center;
     justify-content: center;
     padding: 20px 0px;
-/*    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);*/
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgb(255, 255, 255,0.1);
 }
 
@@ -142,10 +142,13 @@
         .contenido-biblio > p {
             text-align: center;
             margin: 10px 0px;
+            font-size:25px;
+            line-height:30px;
         }
 
     .info-card > div {
         margin-left: 5%;
+        display:none;
     }
 
         .info-card > div > div {
@@ -153,16 +156,16 @@
         }
 
     .flecha-biblio {
-        padding-top: 10px;
         margin: 0;
         width: 100%;
         display: flex;
     }
 
-        .flecha-biblio > svg {
+        .flecha-biblio > a > svg {
             display: block;
-            margin: auto;
-            background-color: #fff;
+            
+            height: 45px;
+            width: 45px;
         }
 }
 
