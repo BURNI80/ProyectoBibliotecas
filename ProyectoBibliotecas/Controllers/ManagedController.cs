@@ -50,7 +50,8 @@ namespace ProyectoBibliotecas.Controllers
         public IActionResult CerrarSesion()
         {
             HttpContext.Session.Remove("user");
-            return RedirectToAction("Login");
+            string urlAnterior = HttpContext.Request.Headers["Referer"];
+            return Redirect(urlAnterior);
         }
     }
 }

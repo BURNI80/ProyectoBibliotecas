@@ -22,6 +22,9 @@ namespace ProyectoBibliotecas.Data
 
         public DbSet<Autor> Autores { get; set; }
 
+        public DbSet<DeseosLeido> ListaDeseos { get; set; }
+
+
 
 
 

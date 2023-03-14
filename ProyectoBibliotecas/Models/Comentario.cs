@@ -24,5 +24,8 @@ namespace ProyectoBibliotecas.Models
 
         [Column("MENSAJE")]
         public string MENSAJE { get; set; }
+
+        [Column("COMENTARIO_LIKE")]
+        public int? COMENTARIO_LIKE { get; set; }
     }
 }

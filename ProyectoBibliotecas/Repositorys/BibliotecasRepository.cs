@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using ProyectoBibliotecas.Helpers;
 using ProyectoBibliotecas.Data;
 using ProyectoBibliotecas.Models;
-using ProyectoBibliotecas.Helpers;
 using System.Data;
 using System.Data.Common;
 using System.Net;
@@ -83,6 +82,8 @@ namespace ProyectoBibliotecas.Repositorys
             return (Biblioteca)consulta.First();
         }
 
+
+
         public List<LibroDisponibilidad> GetLibrosBiblioteca(int id)
         {
             string sql = "SP_BUSCARLIBRO @ID_BIBLIOTECA";
@@ -129,20 +130,22 @@ namespace ProyectoBibliotecas.Repositorys
             return cuenta;
         }
 
-        public List<Comentario> GetComentarios(int id)
+        public List<Comentario> GetComentarios(int id, string dni)
         {
-            string sql = "SP_COMENTARIOSLIBRO @ID_LIBRO";
+            string sql = "SP_GETCOMENTARIOSLIBRO @ID_LIBRO ,@DNI_USUARIO";
             SqlParameter p1 = new SqlParameter("@ID_LIBRO", id);
-            var consulta = this.context.Comentarios.FromSqlRaw(sql, p1);
+            SqlParameter p2 = new SqlParameter("@DNI_USUARIO", dni ?? (object)DBNull.Value);
+            var consulta = this.context.Comentarios.FromSqlRaw(sql, p1, p2);
             return consulta.AsEnumerable().ToList();
         }
 
-        public void LikeComentario(int orden, int idComentario)
+        public void LikeComentario(int orden, int idComentario, string dni)
         {
-            string sql = "SP_LIKECOMENTARIO @ID_COMENTARIO, @IDENT";
+            string sql = "SP_LIKECOMENTARIO @ID_COMENTARIO, @IDENT,@DNI_USUARIO";
             SqlParameter p1 = new SqlParameter("@ID_COMENTARIO", idComentario);
             SqlParameter p2 = new SqlParameter("@IDENT", orden);
-            int rowsAffected = this.context.Database.ExecuteSqlRaw(sql, p1, p2);
+            SqlParameter p3 = new SqlParameter("@DNI_USUARIO", dni);
+            int rowsAffected = this.context.Database.ExecuteSqlRaw(sql, p1, p2, p3);
         }
 
         public List<Autor> GetAutores()
@@ -158,7 +161,7 @@ namespace ProyectoBibliotecas.Repositorys
             return consulta.AsEnumerable().ToList();
         }
 
-        public void PostComentario(int idLibro, string dni,DateTime fecha,string textoComentario,int rating)
+        public void PostComentario(int idLibro, string dni, DateTime fecha, string textoComentario, int rating)
         {
             string sql = "SP_CREATECOMENTARIORESENIA @ID_LIBRO, @DNI_USUARIO, @FECHA_COMENTARIO, @MENSAJE, @PUNTUACION";
             SqlParameter p1 = new SqlParameter("@ID_LIBRO", idLibro);
@@ -166,7 +169,23 @@ namespace ProyectoBibliotecas.Repositorys
             SqlParameter p3 = new SqlParameter("@FECHA_COMENTARIO", fecha);
             SqlParameter p4 = new SqlParameter("@MENSAJE", textoComentario ?? (object)DBNull.Value);
             SqlParameter p5 = new SqlParameter("@PUNTUACION", rating);
-            int rowsAffected = this.context.Database.ExecuteSqlRaw(sql,p1,p2,p3,p4,p5);
+            int rowsAffected = this.context.Database.ExecuteSqlRaw(sql, p1, p2, p3, p4, p5);
+        }
+
+        public DeseosLeido LibroDeseo(int idLibro, string dni)
+        {
+            var consulta = from data in this.context.ListaDeseos.AsEnumerable()
+                           where data.ID_LIBRO == idLibro
+                           select data;
+
+            if(consulta == null)
+            {
+                return null;
+            }
+            else
+            {
+                return consulta.FirstOrDefault();
+            }
         }
 
 

@@ -29,15 +29,29 @@ namespace ProyectoBibliotecas.Controllers
         public IActionResult DetailsLibro(int id)
         {
             ViewData["VALORACIONES"] = this.repo.GetValoraciones(id);
-            ViewData["COMENTARIOS"] = this.repo.GetComentarios(id);
+            string dni;
+            if (HttpContext.Session.GetObject<Usuario>("user") == null)
+            {
+                dni = null;
+                ViewData["LISTADESEOS"] = -1;
+            }
+            else
+            {
+                dni = HttpContext.Session.GetObject<Usuario>("user").DNI_USUARIO;
+                ViewData["LISTADESEOS"] = this.repo.LibroDeseo(id, dni);
+            }
+            ViewData["COMENTARIOS"] = this.repo.GetComentarios(id, dni);
+            ViewData["DNI"] = dni;
             return View(this.repo.GetDatosLibro(id));
         }
+
         [HttpPost]
         public ActionResult DetailsLibro(int orden, int id, string textoComentario, int rating, int idLibro)
         {
             if (orden != 0)
             {
-                this.repo.LikeComentario(orden, id);
+                string dni = HttpContext.Session.GetObject<Usuario>("user").DNI_USUARIO;
+                this.repo.LikeComentario(orden, id, dni);
 
             }
             else
@@ -46,7 +60,8 @@ namespace ProyectoBibliotecas.Controllers
                 string dni = HttpContext.Session.GetObject<Usuario>("user").DNI_USUARIO;
                 this.repo.PostComentario(idLibro, dni, fecha, textoComentario, rating);
                 ViewData["VALORACIONES"] = this.repo.GetValoraciones(id);
-                ViewData["COMENTARIOS"] = this.repo.GetComentarios(id);
+                ViewData["COMENTARIOS"] = this.repo.GetComentarios(id, dni);
+                ViewData["DNI"] = dni;
                 return View(this.repo.GetDatosLibro(idLibro));
             }
             return new EmptyResult();
