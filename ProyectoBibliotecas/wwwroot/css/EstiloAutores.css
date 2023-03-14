@@ -43,16 +43,15 @@
         text-align: center;
         color: var(--title);
         max-height: 90px;
-        /* Altura máxima permitida */
-        display: grid;
-        place-items: center;
     }
 
         .card-autor p > span {
             display: inline-block;
             /* Hace que el contenido sea un bloque */
-            max-height: 100%;
-            /* Establece la altura máxima */
+            max-height: 86px;
+            height: 86px;
+            display: inline-flex;
+            align-items: center;
             overflow-y: auto;
             /* Añade una barra de desplazamiento vertical si el contenido supera la altura máxima */
         }

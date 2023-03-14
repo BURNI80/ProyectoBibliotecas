@@ -20,6 +20,8 @@ namespace ProyectoBibliotecas.Data
 
         public DbSet<Comentario> Comentarios { get; set; }
 
+        public DbSet<Autor> Autores { get; set; }
+
 
 
 

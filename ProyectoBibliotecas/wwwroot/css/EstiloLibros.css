@@ -496,6 +496,7 @@ details[open] {
         width: 100%;
         border-radius: 0px;
         box-shadow: none;
+        margin-top:40px;
     }
 
         .contenido-libro-biblio > h1 {

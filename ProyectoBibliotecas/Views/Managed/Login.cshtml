@@ -18,10 +18,11 @@
                 <h1>Login</h1>
                 <div class="div-form">
                     <form class="form-login" method="post">
-                        <label for="">Usuario:</label>
-                        <input type="text" name="usuario" required />
+                        <label for="">DNI:</label>
+                        <input type="text" name="dni" required />
                         <label for="">Contraseña:</label>
                         <input type="password" name="password" required />
+                        <p style="color:red">@ViewData["MSG"]</p>
                         <button class="boton">Iniciar sesion</button>
                     </form>
                 </div>
@@ -48,7 +49,7 @@
                     <div class="div-form">
                         <form class="form-login" method="post">
                             <label for="">Nombre:</label>
-                            <input type="text" sname="nombre" required />
+                            <input type="text" name="nombre" required />
                             <label for="">Apellidos:</label>
                             <input type="text" name="apellidos" required />
                             <label for="">DNI:</label>

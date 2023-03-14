@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProyectoBibliotecas.Extensions;
+using ProyectoBibliotecas.Models;
 using ProyectoBibliotecas.Repositorys;
 
 namespace ProyectoBibliotecas.Controllers
@@ -31,9 +33,24 @@ namespace ProyectoBibliotecas.Controllers
             return View(this.repo.GetDatosLibro(id));
         }
         [HttpPost]
-        public void DetailsLibro(int orden,int id)
+        public ActionResult DetailsLibro(int orden, int id, string textoComentario, int rating, int idLibro)
         {
-            
+            if (orden != 0)
+            {
+                this.repo.LikeComentario(orden, id);
+
+            }
+            else
+            {
+                DateTime fecha = DateTime.Now;
+                string dni = HttpContext.Session.GetObject<Usuario>("user").DNI_USUARIO;
+                this.repo.PostComentario(idLibro, dni, fecha, textoComentario, rating);
+                ViewData["VALORACIONES"] = this.repo.GetValoraciones(id);
+                ViewData["COMENTARIOS"] = this.repo.GetComentarios(id);
+                return View(this.repo.GetDatosLibro(idLibro));
+            }
+            return new EmptyResult();
+
         }
     }
 }

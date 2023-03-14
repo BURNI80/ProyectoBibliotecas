@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<BibliotecasRepository>();
 builder.Services.AddDbContext<BibliotecasContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
 
+builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(30));
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -27,6 +29,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

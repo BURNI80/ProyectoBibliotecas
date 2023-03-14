@@ -31,6 +31,11 @@ namespace ProyectoBibliotecas.Models
         [Column("TELEFONO")]
         public int TELEFONO { get; set; }
 
+        [Column("SALT")]
+        public string SALT { get; set; }
+
+        [Column("PASSWORD")]
+        public byte[] PASSWORD { get; set; }
 
     }
 }
