@@ -13,8 +13,8 @@ namespace ProyectoBibliotecas.Models
         [Column("ID_LIBRO")]
         public int ID_LIBRO { get; set; }
 
-        [Column("DNI_USUARIO")]
-        public string DNI_USUARIO { get; set; }
+        [Column("USUARIO")]
+        public string USUARIO { get; set; }
 
         [Column("FECHA_COMENTARIO")]
         public DateTime FECHA_COMENTARIO { get; set; }

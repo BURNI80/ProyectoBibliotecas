@@ -30,5 +30,10 @@ namespace ProyectoBibliotecas.Controllers
             ViewData["COMENTARIOS"] = this.repo.GetComentarios(id);
             return View(this.repo.GetDatosLibro(id));
         }
+        [HttpPost]
+        public void DetailsLibro(int orden,int id)
+        {
+            
+        }
     }
 }

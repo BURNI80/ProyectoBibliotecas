@@ -82,36 +82,25 @@
                 </div>
             </form>
         </div>
-        @for (int i = 0; i < 5; i++)
+        @foreach (Comentario com in comentarios)
         {
             <div class="card-comentaro">
                 <div class="datos-comentario">
-                    <p class="usuario-comentario">Usuarioccccccccccccccccccccccccccccccc</p>
-                    <p class="fecha-comentario">14/09/2001</p>
-                    <div class="likes">
-
-                        <a class='like-button'>
+                    <p class="usuario-comentario">@com.USUARIO</p>
+                    <p class="fecha-comentario">@com.FECHA_COMENTARIO.ToShortDateString()</p>
+                    <div class="likes" id="likes" >
+                        <a class='like-button' data-id="@com.ID_COMENTARIO">
                             <span class='like-icon'>
                                 <div class='heart-animation-1'></div>
                                 <div class='heart-animation-2'></div>
                             </span>
                         </a>
-                        <p>124</p>
+                        <p>@com.MEGUSTAS</p>
                     </div>
                 </div>
                 <div class="separador"></div>
                 <p class="descripcion">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                    the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                    type
-                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-                    the
-                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the
-                    1960s
-                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-                    desktop
-                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    @com.MENSAJE
                 </p>
             </div>
         }
@@ -124,9 +113,23 @@
         background-color: var(--bg-details);
     }
 </style>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    $(document).ready(function () {
+        $('a.like-button').on('click', function (e) {
+            $(this).toggleClass('liked');
 
+            var url = "@Url.Action("DetailsLibro","Libros")";
+            var idC = $(this).data("id")
 
+            if ($(this).hasClass('liked') == true) {
+                var data = { "orden": 1, "id": idC }
+            } else {
+                var data = { "orden": 0 ,"id": idC }           
+            }
+            $.post(url, data).done(function (data) {
 
+            })
+        });
+    })
 </script>

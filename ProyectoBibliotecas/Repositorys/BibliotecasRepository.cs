@@ -68,7 +68,7 @@ namespace ProyectoBibliotecas.Repositorys
 
         public Libro GetDatosLibro(int id)
         {
-            string sql = "SP_DETALLELIBRO @ID_LIBRO";
+            string sql = "SP_DETALLESLIBRO @ID_LIBRO";
             SqlParameter p1 = new SqlParameter("@ID_LIBRO", id);
             var consulta = this.context.Libros.FromSqlRaw(sql, p1);
             return consulta.AsEnumerable().First();
@@ -79,16 +79,16 @@ namespace ProyectoBibliotecas.Repositorys
             var consulta = from data in this.context.Valoraciones.AsEnumerable()
                            where data.ID_LIBRO == id
                            select data;
-
-            return consulta.ToList().Count();
+            int cuenta = consulta.ToList().Count();
+            return cuenta;
         }
 
         public List<Comentario> GetComentarios(int id)
         {
-            var consulta = from data in this.context.Comentarios.AsEnumerable()
-                           where data.ID_LIBRO == id
-                           select data;
-            return consulta.ToList();
+            string sql = "SP_COMENTARIOSLIBRO @ID_LIBRO";
+            SqlParameter p1 = new SqlParameter("@ID_LIBRO", id);
+            var consulta = this.context.Comentarios.FromSqlRaw(sql, p1);
+            return consulta.AsEnumerable().ToList();
         }
 
 

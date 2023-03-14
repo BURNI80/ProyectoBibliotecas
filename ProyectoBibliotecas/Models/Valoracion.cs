@@ -20,6 +20,6 @@ namespace ProyectoBibliotecas.Models
         public DateTime FECHA { get; set; }
 
         [Column("PUNTUACION")]
-        public int PUNTUACION { get; set; }
+        public double PUNTUACION { get; set; }
     }
 }
