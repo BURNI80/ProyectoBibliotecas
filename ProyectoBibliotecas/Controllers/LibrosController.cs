@@ -2,6 +2,7 @@
 using ProyectoBibliotecas.Extensions;
 using ProyectoBibliotecas.Models;
 using ProyectoBibliotecas.Repositorys;
+using System.Net;
 
 namespace ProyectoBibliotecas.Controllers
 {
@@ -33,7 +34,7 @@ namespace ProyectoBibliotecas.Controllers
             if (HttpContext.Session.GetObject<Usuario>("user") == null)
             {
                 dni = null;
-                ViewData["LISTADESEOS"] = -1;
+                ViewData["LISTADESEOS"] = -2;
             }
             else
             {
@@ -48,16 +49,16 @@ namespace ProyectoBibliotecas.Controllers
         [HttpPost]
         public ActionResult DetailsLibro(int orden, int id, string textoComentario, int rating, int idLibro)
         {
+            string dni = HttpContext.Session.GetObject<Usuario>("user").DNI_USUARIO;
+            ViewData["LISTADESEOS"] = this.repo.LibroDeseo(id, dni);
             if (orden != 0)
             {
-                string dni = HttpContext.Session.GetObject<Usuario>("user").DNI_USUARIO;
                 this.repo.LikeComentario(orden, id, dni);
 
             }
             else
             {
                 DateTime fecha = DateTime.Now;
-                string dni = HttpContext.Session.GetObject<Usuario>("user").DNI_USUARIO;
                 this.repo.PostComentario(idLibro, dni, fecha, textoComentario, rating);
                 ViewData["VALORACIONES"] = this.repo.GetValoraciones(id);
                 ViewData["COMENTARIOS"] = this.repo.GetComentarios(id, dni);
@@ -66,6 +67,13 @@ namespace ProyectoBibliotecas.Controllers
             }
             return new EmptyResult();
 
+        }
+
+
+        [HttpPost]
+        public void AddListaLibro(string dni, int idLibro, int orden)
+        {
+            this.repo.AddListaLibro(dni, idLibro, orden);
         }
     }
 }

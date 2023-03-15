@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProyectoBibliotecas.Extensions;
+using ProyectoBibliotecas.Models;
 
 namespace ProyectoBibliotecas.Controllers
 {

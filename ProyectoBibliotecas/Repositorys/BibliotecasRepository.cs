@@ -172,20 +172,31 @@ namespace ProyectoBibliotecas.Repositorys
             int rowsAffected = this.context.Database.ExecuteSqlRaw(sql, p1, p2, p3, p4, p5);
         }
 
-        public DeseosLeido LibroDeseo(int idLibro, string dni)
+        public int LibroDeseo(int idLibro, string dni)
         {
-            var consulta = from data in this.context.ListaDeseos.AsEnumerable()
-                           where data.ID_LIBRO == idLibro
-                           select data;
+            var consulta = from data in this.context.ListaDeseos
+                           where data.ID_LIBRO == idLibro && data.DNI_USUARIO.Equals(dni)
+                           select data.LEIDO;
 
-            if(consulta == null)
+            if(!consulta.Any())
             {
-                return null;
+                return -1;
             }
             else
             {
                 return consulta.FirstOrDefault();
             }
+        }
+
+        public void AddListaLibro(string dni, int idLibro, int orden)
+        {
+            DateTime fecha = DateTime.Now;
+            string sql = "SP_LISTADESEOS @ORDEN , @DNI_USUARIO, @ID_LIBRO, @FECHA";
+            SqlParameter p1 = new SqlParameter("@ORDEN", orden);
+            SqlParameter p2 = new SqlParameter("@DNI_USUARIO", dni);
+            SqlParameter p3 = new SqlParameter("@ID_LIBRO", idLibro);
+            SqlParameter p4 = new SqlParameter("@FECHA", fecha);
+            int rowsAffected = this.context.Database.ExecuteSqlRaw(sql, p1, p2, p3, p4);
         }
 
 

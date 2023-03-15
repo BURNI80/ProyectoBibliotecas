@@ -16,7 +16,7 @@ namespace ProyectoBibliotecas.Models
         public int LEIDO { get; set; }
 
         [Column("FECHA_LEIDO")]
-        public DateTime FECHA_LEIDO { get; set; }
+        public DateTime? FECHA_LEIDO { get; set; }
 
     }
 }
