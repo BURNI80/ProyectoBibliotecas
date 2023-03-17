@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProyectoBibliotecas.Models
 {
-    public class Comentario
+    public class ComentarioBasico
     {
         [Key]
         [Column("ID_COMENTARIO")]
@@ -12,8 +12,8 @@ namespace ProyectoBibliotecas.Models
         [Column("ID_LIBRO")]
         public int ID_LIBRO { get; set; }
 
-        [Column("USUARIO")]
-        public string USUARIO { get; set; }
+        [Column("DNI_USUARIO")]
+        public string DNI_USUARIO { get; set; }
 
         [Column("FECHA_COMENTARIO")]
         public DateTime FECHA_COMENTARIO { get; set; }
@@ -23,8 +23,5 @@ namespace ProyectoBibliotecas.Models
 
         [Column("MENSAJE")]
         public string MENSAJE { get; set; }
-
-        [Column("COMENTARIO_LIKE")]
-        public int? COMENTARIO_LIKE { get; set; }
     }
 }

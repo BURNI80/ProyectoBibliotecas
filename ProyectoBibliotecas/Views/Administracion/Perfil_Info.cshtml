@@ -46,9 +46,9 @@
 
     <div class="card-perfil">
         <h1 class="title">Mis Datos</h1>
-        <p>Libros leídos: <strong>24</strong></p>
-        <p>Comentarios: <strong>12</strong></p>
-        <p>Reseñas: <strong>22</strong>
+        <p>Libros leídos: <strong>@ViewData["NLEIDOS"]</strong></p>
+        <p>Comentarios: <strong>@ViewData["NCOMENTARIOS"]</strong></p>
+        <p>Reseñas: <strong>@ViewData["NRESEÑAS"]</strong>
         <p>
             <div style="width: 100%;">
                 <a class="boton" asp-action="Perfil_Reservas" asp-controller="Administracion">Mis reservas</a>

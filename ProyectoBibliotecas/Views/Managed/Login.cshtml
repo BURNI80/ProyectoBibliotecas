@@ -19,7 +19,7 @@
                 <div class="div-form">
                     <form class="form-login" method="post">
                         <label for="">DNI:</label>
-                        <input type="text" name="dni" required />
+                        <input type="text" name="dni" id="dni" required />
                         <label for="">Contraseña:</label>
                         <input type="password" name="password" required />
                         <p style="color:red">@ViewData["MSG"]</p>
@@ -350,6 +350,8 @@
     const flipBackBtn = document.querySelector('#flip-back-btn');
     const container = document.querySelector('.mainContainer');
     const svgs = document.getElementsByTagName('svg');
+
+    $("#dni").focus();
 
     $(".back .contenido").hide();
     flipBtn.addEventListener('click', () => {

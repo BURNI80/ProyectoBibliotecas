@@ -9,7 +9,6 @@
     height: fit-content;
     background-color: red;
     border-radius: 15px;
-    background: url("./img/fondoDef.png"), var(--bg-global);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;

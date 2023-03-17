@@ -1,13 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProyectoBibliotecas.Extensions;
 using ProyectoBibliotecas.Models;
+using ProyectoBibliotecas.Repositorys;
 
 namespace ProyectoBibliotecas.Controllers
 {
     public class AdministracionController : Controller
     {
-        public IActionResult Perfil_Info()
+        private BibliotecasRepository repo;
+
+        public AdministracionController(BibliotecasRepository repo)
         {
+            this.repo = repo;
+        }
+
+        public IActionResult Perfil_Info(string id)
+        {
+            id = "22";
+            ViewData["NCOMENTARIOS"] = this.repo.NComentarios(id);
+            ViewData["NLEIDOS"] = this.repo.NLibrosLeidos(id);
+            ViewData["NRESEÑAS"] = this.repo.NReseñas(id);
             return View();
         }
         public IActionResult EditPerfil()
@@ -15,14 +27,16 @@ namespace ProyectoBibliotecas.Controllers
             return View();
         }
 
-        public IActionResult Perfil_Comentarios()
+        public IActionResult Perfil_Comentarios(string id)
         {
-            return View();
+            id = "22";
+            return View(this.repo.GetComentariosUsuario(id));
         }
 
-        public IActionResult Perfil_Reservas()
+        public IActionResult Perfil_Reservas(string id)
         {
-            return View();
+            id = "22";
+            return View(this.repo.GetReservasUsuario(id));
         }
 
         public IActionResult Lista_LibrosFavoritos()

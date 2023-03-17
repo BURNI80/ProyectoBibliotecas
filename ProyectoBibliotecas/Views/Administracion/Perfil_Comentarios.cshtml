@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<ComentarioBasico>
+
+@{
     Layout = "_LayoutAdministrador";
 }
 
@@ -39,13 +41,13 @@
     </div>
     <div class="card-perfil" style="text-align: center; margin-top:auto">
         <h1 class="title">Mis comentarios</h1>
-        @for (int i = 0; i < 5; i++)
+        @foreach (ComentarioBasico c in Model)
         {
             <div class="card-comentaro">
                 <div class="datos-comentario">
-                    <p class="fecha-comentario">14/09/2001</p>
+                    <p class="fecha-comentario">@c.FECHA_COMENTARIO.ToShortDateString()</p>
                     <div class="likes">
-                        <p>124</p>
+                        <p>@c.MEGUSTAS</p>
                         <svg width="20" height="20" viewBox="0 0 148 133" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M78.5031 126.907C76.1819 127.726 72.3588 127.726 70.0376 126.907C50.2392 120.148 6 91.9525 6 44.1631C6 23.0676 22.9993 6 43.9583 6C56.3835 6 67.375 12.0078 74.2703 21.2926C81.1657 12.0078 92.2255 6 104.582 6C125.541 6 142.541 23.0676 142.541 44.1631C142.541 91.9525 98.3015 120.148 78.5031 126.907Z" fill="#78397C" stroke="black" stroke-width="10.2406" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
@@ -61,17 +63,7 @@
                 </div>
                 <div class="separador"></div>
                 <p class="descripcion">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                    the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                    type
-                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-                    the
-                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the
-                    1960s
-                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-                    desktop
-                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    @c.MENSAJE
                 </p>
             </div>
         }

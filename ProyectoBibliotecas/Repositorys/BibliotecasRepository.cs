@@ -200,5 +200,34 @@ namespace ProyectoBibliotecas.Repositorys
         }
 
 
+        public int NComentarios(string id)
+        {
+            return this.context.ComentariosID.Where(x => x.DNI_USUARIO.Equals(id)).Count();
+        }
+
+        public int NReseñas(string id)
+        {
+            return this.context.Valoraciones.Where(x => x.DNI_USUARIO.Equals(id)).Count();
+        }
+
+        public int NLibrosLeidos(string id)
+        {
+            return this.context.ListaDeseos.Where(x => x.DNI_USUARIO.Equals(id) && x.LEIDO == 1).Count();
+        }
+
+        public List<ReservaUsuario> GetReservasUsuario(string id)
+        {
+            string sql = "SP_PRESTAMOSUSUARIO @DNI_USUARIO";
+            SqlParameter p1 = new SqlParameter("@DNI_USUARIO", id);
+            var consulta = this.context.ReservasUsuario.FromSqlRaw(sql, p1);
+            return consulta.AsEnumerable().ToList();
+        }
+
+        public List<ComentarioBasico> GetComentariosUsuario(string id)
+        {
+            return this.context.ComentarioBasico.Where(x => x.DNI_USUARIO.Equals(id)).ToList();
+        }
+
+
     }
 }

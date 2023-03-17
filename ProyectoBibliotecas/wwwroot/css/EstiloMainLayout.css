@@ -39,6 +39,10 @@
     --border: rgba(65, 65, 65,0.5);
 }
 
+.modal-backdrop {
+    z-index: -1 !important;
+}
+
 .titulo {
     font-family: "Montserrat";
     font-style: normal;
@@ -140,6 +144,7 @@ body {
         line-height: 24px;
         text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         color: #ffffff;
+        margin: 0px;
     }
 
     .boton-menu svg {
@@ -246,6 +251,7 @@ body {
         line-height: 24px;
         text-align: center;
         color: #ff3131;
+        margin: 0px;
     }
 
     .boton-logout svg {
@@ -274,6 +280,7 @@ body {
         font-size: 20px;
         line-height: 24px;
         text-align: center;
+        margin:0px;
         color: #509EFF !important;
     }
 
@@ -348,6 +355,10 @@ body {
 
     .movil-bottom {
         margin-bottom: 100px;
+    }
+
+    .modal-dialog{
+        margin-top:200px !important;
     }
 }
 

@@ -11,11 +11,34 @@
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/EstiloMainLayout.css">
+    <script>
+        const currentTheme = localStorage.getItem('theme');
+        console.log(currentTheme)
+        var rutaImg = "";
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                rutaImg = "/imgs/fondoDef.png";
+            }
+            else {
+                rutaImg = "/imgs/fondoDefClaro.png";
+            }
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+
+
+        }
+    </script>
 </head>
 
 <body>
 
-    <img class="imgFondo" id="imgFondo" src="~/imgs/fondoDefClaro.png" />
+    <img class="imgFondo" id="imgFondo" src="" />
+    <script>
+                document.getElementById("imgFondo").src = rutaImg;
+
+    </script>
 
     <!-- *MENU MOVIL-->
     <div class="menu-movil">
@@ -106,10 +129,14 @@
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script>
+
+
+
     $(document).ready(main);
-    var contador = 1;
+
 
     function main() {
+        var contador = 1;
         $(window).on('resize', function () {
             if ($(this).width() > 800) {
                 $(".menu").css('left', '0');
@@ -135,43 +162,38 @@
 
 
         const toggleSwitch = document.querySelector('#toggle');
-        const currentTheme = localStorage.getItem('theme');
-        const root = document.querySelector(":root");
 
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
+            }
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+
+
+        const root = document.querySelector(":root");
 
         function switchTheme(event) {
             $("body, *, svg").addClass("transi");
             if (event.target.checked) {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
-                document.getElementById("imgFondo").src = "/imgs/fondoDef.png";
+                rutaImg = "/imgs/fondoDef.png"
 
             } else {
 
                 document.documentElement.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
-                document.getElementById("imgFondo").src = "/imgs/fondoDefClaro.png";
-
+                rutaImg = "/imgs/fondoDefClaro.png"
             }
+            document.getElementById("imgFondo").src = rutaImg;
         }
 
         toggleSwitch.addEventListener('change', switchTheme, false);
 
 
-
-        if (currentTheme) {
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            if (currentTheme === 'dark') {
-                toggleSwitch.checked = true
-                document.getElementById("imgFondo").src = "/imgs/fondoDef.png";
-
-
-            }
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            document.getElementById("imgFondo").src = "/imgs/fondoDefClaro.png";
-
-        }
     };
 
 </script>

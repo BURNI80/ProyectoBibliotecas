@@ -13,9 +13,31 @@
     <link rel="stylesheet" href="~/css/EstiloMenuAdmin.css" />
     <link rel="stylesheet" href="~/css/colors.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        const currentTheme = localStorage.getItem('theme');
+        console.log(currentTheme)
+        var rutaImg = "";
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                rutaImg = "/imgs/fondoDef.png";
+            }
+            else {
+                rutaImg = "/imgs/fondoDefClaro.png";
+            }
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+
+
+        }
+    </script>
 </head>
 <body>
     <img class="imgFondo" id="imgFondo" src="~/imgs/fondoDefClaro.png" />
+    <script>
+                document.getElementById("imgFondo").src = rutaImg;
+    </script>
     <div class="menu-admin">
         <div>
             <a asp-action="Index" asp-controller="Home">
@@ -89,43 +111,35 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     const toggleSwitch = document.querySelector('#toggle');
-    const currentTheme = localStorage.getItem('theme');
-    const root = document.querySelector(":root");
 
-
-    function switchTheme(event) {
-        $("body").addClass("transi");
-        $(".card-perfil").addClass("transi");
-        $(".boton").addClass("transi");
-        if (event.target.checked) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            document.getElementById("imgFondo").src = "/imgs/fondoDef.png";
-
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
+            }
         } else {
-
             document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-            document.getElementById("imgFondo").src = "/imgs/fondoDefClaro.png";
-
         }
-    }
-
-    toggleSwitch.addEventListener('change', switchTheme, false);
 
 
+        const root = document.querySelector(":root");
 
-    if (currentTheme) {
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        if (currentTheme === 'dark') {
-            toggleSwitch.checked = true
-            document.getElementById("imgFondo").src = "/imgs/fondoDef.png";
+        function switchTheme(event) {
+            $("body, *, svg").addClass("transi");
+            if (event.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                rutaImg = "/imgs/fondoDef.png"
 
+            } else {
 
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                rutaImg = "/imgs/fondoDefClaro.png"
+            }
+            document.getElementById("imgFondo").src = rutaImg;
         }
-    } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        document.getElementById("imgFondo").src = "/imgs/fondoDefClaro.png";
 
-    }
+        toggleSwitch.addEventListener('change', switchTheme, false);
+
 </script>
