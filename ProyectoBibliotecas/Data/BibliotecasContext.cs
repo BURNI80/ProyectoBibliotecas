@@ -22,7 +22,7 @@ namespace ProyectoBibliotecas.Data
 
         public DbSet<ComentarioID> ComentariosID { get; set; }
 
-        public DbSet<ComentarioBasico> ComentarioBasico { get; set; }
+        public DbSet<ComentarioBasico> ComentariosBasico { get; set; }
 
         public DbSet<Autor> Autores { get; set; }
 

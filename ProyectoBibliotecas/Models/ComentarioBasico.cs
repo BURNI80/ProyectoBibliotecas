@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProyectoBibliotecas.Models
 {
+    [Table("COMENTARIO")]
     public class ComentarioBasico
     {
         [Key]

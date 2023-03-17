@@ -32,6 +32,11 @@ namespace ProyectoBibliotecas.Controllers
             id = "22";
             return View(this.repo.GetComentariosUsuario(id));
         }
+        [HttpPost]
+        public void DeleteComentario(int idComentario)
+        {
+            this.repo.DeleteComentario(idComentario);
+        }
 
         public IActionResult Perfil_Reservas(string id)
         {

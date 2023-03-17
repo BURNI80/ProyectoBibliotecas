@@ -3,6 +3,8 @@
 @{
     Layout = "_LayoutAdministrador";
 }
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <div class="contenido-perfil temp">
     <div class="card-info">
@@ -41,9 +43,10 @@
     </div>
     <div class="card-perfil" style="text-align: center; margin-top:auto">
         <h1 class="title">Mis comentarios</h1>
+        <h3 class="title" id="nocom" style="font-size:20px">No hay comentarios</h3>
         @foreach (ComentarioBasico c in Model)
         {
-            <div class="card-comentaro">
+            <div class="card-comentaro" id="comentario-@c.ID_COMENTARIO">
                 <div class="datos-comentario">
                     <p class="fecha-comentario">@c.FECHA_COMENTARIO.ToShortDateString()</p>
                     <div class="likes">
@@ -52,6 +55,7 @@
                             <path d="M78.5031 126.907C76.1819 127.726 72.3588 127.726 70.0376 126.907C50.2392 120.148 6 91.9525 6 44.1631C6 23.0676 22.9993 6 43.9583 6C56.3835 6 67.375 12.0078 74.2703 21.2926C81.1657 12.0078 92.2255 6 104.582 6C125.541 6 142.541 23.0676 142.541 44.1631C142.541 91.9525 98.3015 120.148 78.5031 126.907Z" fill="#78397C" stroke="black" stroke-width="10.2406" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
+                    <div class="botonmodal" data-idcom="@c.ID_COMENTARIO">
                         <svg style="margin-left:10px" width="20" height="20" viewBox="0 0 35 39" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M33.6652 9.8373C33.6293 9.8373 33.5754 9.8373 33.5216 9.8373C24.0253 8.88588 14.547 8.52685 5.15845 9.47827L1.49638 9.8373C0.742426 9.9091 0.0782276 9.37056 0.00642241 8.61661C-0.0653828 7.86265 0.473157 7.21641 1.20916 7.1446L4.87123 6.78557C14.4214 5.8162 24.0971 6.19318 33.7908 7.1446C34.5268 7.21641 35.0654 7.8806 34.9936 8.61661C34.9397 9.31671 34.3473 9.8373 33.6652 9.8373Z" fill="#FF3131" />
                             <path d="M11.2276 8.02424C11.1558 8.02424 11.084 8.02424 10.9942 8.00628C10.2761 7.88063 9.77351 7.18052 9.89917 6.46247L10.2941 4.11085C10.5813 2.38752 10.9762 0 15.1588 0H19.8621C24.0627 0 24.4576 2.47728 24.7269 4.1288L25.1218 6.46247C25.2475 7.19848 24.7448 7.89858 24.0268 8.00628C23.2908 8.13194 22.5907 7.62931 22.483 6.91125L22.088 4.57758C21.8367 3.01582 21.7829 2.71065 19.88 2.71065H15.1768C13.274 2.71065 13.2381 2.96197 12.9688 4.55963L12.556 6.8933C12.4483 7.5575 11.8738 8.02424 11.2276 8.02424Z" fill="#FF3131" />
@@ -59,20 +63,81 @@
                             <path d="M20.4892 28.722H14.5114C13.7754 28.722 13.165 28.1116 13.165 27.3756C13.165 26.6396 13.7754 26.0293 14.5114 26.0293H20.4892C21.2252 26.0293 21.8356 26.6396 21.8356 27.3756C21.8356 28.1116 21.2252 28.722 20.4892 28.722Z" fill="#FF3131" />
                             <path d="M21.9978 21.5416H13.0221C12.2861 21.5416 11.6758 20.9312 11.6758 20.1952C11.6758 19.4592 12.2861 18.8489 13.0221 18.8489H21.9978C22.7338 18.8489 23.3441 19.4592 23.3441 20.1952C23.3441 20.9312 22.7338 21.5416 21.9978 21.5416Z" fill="#FF3131" />
                         </svg>
-
+                    </div>
                 </div>
                 <div class="separador"></div>
-                <p class="descripcion">
+                <p class="descripcion" style="width:100%">
                     @c.MENSAJE
                 </p>
             </div>
         }
+        @*MODAL*@
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Esta seguro de que desea eliminar el comentario?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="delCom btn btn-danger">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        var nCom = '@Model.Count()'
+
+        function CalcCom(op) {
+            if(op == -1){
+                nCom--;
+            }
+            if (nCom == 0) {
+                $("#nocom").show();
+            }
+            else {
+                $("#nocom").hide();
+            }
+        }
+
+        CalcCom(0);
+
+        var id = 0;
+        $(".botonmodal").click(function () {
+            id = $(this).data('idcom')
+            $('#modal').modal('show');
+        })
+        $(".delCom").click(function () {
+            var url = "@Url.Action("DeleteComentario","Administracion")";
+            var data = { "idComentario": id }
+            var str = "#comentario-" + id
+            $.post(url, data).done(function (data) {
+                $(str).fadeOut("fast")
+                $('#modal').modal('hide');
+                CalcCom(-1);
+            })
+        })
+    })
+
+</script>
+
 <style>
-    .fecha-comentario{
-        margin:0px;
+    .fecha-comentario {
+        margin: 0px;
+    }
+
+    body {
+        background-color: var(--bg-global) !important;
     }
 
     .temp {
@@ -91,6 +156,20 @@
         max-width: 1000px;
     }
 
+    nav {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    ol {
+        margin: 0px;
+    }
+
+    svg {
+        margin-bottom: 2px;
+    }
+
     @@media(max-width: 600px) {
         .card-perfil {
             width: 90%;
@@ -100,6 +179,7 @@
         .title {
             font-size: 40px;
             width: 90%;
+            margin: auto;
         }
     }
 </style>

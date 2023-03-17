@@ -22,8 +22,12 @@
 
 }
 
+.modal-backdrop {
+    z-index: -1 !important;
+}
+
 body {
-    background: var(--bg-global);
+    background-color: var(--bg-global);
     background-attachment: fixed;
     margin: 0px;
     padding: 0px;
@@ -317,6 +321,10 @@ a {
 
     .card-perfil > input {
         width: 100%;
+    }
+
+    .modal-dialog {
+        margin-top: 200px !important;
     }
 }
 

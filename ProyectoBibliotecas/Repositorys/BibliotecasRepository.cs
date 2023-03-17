@@ -178,7 +178,7 @@ namespace ProyectoBibliotecas.Repositorys
                            where data.ID_LIBRO == idLibro && data.DNI_USUARIO.Equals(dni)
                            select data.LEIDO;
 
-            if(!consulta.Any())
+            if (!consulta.Any())
             {
                 return -1;
             }
@@ -202,7 +202,7 @@ namespace ProyectoBibliotecas.Repositorys
 
         public int NComentarios(string id)
         {
-            return this.context.ComentariosID.Where(x => x.DNI_USUARIO.Equals(id)).Count();
+            return this.context.ComentariosBasico.Where(x => x.DNI_USUARIO.Equals(id)).Count();
         }
 
         public int NReseñas(string id)
@@ -225,7 +225,14 @@ namespace ProyectoBibliotecas.Repositorys
 
         public List<ComentarioBasico> GetComentariosUsuario(string id)
         {
-            return this.context.ComentarioBasico.Where(x => x.DNI_USUARIO.Equals(id)).ToList();
+            return this.context.ComentariosBasico.Where(x => x.DNI_USUARIO.Equals(id)).ToList();
+        }
+
+        public void DeleteComentario(int id)
+        {
+            string sql = "SP_DELETECOMENTARIO @ID_COMENTARIO";
+            SqlParameter p1 = new SqlParameter("@ID_COMENTARIO", id);
+            int rowsAffected = this.context.Database.ExecuteSqlRaw(sql, p1);
         }
 
 

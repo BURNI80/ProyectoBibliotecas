@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProyectoBibliotecas.Models
 {
-    [Table("COMENTARIO")]
     public class ComentarioID
     {
         [Key]
