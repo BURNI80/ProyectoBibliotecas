@@ -28,7 +28,12 @@ namespace ProyectoBibliotecas.Data
 
         public DbSet<DeseosLeido> ListaDeseos { get; set; }
 
+        public DbSet<LibroDeseo> LibrosDeseo { get; set; }
+
         public DbSet<ReservaUsuario> ReservasUsuario { get; set; }
+
+        public DbSet<Share> Share { get; set; }
+
 
 
 

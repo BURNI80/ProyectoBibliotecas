@@ -7,7 +7,7 @@
     margin: auto;
     width: 90%;
     height: fit-content;
-    background-color: red;
+    background-color: var(--bg-global);
     border-radius: 15px;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -15,7 +15,7 @@
     background-position: center;
     background-blend-mode: screen;
     border: 1px solid rgb(255, 255, 255,0.1);
-    margin-top:40px;
+    margin-top: 40px;
 }
 
 .card-libro-color {

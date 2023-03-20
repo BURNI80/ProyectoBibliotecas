@@ -1,6 +1,4 @@
-﻿@{
-    Usuario user = Context.Session.GetObject<Usuario>("user");
-}
+﻿
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,8 +34,7 @@
 
     <img class="imgFondo" id="imgFondo" src="" />
     <script>
-                document.getElementById("imgFondo").src = rutaImg;
-
+            document.getElementById("imgFondo").src = rutaImg;
     </script>
 
     <!-- *MENU MOVIL-->
@@ -88,7 +85,7 @@
                 <p style="margin-bottom:5px;" class="menu-usuario">Dia / Noche</p>
                 <input id="toggle" class="toggle" type="checkbox" name="Dark mode" role="switch" value="on">
             </div>
-            @if (user == null)
+            @if (Context.User.Identity.IsAuthenticated == false)
             {
                 <a asp-action="Login" asp-controller="Managed" class="boton-logout boton-login" style="text-decoration:none">
                     <svg width="30" height="30" viewBox="0 0 191 198" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +98,7 @@
             }
             else
             {
-                <p><a class="menu-usuario" asp-action="Perfil_Info" asp-controller="Administracion">@user.USUARIO</a></p>
+                <p><a class="menu-usuario" style="text-decoration:underline" asp-action="Perfil_Info" asp-controller="Administracion">@Context.User.Identity.Name</a></p>
                 <a asp-action="CerrarSesion" asp-controller="Managed" class="boton-logout" style="text-decoration:none">
                     <svg width="30" height="30" viewBox="0 0 198 198" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M130.457 197.685H129.206C86.474 197.685 65.8778 180.842 62.3168 143.115C61.9318 139.169 64.8191 135.608 68.8614 135.223C72.7111 134.838 76.3684 137.821 76.7534 141.767C79.5444 171.988 93.7885 183.248 129.302 183.248H130.554C169.725 183.248 183.584 169.389 183.584 130.218V67.4668C183.584 28.2956 169.725 14.4366 130.554 14.4366H129.302C93.596 14.4366 79.3519 25.8896 76.7534 56.6875C76.2721 60.6335 72.9036 63.6171 68.8614 63.2321C64.8191 62.9434 61.9318 59.3824 62.2206 55.4364C65.4929 17.1314 86.1853 0 129.206 0H130.457C177.713 0 197.924 20.2112 197.924 67.4668V130.218C197.924 177.474 177.713 197.685 130.457 197.685Z" fill="#FF3131" />

@@ -23,7 +23,7 @@ namespace ProyectoBibliotecas.Controllers
             return View(this.repo.SearchBiblioteca(search));
         }
 
-
+        [HttpGet]
         public IActionResult DetailsBiblioteca(int id)
         {
             ViewData["LISTALIBROS"] = this.repo.GetLibrosBiblioteca(id);

@@ -31,14 +31,14 @@ namespace ProyectoBibliotecas.Controllers
         {
             ViewData["VALORACIONES"] = this.repo.GetValoraciones(id);
             string dni;
-            if (HttpContext.Session.GetObject<Usuario>("user") == null)
+            if (HttpContext.User.Identity.IsAuthenticated == false)
             {
                 dni = null;
                 ViewData["LISTADESEOS"] = -2;
             }
             else
             {
-                dni = HttpContext.Session.GetObject<Usuario>("user").DNI_USUARIO;
+                dni = HttpContext.User.Identity.Name;
                 ViewData["LISTADESEOS"] = this.repo.LibroDeseo(id, dni);
             }
             ViewData["COMENTARIOS"] = this.repo.GetComentarios(id, dni);
@@ -49,7 +49,7 @@ namespace ProyectoBibliotecas.Controllers
         [HttpPost]
         public ActionResult DetailsLibro(int orden, int id, string textoComentario, int rating, int idLibro)
         {
-            string dni = HttpContext.Session.GetObject<Usuario>("user").DNI_USUARIO;
+            string dni = HttpContext.User.Identity.Name;
             ViewData["LISTADESEOS"] = this.repo.LibroDeseo(id, dni);
             if (orden != 0)
             {

@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using ProyectoBibliotecas.Extensions;
 using ProyectoBibliotecas.Models;
 using ProyectoBibliotecas.Repositorys;
+using System.Security.Claims;
 
 namespace ProyectoBibliotecas.Controllers
 {
@@ -36,7 +39,17 @@ namespace ProyectoBibliotecas.Controllers
                 else
                 {
                     HttpContext.Session.SetObject("user", user);
-                    return RedirectToAction("IndexBibliotecas","Bibliotecas");
+                    ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
+                    Claim claimUserName = new Claim(ClaimTypes.Name, user.DNI_USUARIO);
+                    Claim claimRole = new Claim(ClaimTypes.Role, user.ROL);
+                    identity.AddClaim(claimUserName);
+                    identity.AddClaim(claimRole);
+                    ClaimsPrincipal userPrincipal = new ClaimsPrincipal(identity);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal, new AuthenticationProperties
+                    {
+                        ExpiresUtc = DateTime.Now.AddMinutes(15)
+                    });
+                    return RedirectToAction("IndexBibliotecas", "Bibliotecas");
                 }
             }
             else
@@ -47,11 +60,25 @@ namespace ProyectoBibliotecas.Controllers
 
         }
 
-        public IActionResult CerrarSesion()
+        public async Task<IActionResult> CerrarSesion()
         {
             HttpContext.Session.Remove("user");
-            string urlAnterior = HttpContext.Request.Headers["Referer"];
-            return Redirect(urlAnterior);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            //string urlAnterior = HttpContext.Request.Headers["Referer"];
+            //return Redirect(urlAnterior);
+            return RedirectToAction("Login", "Managed");
         }
+
+        public IActionResult NotFound()
+        {
+            return View();
+        }
+
+        public IActionResult NoAccess()
+        {
+            return View();
+        }
+
+
     }
 }

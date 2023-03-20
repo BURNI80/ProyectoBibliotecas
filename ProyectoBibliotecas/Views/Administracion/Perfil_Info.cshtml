@@ -1,5 +1,7 @@
-﻿@{
+﻿@model Usuario
+@{
     Layout = "_LayoutAdministrador";
+    string usuario = "@"+Model.USUARIO;
 }
 
 <div class="contenido-perfil temp">
@@ -33,12 +35,12 @@
     </div>
     <div class="card-perfil" style="margin-top: 0;">
         <h1 class="title">Perfil Personal</h1>
-        <p>DNI: 123456789</p>
-        <p>Nombre: Alvaro</p>
-        <p>Apellidos: Gutierrez Carnicero</p>
-        <p>Email: agc@gmail.com</p>
-        <p>Telefono: 123456789</p>
-        <p>Usuario: &#64Alvaro</p>
+        <p>DNI: @Model.DNI_USUARIO</p>
+        <p>Nombre: @Model.NOMBRE</p>
+        <p>Apellidos: @Model.APELLIDO</p>
+        <p>Email: @Model.EMAIL</p>
+        <p>Telefono: @Model.TELEFONO</p>
+        <p>Usuario: @usuario</p>
         <div style="width: 100%;">
             <a class="boton" asp-action="EditPerfil" asp-controller="Administracion">Editar</a>
         </div>

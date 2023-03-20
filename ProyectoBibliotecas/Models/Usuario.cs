@@ -19,6 +19,7 @@ namespace ProyectoBibliotecas.Models
         [Column("ROL")]
         public string ROL { get; set; }
 
+        //[Required]
         [Column("NOMBRE")]
         public string NOMBRE { get; set; }
 

@@ -6,6 +6,7 @@ using ProyectoBibliotecas.Models;
 using System.Data;
 using System.Data.Common;
 using System.Net;
+using Newtonsoft.Json.Linq;
 
 namespace ProyectoBibliotecas.Repositorys
 {
@@ -79,7 +80,7 @@ namespace ProyectoBibliotecas.Repositorys
             var consulta = from data in this.context.Bibliotecas
                            where data.ID_BIBLIOTECA == id
                            select data;
-            return (Biblioteca)consulta.First();
+            return consulta.FirstOrDefault();
         }
 
 
@@ -235,6 +236,56 @@ namespace ProyectoBibliotecas.Repositorys
             int rowsAffected = this.context.Database.ExecuteSqlRaw(sql, p1);
         }
 
+        public List<LibroDeseo> GetFavoritos(string id)
+        {
+            string sql = "SP_LIBROSLISTA @DNI_USUARIO";
+            SqlParameter p1 = new SqlParameter("@DNI_USUARIO", id);
+            var consulta = this.context.LibrosDeseo.FromSqlRaw(sql, p1);
+            return consulta.AsEnumerable().ToList();
+        }
 
+        public string GenerateToken()
+        {
+            var token = Guid.NewGuid().ToString("N") + new Random().Next(1000, 9999).ToString();
+            return token;
+        }
+
+        public Share GetToken(string dni, string token)
+        {
+            string sql = "SP_SHARE @DNI_USUARIO , @TOKEN";
+            SqlParameter p1 = new SqlParameter("@DNI_USUARIO", dni);
+            SqlParameter p2 = new SqlParameter("@TOKEN", token);
+            return this.context.Share.FromSqlRaw(sql, p1,p2).AsEnumerable().FirstOrDefault();
+        }
+
+        public Share GetShare(string id)
+        {
+            return this.context.Share.Where(x => x.DNI_USUARIO.Equals(id)).FirstOrDefault();
+        }
+
+        public Usuario GetUsuario(string dni)
+        {
+            return this.context.Usuarios.Where(x => x.DNI_USUARIO.Equals(dni)).FirstOrDefault();
+        }
+
+        public void UpdateUsuario(string id, string nombre, string apellido, string email, int telefono, string usuario)
+        {
+            Usuario user = this.context.Usuarios.Where(x => x.DNI_USUARIO.Equals(id)).FirstOrDefault();
+            user.NOMBRE = nombre;
+            user.APELLIDO = apellido;
+            user.EMAIL = email;
+            user.TELEFONO = telefono;
+            user.USUARIO = usuario;
+            this.context.SaveChangesAsync();
+        }
+
+
+        public string[] GetLibroDisponible(int id)
+        {
+            string sql = "SP_LIBROBIBLIOTECADISPONIBLE @ID_LIBRO";
+            SqlParameter p1 = new SqlParameter("@ID_LIBRO", id);
+            string consulta = this.context.Database.ExecuteSqlRaw(sql, p1).ToString();
+            return consulta;
+        }
     }
 }

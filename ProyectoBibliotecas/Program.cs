@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ProyectoBibliotecas.Data;
 using ProyectoBibliotecas.Repositorys;
@@ -10,8 +11,16 @@ builder.Services.AddDbContext<BibliotecasContext>(options => options.UseSqlServe
 
 builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(30));
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie();
+
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(
+    options => options.EnableEndpointRouting = false);
 
 var app = builder.Build();
 
@@ -24,16 +33,37 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.Use(async (context, next) =>
+{
+    await next();
+
+    if (context.Response.StatusCode == 404)
+    {
+        context.Request.Path = "/Managed/NotFound";
+        await next();
+    }
+});
+
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.UseSession();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=LandingPage}/{id?}");
+app.UseMvc(routes =>
+{
+    routes.MapRoute(
+        name: "Default",
+        template: "{controller=Home}/{action=LandingPage}/{id?}"
+        );
+});
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=LandingPage}/{id?}");
 
 app.Run();

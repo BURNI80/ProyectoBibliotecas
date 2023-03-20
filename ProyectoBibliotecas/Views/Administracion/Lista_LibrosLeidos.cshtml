@@ -1,21 +1,77 @@
-﻿@{
+﻿@model List<LibroDeseo>
+@{
     Layout = "_LayoutMiLista";
 }
 <div class="card-perfil card-fav" style="margin-top: 0;">
     <h1 class="title" style="margin-top:40px;border-top:2px solid var(--border)"></h1>
     <div class="list-libros">
-        <div class="card-libro-color card-libro">
-            <div class="imagen-libro">
-                <img src="~/imgs/si.jpg" alt="">
-            </div>
-            <div class="contenido-libro">
-                <div class="titulo-autor">
-                    <p class="titulo-libro">El arte de la guerra</p>
-                    <p class="autor-libro">Fecha leido: 14/08/2001</p>
+        @if (Context.User.Identity.Name != null && Context.User.Identity.Name.Equals(Context.Request.RouteValues.Values.ElementAt(2).ToString()))
+        {
+            <div class="shareButton">
+                <button class="view-modal">
+                    <svg width="40" height="40" viewBox="0 0 219 217" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M160.427 48.4858C181.015 62.7947 195.221 85.5448 198.103 111.794" stroke="white" stroke-width="13.7115" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M21.7676 112.309C24.4441 86.1614 38.4441 63.4113 58.8265 48.9995" stroke="white" stroke-width="13.7115" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M70.1416 200.529C82.0828 206.603 95.6711 210 109.98 210C123.774 210 136.745 206.912 148.377 201.25" stroke="white" stroke-width="13.7115" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M109.989 64.2355C125.794 64.2355 138.606 51.423 138.606 35.6178C138.606 19.8126 125.794 7 109.989 7C94.1839 7 81.3711 19.8126 81.3711 35.6178C81.3711 51.423 94.1839 64.2355 109.989 64.2355Z" stroke="white" stroke-width="13.7115" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M35.5572 190.03C51.3623 190.03 64.175 177.217 64.175 161.412C64.175 145.606 51.3623 132.794 35.5572 132.794C19.7521 132.794 6.93945 145.606 6.93945 161.412C6.93945 177.217 19.7521 190.03 35.5572 190.03Z" stroke="white" stroke-width="13.7115" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M183.173 190.03C198.979 190.03 211.791 177.217 211.791 161.412C211.791 145.606 198.979 132.794 183.173 132.794C167.369 132.794 154.556 145.606 154.556 161.412C154.556 177.217 167.369 190.03 183.173 190.03Z" stroke="white" stroke-width="13.7115" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <div class="popup">
+                    <header>
+                        <span>Compartir</span>
+                        <div class="close"><i class="uil uil-times"></i></div>
+                    </header>
+                    <div class="content">
+                        <p>Copiar link</p>
+                        <div class="field">
+                            <svg width="30" height="30" class="url-icon uil uil-link" viewBox="0 0 206 206" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M70.6347 205.015C52.7909 205.015 34.8395 198.243 21.1879 184.592C-6.00793 157.288 -6.00793 113.001 21.1879 85.8053C24.3052 82.688 29.4648 82.688 32.5821 85.8053C35.6994 88.9226 35.6994 94.0823 32.5821 97.1996C11.621 118.161 11.621 152.236 32.5821 173.197C53.5433 194.159 87.6188 194.159 108.58 173.197C118.684 163.093 124.274 149.549 124.274 135.145C124.274 120.848 118.684 107.304 108.58 97.0921C105.463 93.9748 105.463 88.8151 108.58 85.6978C111.697 82.5805 116.857 82.5805 119.974 85.6978C133.196 98.9195 140.398 116.441 140.398 135.145C140.398 153.849 133.088 171.37 119.974 184.592C106.43 198.243 88.5862 205.015 70.6347 205.015Z" fill="black" />
+                                <path d="M178.993 126.116C176.95 126.116 174.908 125.364 173.296 123.751C170.178 120.634 170.178 115.474 173.296 112.357C195.332 90.3209 195.332 54.5259 173.296 32.5973C151.259 10.5612 115.464 10.5612 93.5356 32.5973C82.8937 43.2391 76.9814 57.4283 76.9814 72.4773C76.9814 87.526 82.8937 101.715 93.5356 112.357C96.6529 115.474 96.6529 120.634 93.5356 123.751C90.4183 126.869 85.2586 126.869 82.1413 123.751C68.4894 110.1 60.8574 91.8258 60.8574 72.4773C60.8574 53.1285 68.3819 34.8547 82.1413 21.203C110.412 -7.06768 156.419 -7.06768 184.797 21.203C213.068 49.4738 213.068 95.588 184.797 123.859C183.185 125.364 181.035 126.116 178.993 126.116Z" fill="black" />
+                            </svg>
+                            <input type="text" id="linkField" readonly value="URL">
+                            <button>Copy</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="separator-card"></div>
             </div>
-        </div>
+        }
+        @if (@Model.Where(x => x.FECHA_LEIDO != null).Count() == 0)
+        {
+
+            <h3 class="title" style="margin-top:20px;font-size:20px;line-height:30px">No te has leido ningun libro</h3>
+            <h6 class="title" style="font-size:15px;line-height:30px">Explorar <a style="color:cornflowerblue;text-decoration:underline;" asp-action="IndexLibros" asp-controller="Libros">libros</a></h6>
+        }
+        else
+        {
+            @foreach (LibroDeseo l in Model)
+            {
+                if (l.FECHA_LEIDO != null)
+                {
+                    <a asp-action="DetailsLibro" asp-route-id="@l.ID_LIBRO" asp-controller="Libros" class="card-libro-color card-libro">
+                        <div class="imagen-libro">
+                            @if (l.IMAGEN == null)
+                            {
+                                <img src="~/imgs/ImgNull.jpg" alt="">
+                            }
+                            else
+                            {
+                                <img src="~/imgs/libros/@l.IMAGEN" alt="">
+
+                            }
+                        </div>
+                        <div class="contenido-libro">
+                            <div class="titulo-autor">
+                                <p class="titulo-libro">@l.NOMBRE_LIBRO</p>
+                                <p class="autor-libro">Fecha leido: @l.FECHA_LEIDO.Value.ToShortDateString()</p>
+                            </div>
+                            <div class="separator-card"></div>
+                        </div>
+                    </a>
+                }
+            }
+        }
     </div>
 </div>
 
@@ -49,6 +105,167 @@
     .list-libros {
         overflow: auto;
     }
+
+    .shareButton {
+        margin-top: 20px;
+        height: 51px;
+    }
+
+    /*#region BTN SHARE*/
+    @@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    ::selection {
+        color: #fff;
+        background: #7d2ae8;
+    }
+
+    button {
+        outline: none;
+        cursor: pointer;
+        font-weight: 500;
+        border-radius: 4px;
+        border: 2px solid transparent;
+        transition: background 0.1s linear, border-color 0.1s linear, color 0.1s linear;
+    }
+
+    .view-modal {
+        height: 55px;
+        width: 55px;
+        background-color: #383838;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        margin: auto;
+        border-radius: 100%;
+        font-size: 18px;
+        z-index: 10;
+    }
+
+    .popup {
+        background: #fff;
+        border: 1px solid #898989;
+        padding: 25px;
+        z-index: 10;
+        border-radius: 15px;
+        max-width: 380px;
+        width: 100%;
+        opacity: 0;
+        margin: auto;
+        margin-top: 20px;
+        pointer-events: none;
+        box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+        transition: top 0s 0.2s ease-in-out, opacity 0.2s 0s ease-in-out, transform 0.2s 0s ease-in-out;
+    }
+
+        .popup.show {
+            opacity: 1;
+            pointer-events: auto;
+            position: relative;
+            z-index: 10;
+            transition: top 0s 0s ease-in-out, opacity 0.2s 0s ease-in-out, transform 0.2s 0s ease-in-out;
+        }
+
+        .popup :is(header, .icons, .field) {
+            display: flex;
+            align-items: center;
+            z-index: 10;
+            justify-content: space-between;
+        }
+
+        .popup header {
+            padding-bottom: 15px;
+            z-index: 10;
+            border-bottom: 1px solid #ebedf9;
+        }
+
+    header span {
+        font-size: 21px;
+        font-weight: 600;
+    }
+
+    header .close,
+    .icons a {
+        display: flex;
+        align-items: center;
+        border-radius: 50%;
+        justify-content: center;
+        transition: all 0.3s ease-in-out;
+    }
+
+    header .close {
+        color: #878787;
+        font-size: 17px;
+        background: #f2f3fb;
+        height: 33px;
+        width: 33px;
+        cursor: pointer;
+    }
+
+        header .close:hover {
+            background: #ebedf9;
+        }
+
+    .popup .content {
+        margin: 20px 0;
+    }
+
+    .popup .icons {
+        margin: 15px 0 20px 0;
+    }
+
+    .content p {
+        font-size: 16px;
+    }
+
+    .content .field {
+        margin: 12px 0 -5px 0;
+        height: 45px;
+        border-radius: 4px;
+        padding: 0 5px;
+        border: 1px solid #e1e1e1;
+    }
+
+    .field.active {
+        border-color: var(--button);
+    }
+
+    .field i {
+        width: 50px;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .field.active i {
+        color: var(--button);
+    }
+
+    .field input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        font-size: 15px;
+    }
+
+    .field button {
+        color: #fff;
+        padding: 5px 18px;
+        background: var(--button);
+    }
+
+        .field button:hover {
+            background: var(--button);
+        }
+
+    /*#endregion*/
 
 
     /* #region CARD LIBRO */
@@ -155,3 +372,38 @@
 
     /* #endregion */
 </style>
+<script>
+    const viewBtn = document.querySelector(".view-modal"),
+        popup = document.querySelector(".popup"),
+        close = popup.querySelector(".close"),
+        field = popup.querySelector(".field"),
+        input = field.querySelector("input"),
+        copy = field.querySelector("button");
+
+    viewBtn.onclick = () => {
+        var url = "@Url.Action("Share","Administracion")";
+        var path = window.location.href;
+        var dni = '@Context.User.Identity.Name';
+        var data = { dni: dni, path: path }
+        $.post(url, data).done(function (data) {
+            console.log(data);
+            $("#linkField").val(data)
+            popup.classList.toggle("show");
+        })
+
+    }
+    close.onclick = () => {
+        viewBtn.click();
+    }
+
+    copy.onclick = () => {
+        input.select(); //select input value
+        if (document.execCommand("copy")) { //if the selected text copy
+            copy.innerText = "Copied";
+            setTimeout(() => {
+                window.getSelection().removeAllRanges(); //remove selection from document
+                copy.innerText = "Copy";
+            }, 3000);
+        }
+    }
+</script>
