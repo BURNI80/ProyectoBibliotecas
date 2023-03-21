@@ -10,6 +10,8 @@ namespace ProyectoBibliotecas.Data
 
         public DbSet<Biblioteca> Bibliotecas { get; set; }
 
+        public DbSet<BibliotecaSimple> BibliotecasSimples { get; set; }
+
         public DbSet<Libro> Libros { get; set; }
 
         public DbSet<Usuario> Usuarios { get; set; }

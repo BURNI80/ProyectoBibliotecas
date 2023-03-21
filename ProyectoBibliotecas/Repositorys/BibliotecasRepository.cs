@@ -280,11 +280,11 @@ namespace ProyectoBibliotecas.Repositorys
         }
 
 
-        public string[] GetLibroDisponible(int id)
+        public List<BibliotecaSimple> GetLibroDisponible(int id)
         {
             string sql = "SP_LIBROBIBLIOTECADISPONIBLE @ID_LIBRO";
             SqlParameter p1 = new SqlParameter("@ID_LIBRO", id);
-            string consulta = this.context.Database.ExecuteSqlRaw(sql, p1).ToString();
+            List<BibliotecaSimple> consulta = this.context.BibliotecasSimples.FromSqlRaw(sql, p1).ToList();
             return consulta;
         }
     }

@@ -31,7 +31,13 @@ namespace ProyectoBibliotecas.Controllers
 
         public IActionResult LandingPage()
         {
-            return View();
+            if (HttpContext.User.Identity.Name == null)
+            {
+                return View();
+            }
+            else{
+                return RedirectToAction("IndexBibliotecas", "Bibliotecas");
+            }
         }
     }
 }

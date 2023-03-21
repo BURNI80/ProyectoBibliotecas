@@ -12,6 +12,9 @@
     <script>
         const currentTheme = localStorage.getItem('theme');
         console.log(currentTheme)
+        if(currentTheme == null){
+            currentTheme = "dark"
+        }
         var rutaImg = "";
 
         if (currentTheme) {
@@ -24,8 +27,6 @@
             }
         } else {
             document.documentElement.setAttribute('data-theme', 'light');
-
-
         }
     </script>
 </head>

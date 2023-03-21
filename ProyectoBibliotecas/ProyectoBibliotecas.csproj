@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\imgs\libros\" />
+    <Folder Include="wwwroot\imgs\autores\" />
   </ItemGroup>
 
   <ItemGroup>

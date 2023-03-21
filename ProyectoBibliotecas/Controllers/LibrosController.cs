@@ -30,6 +30,7 @@ namespace ProyectoBibliotecas.Controllers
         public IActionResult DetailsLibro(int id)
         {
             ViewData["VALORACIONES"] = this.repo.GetValoraciones(id);
+            ViewData["BIBLIOTECAS"] = this.repo.GetLibroDisponible(id);
             string dni;
             if (HttpContext.User.Identity.IsAuthenticated == false)
             {
@@ -51,6 +52,7 @@ namespace ProyectoBibliotecas.Controllers
         {
             string dni = HttpContext.User.Identity.Name;
             ViewData["LISTADESEOS"] = this.repo.LibroDeseo(id, dni);
+            ViewData["BIBLIOTECAS"] = this.repo.GetLibroDisponible(id);
             if (orden != 0)
             {
                 this.repo.LikeComentario(orden, id, dni);
