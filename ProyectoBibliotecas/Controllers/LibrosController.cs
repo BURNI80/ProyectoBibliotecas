@@ -2,6 +2,7 @@
 using ProyectoBibliotecas.Extensions;
 using ProyectoBibliotecas.Models;
 using ProyectoBibliotecas.Repositorys;
+using System.Collections.Generic;
 using System.Net;
 
 namespace ProyectoBibliotecas.Controllers
@@ -31,6 +32,7 @@ namespace ProyectoBibliotecas.Controllers
         {
             ViewData["VALORACIONES"] = this.repo.GetValoraciones(id);
             ViewData["BIBLIOTECAS"] = this.repo.GetLibroDisponible(id);
+            ViewData["FECHASNO"] = GetDiasReservado(id);
             string dni;
             if (HttpContext.User.Identity.IsAuthenticated == false)
             {
@@ -52,6 +54,7 @@ namespace ProyectoBibliotecas.Controllers
         {
             string dni = HttpContext.User.Identity.Name;
             ViewData["LISTADESEOS"] = this.repo.LibroDeseo(id, dni);
+            ViewData["FECHASNO"] = GetDiasReservado(id);
             ViewData["BIBLIOTECAS"] = this.repo.GetLibroDisponible(id);
             if (orden != 0)
             {
@@ -76,6 +79,27 @@ namespace ProyectoBibliotecas.Controllers
         public void AddListaLibro(string dni, int idLibro, int orden)
         {
             this.repo.AddListaLibro(dni, idLibro, orden);
+        }
+
+
+        [HttpPost]
+        public List<string> GetDiasReservado(int id)
+        {
+            List<Reserva> reservas = this.repo.GetResrevasLibro(id);
+            List<string> resultado = new List<string>();
+            foreach (Reserva reserva in reservas)
+            {
+                List<string> arr = this.repo.GetDaysBetween(reserva.FECHA_INICIO, reserva.FECHA_FIN);
+                resultado.AddRange(arr);
+            }
+            return resultado;
+        }
+
+        [HttpPost]
+        public void ReservarLibro(int idLibro, int idBiblio, DateTime fechaInicio, DateTime fechaFin)
+        {
+            string dni = HttpContext.User.Identity.Name;
+            this.repo.CreateReserva(dni, idLibro, idBiblio, fechaInicio, fechaFin);
         }
     }
 }

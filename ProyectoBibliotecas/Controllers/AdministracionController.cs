@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProyectoBibliotecas.Extensions;
 using ProyectoBibliotecas.Filters;
 using ProyectoBibliotecas.Models;
@@ -141,6 +142,13 @@ namespace ProyectoBibliotecas.Controllers
             string token = this.repo.GenerateToken();
             Share realToken = this.repo.GetToken(dni,token);
             return path + "?token=" + realToken.TOKEN;
+        }
+
+        [Authorize]
+        [HttpPost]
+        public void EliminarReserva(int id)
+        {
+            this.repo.DeleteReserva(id);
         }
     }
 }

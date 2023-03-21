@@ -8,11 +8,7 @@
 
 <link rel="stylesheet" href="~/css/EstiloLibros.css">
 <link href="~/lib/flowbite.min.css" rel="stylesheet" />
-<link href="~/lib/calendar-disabled-invalid-valuesdemo/css/mobiscroll.javascript.min.css" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="~/js/jquery-ui.js" ></script>
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div class="imagen-fondo-libro">
     @if (Model.IMAGEN != null)
     {
@@ -113,7 +109,7 @@
             <div class="separador"></div>
             <p class="comentarios">@comentarios.Count comentarios</p>
         </div>
-        @if (Context.User.Identity.Name != null || biblios.Count() != 0)
+        @if (Context.User.Identity.Name != null && biblios.Count() != 0)
         {
             <button class="btnReserva" id="openForm">Reservar ahora</button>
             <div class="fromReserva" style="display:none;">
@@ -124,10 +120,10 @@
                         <option value="@b.ID_BIBLIOTECA">@b.NOMBRE</option>
                     }
                 </select>
-                <label>Fecha Inicio</label>
-                <input type="text" id="datepicker">
-                <label>Fecha Fin</label>
-                <input type="date" name="fechaFin" id="fechaFin" />
+                <label for="from">From</label>
+                <input type="text" id="from" name="from" autocomplete="off">
+                <label for="to">to</label>
+                <input type="text" id="to" name="to" autocomplete="off">
                 <button id="confirmReserva" class="btnReserva">Reservar</button>
             </div>
         }
@@ -145,12 +141,12 @@
                             <input hidden value="@Model.ID_LIBRO" name="idLibro" type="text" readonly />
                             <label for="comment" class="sr-only">Tu comentario</label>
                             <textarea id="comment" rows="4" name="textoComentario"
-                                      class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                                      placeholder="Escribe un comentario... | Dejelo vacio para que sea una valoracion"></textarea>
+                                  class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                                  placeholder="Escribe un comentario... | Dejelo vacio para que sea una valoracion"></textarea>
                         </div>
                         <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
                             <button id="btnComentario"
-                                    class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                                class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                                 Publicar
                             </button>
                             <div style="width:100%;">
@@ -221,6 +217,10 @@
 
     .main {
         background-color: var(--bg-details);
+    }
+
+    .ui-datepicker {
+        z-index: 10 !important;
     }
 
     .ulbiblio {
@@ -358,7 +358,6 @@
     }
 
 </style>
-<script src="~/js/jquery-ui.js"></script>
 <script src="~/lib/sweetalert.js"></script>
 <script>
 
@@ -373,48 +372,126 @@
             buttonsStyling: false
         })
 
+        var fechaActual = new Date();
+        var fechaInicio = fechaActual;
+        var disabledDates = ["28/03/2023"]
+
+
         $(function () {
-            var disabledDates = ["2023-03-28", "2023-03-14", "2015-11-21"]
-            $("#datepicker").datepicker({
-                beforeShowDay: function (date) {
-                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [disabledDates.indexOf(string) == -1]
+            var dateFormat = "dd/mm/yy",
+                from = $("#from")
+                    .datepicker({
+                        defaultDate: "+1w",
+                        changeMonth: true,
+                        numberOfMonths: 2,
+                        dateFormat: "dd/mm/yy",
+                        minDate: fechaActual,
+                        beforeShowDay: function (date) {
+                            var string = jQuery.datepicker.formatDate('dd/mm/yy', date);
+                            return [disabledDates.indexOf(string) == -1]
+                        }
+                    })
+                    .on("change", function () {
+                        to.datepicker("option", "minDate", getDate(this));
+                    }),
+                to = $("#to").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    dateFormat: "dd/mm/yy",
+                    minDate: fechaInicio,
+                    beforeShowDay: function (date) {
+                        var string = jQuery.datepicker.formatDate('dd/mm/yy', date);
+                        return [disabledDates.indexOf(string) == -1]
+                    }
+                })
+                    .on("change", function () {
+                        from.datepicker("option", "maxDate", getDate(this));
+                    });
+
+            function getDate(element) {
+                var date;
+                try {
+                    date = $.datepicker.parseDate(dateFormat, element.value);
+                } catch (error) {
+                    date = null;
                 }
-            });
+                return date;
+            }
         });
+
+        function comprobarFechas(fechaInicio, fechaFin, arrayFechas) {
+            var fechaInicioObj = fechaInicio.split("/");
+            var fechaI = new Date(fechaInicioObj[2], fechaInicioObj[1] - 1, fechaInicioObj[0]);
+            var fechaFinObj = fechaFin.split("/");
+            var fechaF = new Date(fechaFinObj[2], fechaFinObj[1] - 1, fechaFinObj[0]);
+
+
+            for (var i = 0; i < arrayFechas.length; i++) {
+                var fe = arrayFechas[i].split("/");
+                var fecha = new Date(fe[2], fe[1] - 1, fe[0]);
+
+                // Verificar si la fecha está dentro del rango especificado
+                if (fecha >= fechaI && fecha <= fechaF) {
+                    // Si se encuentra una fecha que está en el rango, devolver false
+                    return false;
+                }
+            }
+
+            // Si se completa la iteración sin encontrar ninguna fecha conflictiva, devolver true
+            return true;
+        }
 
         $("#openForm").click(function () {
             $(".fromReserva").toggle(function () {
-                let fechaActual = new Date();
-                $("#fechaInicio").attr('min', fechaActual.getTime())
+                var url = "@Url.Action("GetDiasReservado","Libros")";
+                var idLibro = "@Model.ID_LIBRO";
+                var data = { id: idLibro }
+                $.post(url, data).done(function (data) {
+                    disabledDates = data;
+                })
 
                 $("#confirmReserva").click(function () {
-                    var fechaInicio = $("#fechaInicio").val()
-                    let fechaI = new Date(fechaInicio)
-                    var fechaFin = $("#fechaFin").val()
-                    let fechaF = new Date(fechaFin)
+                    var fechaInicio = $("#from").val();
+                    var fechaFin = $("#to").val();
                     var idLibro = "@Model.ID_LIBRO"
                     var idBiblio = $("#idBiblio").val()
-
-                    console.log(fechaActual)
-                    console.log(fechaInicio)
-                    if (fechaActual.getTime() > fechaI.getTime() || fechaActual.getTime() > fechaF.getTime()) {
+                    var com = comprobarFechas(fechaInicio, fechaFin, disabledDates);
+                    if(fechaInicio == "" || fechaFin == ""){
                         Swal.fire({
                             icon: 'error',
-                            text: 'Fehas incorrectas',
+                            text: 'Fechas incorrectas!',
                         })
                         return;
                     }
-
-
-                    var data = {
-                        fechaInicio: fechaInicio,
-                        fechaFin: fechaFin,
-                        idLibro: idLibro,
-                        idBiblio: idBiblio,
+                    if (com == true) {
+                        var datos = {
+                            fechaInicio: fechaInicio,
+                            fechaFin: fechaFin,
+                            idLibro: idLibro,
+                            idBiblio: idBiblio,
+                        }
+                        var ruta = "@Url.Action("ReservarLibro","Libros")";
+                        $.post(ruta, datos).done(function (data) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Reserva realizada con exito!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then((result) => {
+                                location.reload();
+                            })
+                            $(".fromReserva").hide();
+                            $("#from").val("");
+                            $("#to").val("");
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Fechas incorrectas!',
+                        })
+                        return;
                     }
-
-
                 })
             })
         })

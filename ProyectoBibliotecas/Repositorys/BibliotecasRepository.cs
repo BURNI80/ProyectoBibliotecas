@@ -287,5 +287,42 @@ namespace ProyectoBibliotecas.Repositorys
             List<BibliotecaSimple> consulta = this.context.BibliotecasSimples.FromSqlRaw(sql, p1).ToList();
             return consulta;
         }
+
+        public List<Reserva> GetResrevasLibro(int id)
+        {
+            return this.context.Reservas.Where( x => x.ID_LIBRO == id).ToList();
+        }
+
+        public List<string> GetDaysBetween(DateTime fecha_inicio, DateTime fecha_fin)
+        {
+            var days = new List<string>();
+            for (DateTime date = fecha_inicio; date <= fecha_fin; date = date.AddDays(1))
+            {
+                days.Add(date.ToString("dd/MM/yyyy"));
+            }
+            return days;
+        }
+
+        public void CreateReserva(string dni, int idLibro, int idBiblio, DateTime fechaI, DateTime fechaF)
+        {
+            int nuevoId = this.context.Reservas.Any() ? this.context.Reservas.Max(x => x.ID_PRESTAMO) + 1 : 1;
+            Reserva r = new Reserva();
+            r.ID_PRESTAMO = nuevoId;
+            r.DNI_USUARIO = dni;
+            r.ID_LIBRO= idLibro;
+            r.ID_BIBLIOTECA = idBiblio;
+            r.FECHA_INICIO= fechaI;
+            r.FECHA_FIN= fechaF;
+            r.DEVUELTO = true;
+            this.context.Reservas.Add(r);
+            this.context.SaveChangesAsync();
+        }
+
+        public void DeleteReserva(int id)
+        {
+            Reserva r = this.context.Reservas.Where(x => x.ID_PRESTAMO == id).FirstOrDefault();
+            this.context.Reservas.Remove(r);
+            this.context.SaveChangesAsync();
+        }
     }
 }
