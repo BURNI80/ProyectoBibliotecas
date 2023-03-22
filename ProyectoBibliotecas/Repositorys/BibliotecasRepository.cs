@@ -83,6 +83,10 @@ namespace ProyectoBibliotecas.Repositorys
             return consulta.FirstOrDefault();
         }
 
+        public List<LibroDefault> GetLibrosTodos()
+        {
+            return this.context.LibrosDef.ToList();
+        }
 
 
         public List<LibroDisponibilidad> GetLibrosBiblioteca(int id)
@@ -120,6 +124,11 @@ namespace ProyectoBibliotecas.Repositorys
             SqlParameter p1 = new SqlParameter("@ID_LIBRO", id);
             var consulta = this.context.Libros.FromSqlRaw(sql, p1);
             return consulta.AsEnumerable().First();
+        }
+
+        public LibroDefault GetDatosLibroDef(int id)
+        {
+            return this.context.LibrosDef.Where(x => x.ID_LIBRO == id).FirstOrDefault();
         }
 
         public int GetValoraciones(int id)
@@ -322,6 +331,82 @@ namespace ProyectoBibliotecas.Repositorys
         {
             Reserva r = this.context.Reservas.Where(x => x.ID_PRESTAMO == id).FirstOrDefault();
             this.context.Reservas.Remove(r);
+            this.context.SaveChangesAsync();
+        }
+
+        public void DeleteBiblioteca(int id)
+        {
+            Biblioteca b = this.context.Bibliotecas.Where(x => x.ID_BIBLIOTECA == id).FirstOrDefault();
+            this.context.Bibliotecas.Remove(b);
+            this.context.SaveChangesAsync();
+        }
+
+        public void AddBiblio(string nombre, string direccion, int telefono, string web, TimeSpan hora_apertura, TimeSpan hora_cierre, IFormFile imagen)
+        {
+            int nuevoId = this.context.Bibliotecas.Any() ? this.context.Bibliotecas.Max(x => x.ID_BIBLIOTECA) + 1 : 1;
+            Biblioteca b = new Biblioteca();
+            b.ID_BIBLIOTECA = nuevoId;
+            b.NOMBRE = nombre;
+            b.DIRECCION = direccion;
+            b.TELEFONO = telefono;
+            b.WEB = web;
+            b.HORA_APERTURA = hora_apertura;
+            b.HORA_CIERRE = hora_cierre;
+            this.context.Bibliotecas.Add(b);
+            this.context.SaveChangesAsync();
+        }
+
+        public void UpdateBiblio(int id, string nombre, string direccion, int telefono, string web, TimeSpan hora_apertura, TimeSpan hora_cierre, IFormFile imagen)
+        {
+            Biblioteca b = GetDatosBiblioteca(id);
+            b.NOMBRE = nombre;
+            b.DIRECCION = direccion;
+            b.TELEFONO = telefono;
+            b.WEB = web;
+            b.HORA_APERTURA = hora_apertura;
+            b.HORA_CIERRE = hora_cierre;
+            this.context.SaveChangesAsync();
+        }
+
+
+
+
+
+        public void DeleteLibro(int id)
+        {
+            LibroDefault l = this.context.LibrosDef.Where(x => x.ID_LIBRO == id).FirstOrDefault();
+            this.context.LibrosDef.Remove(l);
+            this.context.SaveChangesAsync();
+        }
+        public void AddLibro(string nombre, int numpag, IFormFile imagen, string urlcompra, string descripcion, string idioma, DateTime fecha_publicacion, int idautor)
+        {
+            int nuevoId = this.context.LibrosDef.Any() ? this.context.LibrosDef.Max(x => x.ID_LIBRO) + 1 : 1;
+            LibroDefault b = new LibroDefault();
+            b.ID_LIBRO = nuevoId;
+            b.NOMBRE = nombre;
+            b.NUM_PAGINAS = numpag;
+            b.IMAGEN = null;
+            b.URL_COMPRA = urlcompra;
+            b.DESCRIPCION = descripcion;
+            b.IDIOMA = idioma;
+            b.FECHA_PUBLICACION = fecha_publicacion;
+            b.ID_AUTOR = idautor;
+            this.context.LibrosDef.Add(b);
+            this.context.SaveChangesAsync();
+        }
+
+
+        public void UpdateLibro(int id, string nombre, int numpag, IFormFile imagen, string urlcompra, string descripcion, string idioma, DateTime fecha_publicacion, int idautor)
+        {
+            LibroDefault b = GetDatosLibroDef(id);
+            b.NOMBRE = nombre;
+            b.NUM_PAGINAS = numpag;
+            b.IMAGEN = null;
+            b.URL_COMPRA = urlcompra;
+            b.DESCRIPCION = descripcion;
+            b.IDIOMA = idioma;
+            b.FECHA_PUBLICACION = fecha_publicacion;
+            b.ID_AUTOR = idautor;
             this.context.SaveChangesAsync();
         }
     }

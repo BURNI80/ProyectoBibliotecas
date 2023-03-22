@@ -150,5 +150,87 @@ namespace ProyectoBibliotecas.Controllers
         {
             this.repo.DeleteReserva(id);
         }
+
+        public IActionResult Bibliotecas()
+        {
+            return View(this.repo.GetBibliotecas());
+        }
+
+        [HttpPost]
+        public void EliminarBiblioteca(int id)
+        {
+            this.repo.DeleteBiblioteca(id);
+        }
+
+        public IActionResult NuevaBiblioteca()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult NuevaBiblioteca(string nombre, string direccion, int telefono, string web, TimeSpan hora_apertura, TimeSpan hora_cierre, IFormFile imagen)
+        {
+            this.repo.AddBiblio(nombre, direccion, telefono, web, hora_apertura, hora_cierre, imagen);
+            return RedirectToAction("Bibliotecas","Administracion");
+        }
+
+        public IActionResult EditarBiblioteca(int id)
+        {
+            return View(this.repo.GetDatosBiblioteca(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditarBiblioteca(int id,string nombre, string direccion, int telefono, string web, TimeSpan hora_apertura, TimeSpan hora_cierre, IFormFile imagen)
+        {
+            this.repo.UpdateBiblio(id,nombre, direccion, telefono, web, hora_apertura, hora_cierre, imagen);
+            return RedirectToAction("Bibliotecas", "Administracion");
+        }
+
+
+
+
+
+
+        public IActionResult Libros()
+        {
+            return View(this.repo.GetLibrosTodos());
+        }
+
+        [HttpPost]
+        public void EliminarLibro(int id)
+        {
+            this.repo.DeleteLibro(id);
+        }
+
+        public IActionResult NuevoLibro()
+        {
+            ViewData["AUTORES"] = this.repo.GetAutores();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult NuevoLibro(string nombre, int numpag, IFormFile imagen, string urlcompra, string descripcion, string idioma, DateTime fecha_publicacion,int idautor)
+        {
+            this.repo.AddLibro(nombre, numpag, imagen, urlcompra, descripcion, idioma, fecha_publicacion,idautor);
+            return RedirectToAction("Libros", "Administracion");
+        }
+
+        public IActionResult EditarLibro(int id)
+        {
+            ViewData["AUTORES"] = this.repo.GetAutores();
+            return View(this.repo.GetDatosLibroDef(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditarLibro(int id, string nombre, int numpag, IFormFile imagen, string urlcompra, string descripcion, string idioma, DateTime fecha_publicacion, int idautor)
+        {
+            this.repo.UpdateLibro(id,nombre, numpag, imagen, urlcompra, descripcion, idioma, fecha_publicacion, idautor);
+            return RedirectToAction("Libros", "Administracion");
+        }
+
+
+
+
+
     }
 }

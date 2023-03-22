@@ -25,6 +25,6 @@ namespace ProyectoBibliotecas.Models
         public double? VALORACION_MEDIA { get; set; }
 
         [Column("DISPONIBLE")]
-        public bool DISPONIBLE { get; set; }
+        public bool? DISPONIBLE { get; set; }
     }
 }

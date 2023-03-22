@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "_LayoutAdministrador";
+}
+
+
+
+<div class="contenido-perfil temp">
+    <div style="width:100%; display:flex;justify-content:center;align-items:center;">
+       
+    </div>
+    <form method="post">
+        <div class="card-perfil" style="margin-top: 0; text-align: center;">
+            <h1 class="title">Nueva biblioteca</h1>
+            <label for="">Nombre:</label>
+            <input type="text" name="nombre">
+            <label for="">Direccion:</label>
+            <input type="text" name="direccion">
+            <label for="">Telefono:</label>
+            <input type="number" name="telefono">
+            <label for="">Web:</label>
+            <input type="text" name="web">
+            <label for="">Hora de apertura:</label>
+            <input type="time" name="hora_apertura">
+            <label for="">Hora de cierre:</label>
+            <input type="time" name="hora_cierre">
+            <label for="">Imagen:</label>
+            <input type="file" name="imagen">
+            <button class="boton">Añadir</button>
+        </div>
+    </form>
+
+</div>
+
+<style>
+    .temp {
+        height: 90vh;
+        margin: 0px;
+        padding: 0px;
+        margin-top: 5vh;
+    }
+
+    form {
+        width: 100%;
+        height: fit-content;
+        background-color: transparent;
+    }
+
+</style>

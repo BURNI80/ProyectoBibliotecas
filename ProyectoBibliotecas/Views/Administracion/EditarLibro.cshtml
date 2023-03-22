@@ -1,0 +1,93 @@
+﻿@model LibroDefault
+@{
+    Layout = "_LayoutAdministrador";
+    List<Autor> autores = (List<Autor>)ViewData["AUTORES"];
+}
+
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+
+<div class="contenido-perfil temp">
+    <div style="width:100%; display:flex;justify-content:center;align-items:center;">
+    </div>
+    <form method="post">
+        <div class="card-perfil" style="margin-top: 0; text-align: center;">
+            <h1 class="title">Editar libro</h1>
+            <input type="text" value="@Model.ID_LIBRO" hidden readonly name="id" />
+            <label for="">Nombre:</label>
+            <input type="text" name="nombre" value="@Model.NOMBRE">
+            <label for="">Numero de paginas:</label>
+            <input type="number" name="numpag" value="@Model.NUM_PAGINAS">
+            <label for="">Imagen:</label>
+            <input type="file" name="imagen">
+            <label for="">Url compra:</label>
+            <input type="text" name="urlcompra" value="@Model.URL_COMPRA">
+            <label for="">Descripcion:</label>
+            <textarea rows="4" name="descripcion">@Model.DESCRIPCION</textarea>
+            <label for="">Idioma:</label>
+            <input type="text" name="idioma" value="@Model.IDIOMA">
+            <label for="">Fecha de publicacion:</label>
+            <input type="date" name="fecha_publicacion" value="@Model.FECHA_PUBLICACION">
+            <label for="">Autor:</label>
+            <select name="idautor" class="selectpicker selectM" data-show-subtext="true" data-live-search="true" value="@Model.ID_AUTOR">
+                <option value='' selected="true">Selecciona un autor</option>
+                @foreach (Autor a in autores)
+                {
+                    if (a.ID_AUTOR == Model.ID_AUTOR)
+                    {
+                        <option selected value='@a.ID_AUTOR'>@a.NOMBRE</option>
+                    }
+                    else
+                    {
+                        <option value='@a.ID_AUTOR'>@a.NOMBRE</option>
+                    }
+                }
+            </select>
+            <button class="boton">Modificar</button>
+        </div>
+    </form>
+
+</div>
+
+<style>
+    .temp {
+        height: 90vh;
+        margin: 0px;
+        padding: 0px;
+        margin-top: 5vh;
+    }
+
+    form {
+        width: 100%;
+        height: fit-content;
+        background-color: transparent;
+    }
+
+    textarea {
+        width: 70%;
+        font-family: "Poppins";
+        border: 1px solid var(--border);
+        color: var(--text);
+        background: var(--bg-card);
+        box-shadow: 0px 4px 10px -4px rgb(0 0 0 / 25%);
+        border-radius: 10px;
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+
+    .selectM {
+        width: 70% !important;
+        font-family: "Poppins" !important;
+        border: 1px solid var(--border) !important;
+        color: var(--text) !important;
+        background-col: var(--bg-card) !important;
+        box-shadow: 0px 4px 10px -4px rgb(0 0 0 / 25%) !important;
+        border-radius: 10px !important;
+        margin-top: 5px !important;
+        margin-bottom: 20px !important;
+    }
+
+</style>

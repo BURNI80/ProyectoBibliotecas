@@ -1,0 +1,49 @@
+﻿@model Biblioteca
+@{
+    Layout = "_LayoutAdministrador";
+}
+
+
+
+<div class="contenido-perfil temp">
+    <div style="width:100%; display:flex;justify-content:center;align-items:center;">
+       
+    </div>
+    <form method="post">
+        <div class="card-perfil" style="margin-top: 0; text-align: center;">
+            <h1 class="title">Editar biblioteca</h1>
+            <input hidden type="number" value="@Model.ID_BIBLIOTECA" name="id" readonly>
+            <label for="">Nombre:</label>
+            <input type="text" value="@Model.NOMBRE" name="nombre">
+            <label for="">Direccion:</label>
+            <input type="text" value="@Model.DIRECCION" name="direccion">
+            <label for="">Telefono:</label>
+            <input type="number" value="@Model.TELEFONO" name="telefono">
+            <label for="">Web:</label>
+            <input type="text" value="@Model.WEB" name="web">
+            <label for="">Hora de apertura:</label>
+            <input type="time" value="@Model.HORA_APERTURA" name="hora_apertura">
+            <label for="">Hora de cierre:</label>
+            <input type="time" value="@Model.HORA_CIERRE" name="hora_cierre">
+            <label for="">Imagen:</label>
+            <input type="file" name="imagen">
+            <button class="boton">Modificar</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    .temp {
+        height: 90vh;
+        margin: 0px;
+        padding: 0px;
+        margin-top: 5vh;
+    }
+
+    form {
+        width: 100%;
+        height: fit-content;
+        background-color: transparent;
+    }
+
+</style>

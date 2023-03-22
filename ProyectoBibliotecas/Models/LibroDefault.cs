@@ -3,14 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProyectoBibliotecas.Models
 {
-    public class Libro
+    [Table("LIBRO")]
+    public class LibroDefault
     {
         [Key]
         [Column("ID_LIBRO")]
         public int ID_LIBRO { get; set; }
 
-        [Column("NOMBRE_LIBRO")]
-        public string NOMBRE_LIBRO { get; set; }
+        [Column("NOMBRE")]
+        public string NOMBRE { get; set; }
 
         [Column("NUM_PAGINAS")]
         public int NUM_PAGINAS { get; set; }
@@ -34,8 +35,8 @@ namespace ProyectoBibliotecas.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? FECHA_PUBLICACION { get; set; }
 
-        [Column("NOMBRE_AUTOR")]
-        public string NOMBRE_AUTOR { get; set; }
+        [Column("ID_AUTOR")]
+        public int ID_AUTOR { get; set; }
 
     }
 }
