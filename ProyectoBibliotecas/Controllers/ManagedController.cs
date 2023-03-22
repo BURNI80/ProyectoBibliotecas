@@ -40,6 +40,7 @@ namespace ProyectoBibliotecas.Controllers
                 {
                     HttpContext.Session.SetObject("user", user);
                     ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
+                    identity.AddClaim(new Claim("ROL", user.ROL));
                     Claim claimUserName = new Claim(ClaimTypes.Name, user.DNI_USUARIO);
                     Claim claimRole = new Claim(ClaimTypes.Role, user.ROL);
                     identity.AddClaim(claimUserName);

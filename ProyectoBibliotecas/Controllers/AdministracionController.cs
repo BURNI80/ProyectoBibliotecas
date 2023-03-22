@@ -128,7 +128,7 @@ namespace ProyectoBibliotecas.Controllers
             }
         }
 
-
+        [AuthorizeUsers(Policy = "ADMIN")]
         [AuthorizeUsers]
         public IActionResult Admin_Panel()
         {

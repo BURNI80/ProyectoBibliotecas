@@ -18,6 +18,11 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 }).AddCookie();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ADMIN", policy => policy.RequireRole("ADMIN","EDITOR"));
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews(
     options => options.EnableEndpointRouting = false);
