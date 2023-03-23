@@ -43,7 +43,7 @@
                     </ul>
                 </div>
             </div>
-            <button class="boton">Agregar</button>
+            <button id="btnConfirmLibro" class="boton">Agregar</button>
         </div>
         <div class="div-tabla">
             <table class="table" style="width: 100%; border-spacing: 20px;">
@@ -100,7 +100,7 @@
         overflow-clip-margin: 20px;
     }
 
-    .boton{
+    .boton {
         background-color: var(--button);
         padding: 10px 20px;
     }
@@ -221,7 +221,15 @@
     $(document).ready(function () {
         $("#addLibro").click(function () {
             $("#formAddLibro").toggle("fast");
-            
+            $("#btnConfirmLibro").click(function () {
+                var url = "@Url.Action("AddLibroBiblio","Administracion")";
+                var idLibro = "@ViewData["IDLIBRO"]";
+                var data = { id: idLibro }
+                $.post(url, data).done(function (data) {
+                    disabledDates = data;
+                })
+            })
+
         })
 
     })
