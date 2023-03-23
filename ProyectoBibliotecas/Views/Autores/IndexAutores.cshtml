@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/css/EstiloAutores.css">
     <link rel="stylesheet" href="~/css/SearchBar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -25,23 +26,34 @@
             </form>
         </div>
 
-
-        <div class="parent-div">
-            @foreach (Autor a in Model)
-            {
-                <div class="card-autor">
-                    @if (a.IMAGEN == null)
-                    {
-                        <img src="~/imgs/ImgNull.jpg" alt="">
-                    }
-                    else
-                    {
-                        <img src="~/imgs/autores/@a.IMAGEN" alt="">
-                    }
-                    <p><span class="scrollbar" id="style-1">@a.NOMBRE</span></p>
+        @if (Model.Count() == 0)
+        {
+            <div class="contenido-texto">
+                <div class="texto" style="margin: auto" class="text-center">
+                    <h4>No se han encontrado autores</h4>
                 </div>
-            }
-        </div>
+            </div>
+        }
+        else
+        {
+            <div class="parent-div">
+                @foreach (Autor a in Model)
+                {
+                    <div class="card-autor">
+                        @if (a.IMAGEN == null)
+                        {
+                            <img src="~/imgs/ImgNull.jpg" alt="">
+                        }
+                        else
+                        {
+                            <img src="~/imgs/autores/@a.IMAGEN" alt="">
+                        }
+                        <p><span class="scrollbar" id="style-1">@a.NOMBRE</span></p>
+                    </div>
+                }
+            </div>
+        }
+
 
 
     </div>
@@ -55,6 +67,29 @@
         height: fit-content;
         margin-top: 20px !important;
         background-color: transparent;
+    }
+
+    .contenido-texto {
+        margin-top: 40px;
+        align-content: center;
+        justify-content: center;
+        display: flex;
+    }
+
+    .texto {
+        width: 80%;
+        padding-top: 60px;
+        padding-bottom: 60px;
+        height: auto;
+        text-align: center;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 700;
+        color: var(--icons);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+        font-size: 3vw;
+        line-height: 105px;
     }
 </style>
 

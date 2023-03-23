@@ -468,6 +468,18 @@ namespace ProyectoBibliotecas.Repositorys
             return biblios;
         }
 
+        public List<BibliotecaSimple> GetBibliotecasSimples()
+        {
+            List<Biblioteca> biblios = this.context.Bibliotecas.ToList();
+            List<BibliotecaSimple> bibliotecasSimples = biblios.Select(b =>
+                    new BibliotecaSimple
+                    {
+                        ID_BIBLIOTECA = b.ID_BIBLIOTECA,
+                        NOMBRE = b.NOMBRE
+                    }).ToList();
+            return bibliotecasSimples;
+        }
+
         public List<LibroDefault> GetLibrosNotInBiblioteca(int id)
         {
             var consulta = from libro in this.context.LibrosDef
@@ -478,6 +490,52 @@ namespace ProyectoBibliotecas.Repositorys
                            select libro;
 
             return consulta.ToList();
+        }
+
+        public void AddLibroBiblio(int idBiblio, int idLibro)
+        {
+            string sql = "SP_ADDLIBROBIBLIOTECA @ID_LIBRO ,@ID_BIBLIOTECA";
+            SqlParameter p1 = new SqlParameter("@ID_LIBRO", idLibro);
+            SqlParameter p2 = new SqlParameter("@ID_BIBLIOTECA", idBiblio);
+            int rowsAffected = this.context.Database.ExecuteSqlRaw(sql, p1, p2);
+        }
+
+        public void DeleteLibroBiblio(int idBiblio, int idLibro)
+        {
+            string sql = "SP_DELETELIBROBIBLIOTECA @ID_LIBRO ,@ID_BIBLIOTECA";
+            SqlParameter p1 = new SqlParameter("@ID_LIBRO", idLibro);
+            SqlParameter p2 = new SqlParameter("@ID_BIBLIOTECA", idBiblio);
+            int rowsAffected = this.context.Database.ExecuteSqlRaw(sql, p1, p2);
+        }
+
+        public List<ReservaNLibro> GetReservasBiblio(int id)
+        {
+            string sql = "SP_GETPRESTAMOBIBLIOTECA @ID_BIBLIOTECA";
+            SqlParameter p1 = new SqlParameter("@ID_BIBLIOTECA", id);
+            List<ReservaNLibro> consulta = this.context.ReservaNLibros.FromSqlRaw(sql, p1).ToList();
+            return consulta;
+        }
+
+        public void RecogerLibro(int idPrestamo,int idBiblio)
+        {
+            string sql = "SP_PRESTARLIBRO @ID_PRESTAMO ,@ID_BIBLIOTECA, @ID_LIBRO";
+            SqlParameter p1 = new SqlParameter("@ID_PRESTAMO", idPrestamo);
+            SqlParameter p2 = new SqlParameter("@ID_BIBLIOTECA", idBiblio);
+            Reserva r = this.context.Reservas.Where(x => x.ID_PRESTAMO == idPrestamo).FirstOrDefault();
+            int idLibro = r.ID_LIBRO;
+            SqlParameter p3 = new SqlParameter("@ID_LIBRO", idLibro);
+            int rowsAffected = this.context.Database.ExecuteSqlRaw(sql, p1, p2,p3);
+        }
+
+        public void DevolverLibro(int idPrestamo, int idBiblio)
+        {
+            string sql = "SP_RECIVIRLIBRO @ID_PRESTAMO ,@ID_BIBLIOTECA, @ID_LIBRO";
+            SqlParameter p1 = new SqlParameter("@ID_PRESTAMO", idPrestamo);
+            SqlParameter p2 = new SqlParameter("@ID_BIBLIOTECA", idBiblio);
+            Reserva r = this.context.Reservas.Where(x => x.ID_PRESTAMO == idPrestamo).FirstOrDefault();
+            int idLibro = r.ID_LIBRO;
+            SqlParameter p3 = new SqlParameter("@ID_LIBRO", idLibro);
+            int rowsAffected = this.context.Database.ExecuteSqlRaw(sql, p1, p2, p3);
         }
     }
 }

@@ -136,6 +136,10 @@ namespace ProyectoBibliotecas.Controllers
             {
                 ViewData["BIBLIOTECAS"] = this.repo.GetBibliotecasEditables(HttpContext.User.Identity.Name);
             }
+            if (HttpContext.User.IsInRole("ADMIN"))
+            {
+                ViewData["BIBLIOTECAS"] = this.repo.GetBibliotecasSimples();
+            }
             return View();
         }
 
@@ -289,14 +293,44 @@ namespace ProyectoBibliotecas.Controllers
         public IActionResult LibrosBiblioteca(int id)
         {
             ViewData["LIBROSADD"] = this.repo.GetLibrosNotInBiblioteca(id);
-            @ViewData["IDLIBRO"] = id;
+            @ViewData["IDBIBLIO"] = id;
             return View(this.repo.GetLibrosBiblioteca(id));
+        }
+        [HttpPost]
+        public void AddLibroBiblio(int idBiblio, int idLibro)
+        {
+            this.repo.AddLibroBiblio(idBiblio, idLibro);
+        }
+
+        [HttpPost]
+        public void EliminarLibroBiblioteca(int idBiblio, int idLibro)
+        {
+            this.repo.DeleteLibroBiblio(idBiblio, idLibro);
         }
 
 
         public IActionResult PrestamosBiblioteca(int id)
         {
-            return View();
+            @ViewData["IDBIBLIO"] = id;
+            return View(this.repo.GetReservasBiblio(id));
+        }
+
+        [HttpPost]
+        public void EliminarPrestamoBiblioteca(int id)
+        {
+            this.repo.DeleteReserva(id);
+        }
+
+        [HttpPost]
+        public void RecogerLibro(int idPrestamo, int idBiblio)
+        {
+            this.repo.RecogerLibro(idPrestamo, idBiblio);
+        }
+
+        [HttpPost]
+        public void DevolverLibro(int idPrestamo, int idBiblio)
+        {
+            this.repo.DevolverLibro(idPrestamo, idBiblio);
         }
     }
 }

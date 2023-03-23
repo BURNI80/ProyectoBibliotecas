@@ -1,6 +1,7 @@
 :root {
     --bg-global: #ffdaff;
     --bg-card: rgba(235, 235, 235, 0.8);
+    --bg-card-o: rgba(235, 235, 235, 1);
     --border: rgba(167, 167, 167, 0.5);
     --icons: hsla(0, 0%, 15%, 0.8);
     --icons-i: white;
@@ -15,6 +16,7 @@
 [data-theme="dark"] {
     --bg-global: #0c000f;
     --bg-card: hsla(0, 0%, 15%, 0.8);
+    --bg-card-o: hsla(0, 0%, 15%, 1);
     --border: rgba(65, 65, 65, 0.5);
     --icons: white;
     --icons-i: hsla(0, 0%, 15%, 0.8);

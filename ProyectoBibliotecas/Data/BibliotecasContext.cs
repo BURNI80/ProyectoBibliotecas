@@ -40,6 +40,8 @@ namespace ProyectoBibliotecas.Data
 
         public DbSet<ReservaUsuario> ReservasUsuario { get; set; }
 
+        public DbSet<ReservaNLibro> ReservaNLibros { get; set; }
+
         public DbSet<Reserva> Reservas { get; set; }
 
         public DbSet<Compartido> Share { get; set; }

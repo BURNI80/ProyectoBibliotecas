@@ -109,7 +109,7 @@
             <div class="separador"></div>
             <p class="comentarios">@comentarios.Count comentarios</p>
         </div>
-        @if (Context.User.Identity.Name != null && biblios.Count() != 0)
+        @if (Context.User.Identity.Name != null)
         {
             <button class="btnReserva" id="openForm">Reservar ahora</button>
             <div class="fromReserva" style="display:none;">
