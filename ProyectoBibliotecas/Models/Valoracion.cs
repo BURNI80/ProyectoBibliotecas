@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProyectoBibliotecas.Models
 {
-    [Table("VALORACION-LIBRO")]
+    [Table("VALORACION_LIBRO")]
     public class Valoracion
     {
         [Key]

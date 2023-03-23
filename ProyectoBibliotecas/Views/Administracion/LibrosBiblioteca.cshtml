@@ -1,0 +1,522 @@
+﻿@model List<LibroDisponibilidad>
+@{
+    Layout = "_LayoutAdministrador";
+    DateTime fechaActual = DateTime.Now;
+    List<LibroDefault> libros = ViewData["LIBROSADD"] as List<LibroDefault>;
+}
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
+
+<div class="contenido-perfil temp">
+    <div class="card-perfil" style="text-align: center; margin-top:auto">
+        <h1 class="title">Libros</h1>
+        <div id="addLibro" class="new">
+            <svg width="20" height="20" viewBox="0 0 295 295" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M278.108 163.593H16.3593C7.41623 163.593 0 156.177 0 147.234C0 138.291 7.41623 130.875 16.3593 130.875H278.108C287.052 130.875 294.468 138.291 294.468 147.234C294.468 156.177 287.052 163.593 278.108 163.593Z" fill="white" />
+                <path d="M147.234 294.468C138.291 294.468 130.875 287.052 130.875 278.108V16.3593C130.875 7.41623 138.291 0 147.234 0C156.177 0 163.594 7.41623 163.594 16.3593V278.108C163.594 287.052 156.177 294.468 147.234 294.468Z" fill="white" />
+            </svg>
+            <p>Agregar Libro</p>
+        </div>
+        <div id="formAddLibro" style="display:none">
+            <div class="select_box_wrapper">
+                <div class="custom_select_box">
+                    <div class="custom_select_box_selected_label">
+                        <label class="custom_select_box_selected_label_text">Selecciona un libro</label>
+                    </div>
+                    <div class="custom_select_box_dropdown_icon">
+                        <a class="custom_select_box_dropdown_icon_button"><i class="fal fa-angle-down"></i></a>
+                    </div>
+
+                </div>
+                <div class="custom_select_dropdown">
+                    <ul class="custom_select_dropdown_list_wrapper">
+                        <li class="custom_select_dropdown_list_search">
+                            <input onkeyup="searchSelectedlist()" class="custom_select_dropdown_list_search_input"
+                                   placeholder="Buscar" type="text">
+                        </li>
+                        @foreach (LibroDefault lib in libros)
+                        {
+                            <li onclick="changeValue(@lib.ID_LIBRO)" class="custom_select_dropdown_list">
+                                <input class="custom_select_dropdown_list_radio" type="radio" value="@lib.NOMBRE" data-id="@lib.ID_LIBRO"><label class="custom_select_dropdown_list_label" value="@lib.ID_LIBRO">@lib.NOMBRE</label>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <button class="boton">Agregar</button>
+        </div>
+        <div class="div-tabla">
+            <table class="table" style="width: 100%; border-spacing: 20px;">
+                <tr class="thead">
+                    <td>Titulo</td>
+                    <td>Autor</td>
+                    <td>Nº paginas</td>
+                    <td>Valoracion</td>
+                    <td>Disponible</td>
+                </tr>
+                <tbody class="tbody">
+                    @foreach (LibroDisponibilidad l in Model)
+                    {
+                        <tr id="idPres-@l.ID_LIBRO">
+                            <td>@l.NOMBRE_LIBRO</td>
+                            <td>@l.NOMBRE_AUTOR</td>
+                            <td>@l.NUM_PAGINAS</td>
+                            <td>@l.VALORACION_MEDIA</td>
+                            <td>
+                                @if (l.DISPONIBLE == true)
+                                {
+                                    <svg style="margin:auto;" width="20" height="20" viewBox="0 0 262 262" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.4" d="M130.969 261.212C203.067 261.212 261.515 202.764 261.515 130.667C261.515 58.5685 203.067 0.121338 130.969 0.121338C58.871 0.121338 0.423828 58.5685 0.423828 130.667C0.423828 202.764 58.871 261.212 130.969 261.212Z" fill="#24FF00" />
+                                        <path d="M112.425 177.403C109.814 177.403 107.334 176.359 105.506 174.531L68.561 137.587C64.7752 133.801 64.7752 127.535 68.561 123.749C72.3469 119.963 78.613 119.963 82.3989 123.749L112.425 153.775L179.525 86.6743C183.311 82.8885 189.577 82.8885 193.363 86.6743C197.149 90.4601 197.149 96.7263 193.363 100.512L119.344 174.531C117.516 176.359 115.036 177.403 112.425 177.403Z" fill="#24FF00" />
+                                    </svg>
+                                }
+                                else
+                                {
+                                    <svg style="margin:auto;" width="20" height="20" viewBox="0 0 262 262" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.4" d="M130.545 261.091C202.643 261.091 261.091 202.643 261.091 130.545C261.091 58.4472 202.643 0 130.545 0C58.4472 0 0 58.4472 0 130.545C0 202.643 58.4472 261.091 130.545 261.091Z" fill="#FF3131" />
+                                        <path d="M144.376 130.547L174.401 100.521C178.187 96.7356 178.187 90.4694 174.401 86.6836C170.615 82.8978 164.349 82.8978 160.563 86.6836L130.538 116.709L100.512 86.6836C96.7262 82.8978 90.46 82.8978 86.6743 86.6836C82.8885 90.4694 82.8885 96.7356 86.6743 100.521L116.7 130.547L86.6743 160.572C82.8885 164.358 82.8885 170.624 86.6743 174.41C88.6325 176.368 91.1127 177.282 93.5931 177.282C96.0735 177.282 98.5538 176.368 100.512 174.41L130.538 144.385L160.563 174.41C162.521 176.368 165.002 177.282 167.482 177.282C169.963 177.282 172.443 176.368 174.401 174.41C178.187 170.624 178.187 164.358 174.401 160.572L144.376 130.547Z" fill="#FF3131" />
+                                    </svg>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="~/lib/sweetalert.js"></script>
+<style>
+    .temp {
+        height: 90vh;
+        margin: 0px;
+        margin-top: 5vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        overflow-clip-margin: 20px;
+    }
+
+    .boton{
+        background-color: var(--button);
+        padding: 10px 20px;
+    }
+
+    #formAddLibro {
+        border: 1px solid var(--border);
+        background-color: var(--bg-card);
+        border-radius: 15px;
+        height: auto;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 70%;
+        margin-bottom: 20px;
+    }
+
+    .new {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--button);
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 20px;
+        color: white;
+        gap: 10px;
+        font-family: "Poppins"
+    }
+
+    .card-perfil {
+        max-width: 1000px;
+    }
+
+    @@media(max-width: 600px) {
+        .card-perfil {
+            width: 90%;
+            padding: 40px 10px;
+        }
+
+        .title {
+            font-size: 40px;
+            width: 90%;
+        }
+    }
+
+    .div-tabla {
+        width: 100%;
+        overflow: hidden;
+        overflow: auto;
+    }
+
+    .table {
+        margin: auto;
+        border-collapse: collapse;
+        font-family: "Poppins";
+        font-weight: 400;
+        font-size: 15px;
+        color: var(--text);
+        overflow-x: auto;
+    }
+
+    .thead {
+        font-weight: bold;
+        font-size: 18px;
+        position: sticky;
+        top: 0px;
+        background-color: rgb(65, 65, 65);
+    }
+
+        .thead > td {
+            padding: 0px;
+            height: fit-content;
+            min-width: 130px;
+            color: white;
+        }
+
+        .thead > :first-child {
+            border-radius: 15px 0 0 15px;
+        }
+
+        .thead > :last-child {
+            border-radius: 0 15px 15px 0;
+        }
+
+    .tbody > tr {
+        height: 30px;
+    }
+
+        .tbody > tr > td {
+            max-width: 250px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .tbody > tr:nth-child(even) {
+            background-color: var(--bg-table-stripp);
+            border-radius: 15px;
+        }
+
+        .tbody > tr > td:first-child {
+            border-radius: 15px 0 0 15px;
+        }
+
+        .tbody > tr > td:last-child {
+            border-radius: 0 15px 15px 0;
+        }
+
+</style>
+<script>
+    var idLibro = 0;
+    function changeValue(id) {
+        idLibro = id;
+    }
+    $(document).ready(function () {
+        $("#addLibro").click(function () {
+            $("#formAddLibro").toggle("fast");
+            
+        })
+
+    })
+</script>
+
+
+
+<style>
+
+    * {
+        font-family: 'Poppins';
+        box-sizing: border-box;
+    }
+
+    .select_box_wrapper {
+        width: 100%;
+        height: 40px;
+        position: relative;
+    }
+
+    .custom_select_box {
+        width: 100%;
+        height: 40px;
+        border-radius: 3px;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.01), 0 2px 10px 0 rgba(0, 0, 0, 0.06);
+        display: flex;
+        align-items: center;
+        padding: 0 8px;
+        justify-content: space-between;
+        background: #fff;
+        border-bottom: 2px solid transparent;
+        transition: all 300ms;
+        cursor: pointer;
+    }
+
+    .custom_select_dropdown {
+        border: none;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        margin-top: 5px;
+        border-radius: 1px;
+        height: 160px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        opacity: 0;
+        transition: all 300ms;
+        display: none;
+        position: absolute;
+        left: 0;
+        background: #fff;
+        width: 100%;
+        z-index: 9999999999999;
+    }
+
+    .custom_select_dropdown_list_wrapper {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background: #fff;
+        padding: 8px 10px;
+    }
+
+    .custom_select_dropdown_list {
+        padding: 10px 0 10px 10px;
+        position: relative;
+        transition: all 100ms;
+        color: #4285f4;
+        border-radius: 1px;
+        cursor: pointer;
+    }
+
+        .custom_select_dropdown_list:hover {
+            background: var(--button);
+            color: #fff;
+            box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+        }
+
+    .custom_select_dropdown_list_radio {
+        width: 100%;
+        position: absolute;
+        opacity: 0;
+        margin: 0;
+        height: 100%;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+    }
+
+    .custom_select_box.select_box_active {
+        border-bottom: 2px solid #4285f4;
+    }
+
+        .custom_select_box.select_box_active + .custom_select_dropdown {
+            display: block;
+            animation: animateDrop 300ms forwards;
+        }
+
+    @@keyframes animateDrop {
+        from {
+            opacity: 0;
+            height: 0;
+        }
+
+        to {
+            opacity: 1;
+            height: 160px;
+        }
+    }
+
+    .custom_select_box_selected_label {
+        width: 94%;
+    }
+
+    .custom_select_box_dropdown_icon {
+        width: 5%;
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        align-items: center;
+    }
+
+    .custom_select_box_dropdown_icon_button {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        font-size: 24px;
+        transition: all 300ms;
+        color: #313131;
+    }
+
+    .custom_select_dropdown_list_search_input {
+        width: 100%;
+        height: 30px;
+        padding-left: 8px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        transition: all 300ms;
+        border-bottom: 1px solid #cacaca80;
+    }
+
+        .custom_select_dropdown_list_search_input:focus {
+            border-bottom: 1px solid #4285f4;
+        }
+
+    .custom_select_dropdown_list_search {
+        margin-bottom: 4px;
+    }
+
+    .custom_select_dropdown_list_search_input::placeholder {
+        opacity: 1;
+        transition: all 300ms ease-in-out;
+    }
+
+    .custom_select_dropdown_list_search_input:focus::placeholder {
+        opacity: 0;
+    }
+
+    .custom_select_dropdown::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #F5F5F5;
+        border-radius: 10px;
+    }
+
+    .custom_select_dropdown::-webkit-scrollbar {
+        width: 6px;
+        background-color: #F5F5F5;
+    }
+
+    .custom_select_dropdown::-webkit-scrollbar-thumb {
+        background-color: #31313150;
+        border-radius: 10px;
+    }
+
+    .custom_select_box.select_box_active .custom_select_box_dropdown_icon .custom_select_box_dropdown_icon_button i {
+        animation: animateselectIcon 300ms forwards;
+        transform-origin: center;
+    }
+
+    @@keyframes animateselectIcon {
+        from {
+            transform: rotateZ(0);
+            color: #313131;
+        }
+
+        to {
+            transform: rotateZ(180deg);
+            color: #4285f4;
+        }
+    }
+
+    .custom_select_box .custom_select_box_dropdown_icon .custom_select_box_dropdown_icon_button i {
+        animation: animateselectIconBack 300ms forwards;
+        transform-origin: center;
+    }
+
+    @@keyframes animateselectIconBack {
+        from {
+            transform: rotateZ(180deg);
+            color: #4285f4;
+        }
+
+        to {
+            transform: rotateZ(0deg);
+            color: #313131;
+        }
+    }
+</style>
+<script>
+    const selectBoxes = document.querySelectorAll(".custom_select_box");
+    for (let currentselectedSelect = 0; currentselectedSelect < selectBoxes.length; currentselectedSelect++) {
+        selectBoxes[currentselectedSelect].addEventListener('click', (event) => {
+            if (selectBoxes[currentselectedSelect].classList.contains('select_box_active')) {
+                selectBoxes[currentselectedSelect].classList.remove('select_box_active');
+            }
+            else {
+                for (let p = 0; p < selectBoxes.length; p++) {
+                    selectBoxes[p].classList.remove('select_box_active');
+                }
+                selectBoxes[currentselectedSelect].classList.add('select_box_active');
+                document.querySelector('.custom_select_box.select_box_active + .custom_select_dropdown').scrollTo(0, 0);
+                var dropDownListLi = document.querySelectorAll('.custom_select_box.select_box_active + .custom_select_dropdown > .custom_select_dropdown_list_wrapper .custom_select_dropdown_list');
+                var serachActive = document.querySelector('.custom_select_box.select_box_active + .custom_select_dropdown > .custom_select_dropdown_list_wrapper > .custom_select_dropdown_list_search .custom_select_dropdown_list_search_input');
+                if (!serachActive.value == "") {
+                    serachActive.value = "";
+                    for (let x = 0; x < dropDownListLi.length; x++) {
+                        dropDownListLi[x].style.display = "";
+                    }
+                }
+            }
+
+        });
+    }
+    function searchSelectedlist() {
+        var searchedText;
+        var serachActive = document.querySelector('.custom_select_box.select_box_active + .custom_select_dropdown > .custom_select_dropdown_list_wrapper > .custom_select_dropdown_list_search .custom_select_dropdown_list_search_input');
+        var searchedvalue = serachActive.value.toUpperCase();
+        var dropDownList = document.querySelectorAll('.custom_select_box.select_box_active + .custom_select_dropdown > .custom_select_dropdown_list_wrapper .custom_select_dropdown_list .custom_select_dropdown_list_radio');
+        var dropDownListLi = document.querySelectorAll('.custom_select_box.select_box_active + .custom_select_dropdown > .custom_select_dropdown_list_wrapper .custom_select_dropdown_list');
+
+        for (let listcount = 0; listcount < dropDownList.length; listcount++) {
+            searchedText = dropDownList[listcount].value;
+            if (searchedText.toUpperCase().indexOf(searchedvalue) > -1) {
+                dropDownListLi[listcount].style.display = "";
+            } else {
+                dropDownListLi[listcount].style.display = "none";
+            }
+        }
+        if (serachActive.value.length == 0) {
+            for (let m = 0; m < dropDownList.length; m++) {
+                dropDownListLi[listcount].style.display = "";
+            }
+        }
+    }
+
+
+    document.addEventListener('click', function (event) {
+
+        if (!event.target.closest('.custom_select_box')) {
+            if (!event.target.closest('.custom_select_dropdown')) {
+                var selectedBox = document.querySelectorAll('.custom_select_box');
+                for (let p = 0; p < selectedBox.length; p++) {
+                    selectedBox[p].classList.remove('select_box_active');
+                }
+            }
+        };
+
+    }, false);
+
+    var allDropdownsList = document.querySelectorAll('.custom_select_dropdown_list_wrapper');
+    for (let drop = 0; drop < allDropdownsList.length; drop++) {
+        allDropdownsList[drop].addEventListener('click', function () {
+            var allradio = document.querySelectorAll('.custom_select_dropdown_list_radio');
+            var selectedBox = document.querySelectorAll('.custom_select_box');
+            for (var k = 0; k < allradio.length; k++) {
+                if (allradio[k].checked == true) {
+                    for (let p = 0; p < selectedBox.length; p++) {
+                        if (selectedBox[p].classList.contains('select_box_active')) {
+                            let selectedvalue = document.querySelector('.select_box_active .custom_select_box_selected_label  label');
+                            selectedvalue.innerHTML = allradio[k].value;
+                        }
+                    }
+                    for (let p = 0; p < selectedBox.length; p++) {
+                        selectedBox[p].classList.remove('select_box_active');
+                    }
+                }
+            }
+
+            for (let l = 0; l < allradio.length; l++) {
+                allradio[l].checked = false;
+            }
+        })
+    }
+
+</script>

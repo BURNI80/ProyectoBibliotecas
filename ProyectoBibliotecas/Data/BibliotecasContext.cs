@@ -12,7 +12,11 @@ namespace ProyectoBibliotecas.Data
 
         public DbSet<BibliotecaSimple> BibliotecasSimples { get; set; }
 
+        public DbSet<EditorBiblioteca> EditorBiblioteca { get; set; }
+
         public DbSet<Libro> Libros { get; set; }
+
+        public DbSet<LibroBiblio> LibrosBiblio { get; set; }
 
         public DbSet<LibroDefault> LibrosDef { get; set; }
 
@@ -38,7 +42,7 @@ namespace ProyectoBibliotecas.Data
 
         public DbSet<Reserva> Reservas { get; set; }
 
-        public DbSet<Share> Share { get; set; }
+        public DbSet<Compartido> Share { get; set; }
 
 
 

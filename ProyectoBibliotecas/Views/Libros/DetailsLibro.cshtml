@@ -472,6 +472,7 @@
                             idBiblio: idBiblio,
                         }
                         var ruta = "@Url.Action("ReservarLibro","Libros")";
+                        $("#confirmReserva").hide();
                         $.post(ruta, datos).done(function (data) {
                             Swal.fire({
                                 icon: 'success',

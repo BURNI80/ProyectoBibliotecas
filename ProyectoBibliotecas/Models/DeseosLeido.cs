@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 namespace ProyectoBibliotecas.Models
 {
-    [Table("DESEOS-LEIDO")]
+    [Table("DESEOS_LEIDO")]
     [Keyless]
     public class DeseosLeido
     {

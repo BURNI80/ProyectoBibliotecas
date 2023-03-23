@@ -14,22 +14,23 @@ namespace ProyectoBibliotecas.Models
         public string NOMBRE { get; set; }
 
         [Column("NACIONALIDAD")]
-        public string NACIONALIDAD { get; set; }
+        public string? NACIONALIDAD { get; set; }
 
         [Column("FECHA_NACIMIENTO")]
-        public DateTime FECHA_NACIMIENTO { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? FECHA_NACIMIENTO { get; set; }
 
         [Column("IMAGEN")]
-        public string IMAGEN { get; set; }
+        public string? IMAGEN { get; set; }
 
         [Column("HISTORIA")]
-        public string HISTORIA { get; set; }
+        public string? HISTORIA { get; set; }
 
         [Column("NUM_LIBROS")]
-        public int NUM_LIBROS { get; set; }
+        public int? NUM_LIBROS { get; set; }
 
         [Column("WIKI")]
-        public string WIKI { get; set; }
+        public string? WIKI { get; set; }
 
     }
 }

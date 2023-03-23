@@ -259,15 +259,15 @@ namespace ProyectoBibliotecas.Repositorys
             return token;
         }
 
-        public Share GetToken(string dni, string token)
+        public Compartido GetToken(string dni, string token)
         {
-            string sql = "SP_SHARE @DNI_USUARIO , @TOKEN";
+            string sql = "SP_COMPARTIR @DNI_USUARIO , @TOKEN";
             SqlParameter p1 = new SqlParameter("@DNI_USUARIO", dni);
             SqlParameter p2 = new SqlParameter("@TOKEN", token);
-            return this.context.Share.FromSqlRaw(sql, p1,p2).AsEnumerable().FirstOrDefault();
+            return this.context.Share.FromSqlRaw(sql, p1, p2).AsEnumerable().FirstOrDefault();
         }
 
-        public Share GetShare(string id)
+        public Compartido GetShare(string id)
         {
             return this.context.Share.Where(x => x.DNI_USUARIO.Equals(id)).FirstOrDefault();
         }
@@ -275,6 +275,11 @@ namespace ProyectoBibliotecas.Repositorys
         public Usuario GetUsuario(string dni)
         {
             return this.context.Usuarios.Where(x => x.DNI_USUARIO.Equals(dni)).FirstOrDefault();
+        }
+
+        public Autor GetDatosAutor(int id)
+        {
+            return this.context.Autores.Where(x => x.ID_AUTOR == id).FirstOrDefault();
         }
 
         public void UpdateUsuario(string id, string nombre, string apellido, string email, int telefono, string usuario)
@@ -299,7 +304,7 @@ namespace ProyectoBibliotecas.Repositorys
 
         public List<Reserva> GetResrevasLibro(int id)
         {
-            return this.context.Reservas.Where( x => x.ID_LIBRO == id).ToList();
+            return this.context.Reservas.Where(x => x.ID_LIBRO == id).ToList();
         }
 
         public List<string> GetDaysBetween(DateTime fecha_inicio, DateTime fecha_fin)
@@ -318,10 +323,10 @@ namespace ProyectoBibliotecas.Repositorys
             Reserva r = new Reserva();
             r.ID_PRESTAMO = nuevoId;
             r.DNI_USUARIO = dni;
-            r.ID_LIBRO= idLibro;
+            r.ID_LIBRO = idLibro;
             r.ID_BIBLIOTECA = idBiblio;
-            r.FECHA_INICIO= fechaI;
-            r.FECHA_FIN= fechaF;
+            r.FECHA_INICIO = fechaI;
+            r.FECHA_FIN = fechaF;
             r.DEVUELTO = true;
             this.context.Reservas.Add(r);
             this.context.SaveChangesAsync();
@@ -394,8 +399,6 @@ namespace ProyectoBibliotecas.Repositorys
             this.context.LibrosDef.Add(b);
             this.context.SaveChangesAsync();
         }
-
-
         public void UpdateLibro(int id, string nombre, int numpag, IFormFile imagen, string urlcompra, string descripcion, string idioma, DateTime fecha_publicacion, int idautor)
         {
             LibroDefault b = GetDatosLibroDef(id);
@@ -408,6 +411,73 @@ namespace ProyectoBibliotecas.Repositorys
             b.FECHA_PUBLICACION = fecha_publicacion;
             b.ID_AUTOR = idautor;
             this.context.SaveChangesAsync();
+        }
+
+
+
+        public void DeleteAutor(int id)
+        {
+            Autor l = this.context.Autores.Where(x => x.ID_AUTOR == id).FirstOrDefault();
+            this.context.Autores.Remove(l);
+            this.context.SaveChangesAsync();
+        }
+        public void AddAutor(string nombre, string nacionalidad, DateTime fechaNac, IFormFile imagen, string descripcion, int numLibros, string wiki)
+        {
+            int nuevoId = this.context.Autores.Any() ? this.context.Autores.Max(x => x.ID_AUTOR) + 1 : 1;
+            Autor b = new Autor();
+            b.ID_AUTOR = nuevoId;
+            b.NOMBRE = nombre;
+            b.NACIONALIDAD = nacionalidad;
+            b.FECHA_NACIMIENTO = fechaNac;
+            b.IMAGEN = null;
+            b.HISTORIA = descripcion;
+            b.NUM_LIBROS = numLibros;
+            b.WIKI = wiki;
+            this.context.Autores.Add(b);
+            this.context.SaveChangesAsync();
+        }
+        public void UpdateAutor(int id, string nombre, string nacionalidad, DateTime fechaNac, IFormFile imagen, string descripcion, int numLibros, string wiki)
+        {
+            Autor b = GetDatosAutor(id);
+            b.NOMBRE = nombre;
+            b.NACIONALIDAD = nacionalidad;
+            b.FECHA_NACIMIENTO = fechaNac;
+            b.IMAGEN = null;
+            b.HISTORIA = descripcion;
+            b.NUM_LIBROS = numLibros;
+            b.WIKI = wiki;
+            this.context.SaveChangesAsync();
+        }
+
+        public List<BibliotecaSimple> GetBibliotecasEditables(string id)
+        {
+            var consulta = from editorBiblioteca in context.EditorBiblioteca
+                           join biblioteca in context.Bibliotecas
+                           on editorBiblioteca.ID_BIBLIOTECA equals biblioteca.ID_BIBLIOTECA
+                           where editorBiblioteca.DNI_USUARIO == id
+                           select new
+                           {
+                               biblioteca.ID_BIBLIOTECA,
+                               biblioteca.NOMBRE,
+                           };
+            List<BibliotecaSimple> biblios = consulta.ToList().ConvertAll(x => new BibliotecaSimple
+            {
+                ID_BIBLIOTECA = x.ID_BIBLIOTECA,
+                NOMBRE = x.NOMBRE,
+            });
+            return biblios;
+        }
+
+        public List<LibroDefault> GetLibrosNotInBiblioteca(int id)
+        {
+            var consulta = from libro in this.context.LibrosDef
+                           where !(from lb in this.context.LibrosBiblio
+                                   where lb.ID_BIBLIOTECA == id
+                                   select lb.ID_LIBRO)
+                                   .Contains(libro.ID_LIBRO)
+                           select libro;
+
+            return consulta.ToList();
         }
     }
 }
