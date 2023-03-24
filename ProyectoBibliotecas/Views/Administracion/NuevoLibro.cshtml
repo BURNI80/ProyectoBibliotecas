@@ -12,7 +12,7 @@
 <div class="contenido-perfil temp">
     <div style="width:100%; display:flex;justify-content:center;align-items:center;">
     </div>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="card-perfil" style="margin-top: 0; text-align: center;">
             <h1 class="title">Nuevo libro</h1>
             <label for="">Nombre:</label>
@@ -20,7 +20,7 @@
             <label for="">Numero de paginas:</label>
             <input type="number" name="numpag">
             <label for="">Imagen:</label>
-            <input type="file" name="imagen">
+            <input type="file" name="imagen" accept=".jpg, .jpeg, .png, .svg, .webp">
             <label for="">Url compra:</label>
             <input type="text" name="urlcompra">
             <label for="">Descripcion:</label>
@@ -49,6 +49,10 @@
         margin: 0px;
         padding: 0px;
         margin-top: 5vh;
+    }
+
+    body {
+        background-color: var(--bg-global) !important;
     }
 
     form {

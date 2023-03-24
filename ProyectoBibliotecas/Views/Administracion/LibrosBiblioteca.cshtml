@@ -45,8 +45,10 @@
             </div>
             <button id="btnConfirmLibro" class="boton">Agregar</button>
         </div>
+        <input type="search" class="light-table-filter" data-table="order-table" placeholder="Buscar por Titulo" />
         <div class="div-tabla">
-            <table class="table" style="width: 100%; border-spacing: 20px;">
+            <table class="order-table table" style="width: 100%; border-spacing: 20px;">
+                <thead>
                 <tr class="thead">
                     <td>Titulo</td>
                     <td>Autor</td>
@@ -55,6 +57,7 @@
                     <td>Disponible</td>
                     <th></th>
                 </tr>
+                </thead>
                 <tbody class="tbody">
                     @foreach (LibroDisponibilidad l in Model)
                     {
@@ -224,6 +227,47 @@
         }
 
 </style>
+<script>
+    (function (document) {
+        'use strict';
+
+        var LightTableFilter = (function (Arr) {
+
+            var _input;
+
+            function _onInputEvent(e) {
+                _input = e.target;
+                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                Arr.forEach.call(tables, function (table) {
+                    Arr.forEach.call(table.tBodies, function (tbody) {
+                        Arr.forEach.call(tbody.rows, _filter);
+                    });
+                });
+            }
+
+            function _filter(row) {
+                var text = row.cells[0].textContent.toLowerCase(), val = _input.value.toLowerCase();
+                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+            }
+
+            return {
+                init: function () {
+                    var inputs = document.getElementsByClassName('light-table-filter');
+                    Arr.forEach.call(inputs, function (input) {
+                        input.oninput = _onInputEvent;
+                    });
+                }
+            };
+        })(Array.prototype);
+
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === 'complete') {
+                LightTableFilter.init();
+            }
+        });
+
+    })(document);
+</script>
 <script>
     var idLibro = 0;
     function changeValue(id) {

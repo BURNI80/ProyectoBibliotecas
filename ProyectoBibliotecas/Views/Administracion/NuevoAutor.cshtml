@@ -8,7 +8,7 @@
     <div style="width:100%; display:flex;justify-content:center;align-items:center;">
        
     </div>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="card-perfil" style="margin-top: 0; text-align: center;">
             <h1 class="title">Nuevo autor</h1>
             <label for="">Nombre:</label>
@@ -18,7 +18,7 @@
             <label for="">Fecha de nacimiento:</label>
             <input type="date" name="fechaNac">
             <label for="">Imagen:</label>
-            <input type="file" name="imagen">
+            <input type="file" name="imagen" accept=".jpg, .jpeg, .png, .svg, .webp">
             <label for="">Historia:</label>
             <textarea rows="4" name="descripcion"></textarea>
             <label for="">Numero de libros:</label>

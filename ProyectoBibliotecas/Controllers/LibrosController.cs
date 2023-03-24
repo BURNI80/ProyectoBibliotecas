@@ -32,7 +32,7 @@ namespace ProyectoBibliotecas.Controllers
         {
             ViewData["VALORACIONES"] = this.repo.GetValoraciones(id);
             ViewData["BIBLIOTECAS"] = this.repo.GetLibroDisponible(id);
-            ViewData["FECHASNO"] = GetDiasReservado(id);
+            ViewData["FECHASNO"] = GetDiasReservado(id, 1);
             string dni;
             if (HttpContext.User.Identity.IsAuthenticated == false)
             {
@@ -54,7 +54,7 @@ namespace ProyectoBibliotecas.Controllers
         {
             string dni = HttpContext.User.Identity.Name;
             ViewData["LISTADESEOS"] = this.repo.LibroDeseo(id, dni);
-            ViewData["FECHASNO"] = GetDiasReservado(id);
+            ViewData["FECHASNO"] = GetDiasReservado(id, 0);
             ViewData["BIBLIOTECAS"] = this.repo.GetLibroDisponible(id);
             if (orden != 0)
             {
@@ -83,9 +83,9 @@ namespace ProyectoBibliotecas.Controllers
 
 
         [HttpPost]
-        public List<string> GetDiasReservado(int id)
+        public List<string> GetDiasReservado(int id, int idBiblio)
         {
-            List<Reserva> reservas = this.repo.GetResrevasLibro(id);
+            List<Reserva> reservas = this.repo.GetResrevasLibro(id, idBiblio);
             List<string> resultado = new List<string>();
             foreach (Reserva reserva in reservas)
             {

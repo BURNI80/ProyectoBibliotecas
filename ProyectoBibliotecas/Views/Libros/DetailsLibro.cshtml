@@ -141,12 +141,12 @@
                             <input hidden value="@Model.ID_LIBRO" name="idLibro" type="text" readonly />
                             <label for="comment" class="sr-only">Tu comentario</label>
                             <textarea id="comment" rows="4" name="textoComentario"
-                                  class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                                  placeholder="Escribe un comentario... | Dejelo vacio para que sea una valoracion"></textarea>
+                                      class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                                      placeholder="Escribe un comentario... | Dejelo vacio para que sea una valoracion"></textarea>
                         </div>
                         <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
                             <button id="btnComentario"
-                                class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                                    class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                                 Publicar
                             </button>
                             <div style="width:100%;">
@@ -374,7 +374,7 @@
 
         var fechaActual = new Date();
         var fechaInicio = fechaActual;
-        var disabledDates = ["28/03/2023"]
+        var disabledDates = []
 
 
         $(function () {
@@ -442,14 +442,26 @@
             return true;
         }
 
+        var idLibro = "@Model.ID_LIBRO";
+        var urlIni = "@Url.Action("GetDiasReservado","Libros")";
+        var idBiblio = $("#idBiblio").val();
+        var datos = { id: idLibro, idBiblio: idBiblio }
+        $.post(urlIni, datos).done(function (data) {
+            disabledDates = data;
+        })
+
+
         $("#openForm").click(function () {
             $(".fromReserva").toggle(function () {
                 var url = "@Url.Action("GetDiasReservado","Libros")";
-                var idLibro = "@Model.ID_LIBRO";
-                var data = { id: idLibro }
-                $.post(url, data).done(function (data) {
-                    disabledDates = data;
+                $("#idBiblio").change(function () {
+                    idBiblio = $(this).val()
+                    var data = { id: idLibro, idBiblio: idBiblio }
+                    $.post(url, data).done(function (data) {
+                        disabledDates = data;
+                    })
                 })
+
 
                 $("#confirmReserva").click(function () {
                     var fechaInicio = $("#from").val();
@@ -457,7 +469,7 @@
                     var idLibro = "@Model.ID_LIBRO"
                     var idBiblio = $("#idBiblio").val()
                     var com = comprobarFechas(fechaInicio, fechaFin, disabledDates);
-                    if(fechaInicio == "" || fechaFin == ""){
+                    if (fechaInicio == "" || fechaFin == "") {
                         Swal.fire({
                             icon: 'error',
                             text: 'Fechas incorrectas!',
@@ -482,7 +494,7 @@
                             }).then((result) => {
                                 location.reload();
                             })
-                            
+
                         })
                     } else {
                         Swal.fire({

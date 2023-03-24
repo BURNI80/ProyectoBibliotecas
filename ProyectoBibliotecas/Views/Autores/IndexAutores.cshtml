@@ -39,7 +39,7 @@
             <div class="parent-div">
                 @foreach (Autor a in Model)
                 {
-                    <div class="card-autor">
+                    <a style="text-decoration:none" asp-action="DetailsAutor" asp-controller="Autores" asp-route-id="@a.ID_AUTOR" class="card-autor">
                         @if (a.IMAGEN == null)
                         {
                             <img src="~/imgs/ImgNull.jpg" alt="">
@@ -49,7 +49,7 @@
                             <img src="~/imgs/autores/@a.IMAGEN" alt="">
                         }
                         <p><span class="scrollbar" id="style-1">@a.NOMBRE</span></p>
-                    </div>
+                    </a>
                 }
             </div>
         }

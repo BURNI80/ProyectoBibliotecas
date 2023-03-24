@@ -9,7 +9,7 @@
     <div style="width:100%; display:flex;justify-content:center;align-items:center;">
        
     </div>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="card-perfil" style="margin-top: 0; text-align: center;">
             <h1 class="title">Editar autor</h1>
             <input type="number" value="@Model.ID_AUTOR" name="id" hidden readonly>
@@ -20,7 +20,8 @@
             <label for="">Fecha de nacimiento:</label>
             <input type="date" name="fechaNac" value="@Model.FECHA_NACIMIENTO">
             <label for="">Imagen:</label>
-            <input type="file" name="imagen">
+            <input type="file" name="imagen" accept=".jpg, .jpeg, .png, .svg, .webp">
+            <input hidden type="text" name="nImagen" value="@Model.IMAGEN" />
             <label for="">Historia:</label>
             <textarea rows="4" name="descripcion">@Model.HISTORIA</textarea>
             <label for="">Numero de libros:</label>

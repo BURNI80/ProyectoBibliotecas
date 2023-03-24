@@ -49,6 +49,7 @@
                     <td>Inicio reserva</td>
                     <td>Fin reserva</td>
                     <td>Devuelto</td>
+                    <td>Estado</td>
                     <th></th>
                 </tr>
                 <tbody class="tbody">
@@ -73,7 +74,7 @@
                             <td>@r.FECHA_FIN.ToShortDateString()</td>
                             <td>
                                 <div style="height:100%;display:flex;flex-direction:row;justify-content:center;align-items:center;">
-                                    @if (fechaActual > r.FECHA_INICIO)
+                                    @if (!(r.COMPLETADO == false && r.DEVUELTO == true))
                                     {
                                         if (r.DEVUELTO == false)
                                         {
@@ -96,10 +97,30 @@
 
 
 
+
+
                                 </div>
                             </td>
                             <td>
-                                @if (fechaActual < r.FECHA_INICIO)
+                                @if (r.COMPLETADO == true)
+                                {
+                                    <p style="color:#24FF00; font-size:14px;">Finalizado</p>
+                                }
+                                else
+                                {
+                                    @if (r.COMPLETADO == false && r.DEVUELTO == false)
+                                    {
+                                        <p style="color:#FFE600; font-size:14px;">En curso</p>
+                                    }
+                                    else
+                                    {
+                                        <p style="color:#4799FF; font-size:14px;">Sin comenzar</p>
+                                    }
+                                }
+
+                            </td>
+                            <td>
+                                @if (r.COMPLETADO != true  && r.DEVUELTO == true)
                                 {
                                     <svg class="delRes" data-id="@r.ID_PRESTAMO" width="20" height="20" viewBox="0 0 35 39" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M33.6652 9.8373C33.6293 9.8373 33.5754 9.8373 33.5216 9.8373C24.0253 8.88588 14.547 8.52685 5.15845 9.47827L1.49638 9.8373C0.742426 9.9091 0.0782276 9.37056 0.00642241 8.61661C-0.0653828 7.86265 0.473157 7.21641 1.20916 7.1446L4.87123 6.78557C14.4214 5.8162 24.0971 6.19318 33.7908 7.1446C34.5268 7.21641 35.0654 7.8806 34.9936 8.61661C34.9397 9.31671 34.3473 9.8373 33.6652 9.8373Z" fill="#FF3131" />
@@ -217,7 +238,7 @@
         $(".delRes").click(function () {
             var idPres = $(this).data("id")
             var str = "#idPres-" + idPres
-                Swal.fire({
+            Swal.fire({
                 title: 'Cancelar',
                 text: "¿Estas seguro que deseas cancelar la reserva?",
                 icon: 'warning',

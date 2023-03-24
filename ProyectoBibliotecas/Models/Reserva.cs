@@ -27,5 +27,8 @@ namespace ProyectoBibliotecas.Models
 
         [Column("DEVUELTO")]
         public bool DEVUELTO { get; set; }
+
+        [Column("COMPLETADO")]
+        public bool COMPLETADO { get; set; }
     }
 }

@@ -8,7 +8,7 @@
     <div style="width:100%; display:flex;justify-content:center;align-items:center;">
        
     </div>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="card-perfil" style="margin-top: 0; text-align: center;">
             <h1 class="title">Nueva biblioteca</h1>
             <label for="">Nombre:</label>
@@ -24,7 +24,7 @@
             <label for="">Hora de cierre:</label>
             <input type="time" name="hora_cierre">
             <label for="">Imagen:</label>
-            <input type="file" name="imagen">
+            <input type="file" name="imagen" accept=".jpg, .jpeg, .png, .svg, .webp">
             <button class="boton">Añadir</button>
         </div>
     </form>

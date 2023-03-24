@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ProyectoBibliotecas.Data;
+using ProyectoBibliotecas.Helpers;
 using ProyectoBibliotecas.Repositorys;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddSingleton<HelperPathProvider>();
+builder.Services.AddTransient<HelperUploadFiles>();
 builder.Services.AddTransient<BibliotecasRepository>();
 builder.Services.AddDbContext<BibliotecasContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
 

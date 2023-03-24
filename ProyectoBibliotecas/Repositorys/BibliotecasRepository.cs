@@ -282,6 +282,20 @@ namespace ProyectoBibliotecas.Repositorys
             return this.context.Autores.Where(x => x.ID_AUTOR == id).FirstOrDefault();
         }
 
+        public List<LibroDefault> GetLibrosAutor(int id)
+        {
+            return this.context.LibrosDef.Where(x => x.ID_AUTOR == id).ToList();
+        }
+
+        public List<LibroDefault> SearchLibroAutor(int id, string input)
+        {
+            string sql = "SP_SEARCHLIBRODEAUTOR @ID_AUTOR, @INPUT";
+            SqlParameter p1 = new SqlParameter("@ID_AUTOR", id);
+            SqlParameter p2 = new SqlParameter("@INPUT", input);
+            var consulta = this.context.LibrosDef.FromSqlRaw(sql, p1,p2);
+            return consulta.ToList();
+        }
+
         public void UpdateUsuario(string id, string nombre, string apellido, string email, int telefono, string usuario)
         {
             Usuario user = this.context.Usuarios.Where(x => x.DNI_USUARIO.Equals(id)).FirstOrDefault();
@@ -302,9 +316,9 @@ namespace ProyectoBibliotecas.Repositorys
             return consulta;
         }
 
-        public List<Reserva> GetResrevasLibro(int id)
+        public List<Reserva> GetResrevasLibro(int id , int idBiblio)
         {
-            return this.context.Reservas.Where(x => x.ID_LIBRO == id).ToList();
+            return this.context.Reservas.Where(x => x.ID_LIBRO == id && x.ID_BIBLIOTECA == idBiblio).ToList();
         }
 
         public List<string> GetDaysBetween(DateTime fecha_inicio, DateTime fecha_fin)
@@ -328,6 +342,7 @@ namespace ProyectoBibliotecas.Repositorys
             r.FECHA_INICIO = fechaI;
             r.FECHA_FIN = fechaF;
             r.DEVUELTO = true;
+            r.COMPLETADO = false;
             this.context.Reservas.Add(r);
             this.context.SaveChangesAsync();
         }
@@ -346,7 +361,7 @@ namespace ProyectoBibliotecas.Repositorys
             this.context.SaveChangesAsync();
         }
 
-        public void AddBiblio(string nombre, string direccion, int telefono, string web, TimeSpan hora_apertura, TimeSpan hora_cierre, IFormFile imagen)
+        public void AddBiblio(string nombre, string direccion, int telefono, string web, TimeSpan hora_apertura, TimeSpan hora_cierre, string imagen)
         {
             int nuevoId = this.context.Bibliotecas.Any() ? this.context.Bibliotecas.Max(x => x.ID_BIBLIOTECA) + 1 : 1;
             Biblioteca b = new Biblioteca();
@@ -355,19 +370,21 @@ namespace ProyectoBibliotecas.Repositorys
             b.DIRECCION = direccion;
             b.TELEFONO = telefono;
             b.WEB = web;
+            b.IMAGEN = imagen;
             b.HORA_APERTURA = hora_apertura;
             b.HORA_CIERRE = hora_cierre;
             this.context.Bibliotecas.Add(b);
             this.context.SaveChangesAsync();
         }
 
-        public void UpdateBiblio(int id, string nombre, string direccion, int telefono, string web, TimeSpan hora_apertura, TimeSpan hora_cierre, IFormFile imagen)
+        public void UpdateBiblio(int id, string nombre, string direccion, int telefono, string web, TimeSpan hora_apertura, TimeSpan hora_cierre, string imagen)
         {
             Biblioteca b = GetDatosBiblioteca(id);
             b.NOMBRE = nombre;
             b.DIRECCION = direccion;
             b.TELEFONO = telefono;
             b.WEB = web;
+            b.IMAGEN = imagen;
             b.HORA_APERTURA = hora_apertura;
             b.HORA_CIERRE = hora_cierre;
             this.context.SaveChangesAsync();
@@ -383,7 +400,7 @@ namespace ProyectoBibliotecas.Repositorys
             this.context.LibrosDef.Remove(l);
             this.context.SaveChangesAsync();
         }
-        public void AddLibro(string nombre, int numpag, IFormFile imagen, string urlcompra, string descripcion, string idioma, DateTime fecha_publicacion, int idautor)
+        public void AddLibro(string nombre, int numpag, string imagen, string urlcompra, string descripcion, string idioma, DateTime fecha_publicacion, int idautor)
         {
             int nuevoId = this.context.LibrosDef.Any() ? this.context.LibrosDef.Max(x => x.ID_LIBRO) + 1 : 1;
             LibroDefault b = new LibroDefault();
@@ -394,12 +411,13 @@ namespace ProyectoBibliotecas.Repositorys
             b.URL_COMPRA = urlcompra;
             b.DESCRIPCION = descripcion;
             b.IDIOMA = idioma;
+            b.IMAGEN = imagen;
             b.FECHA_PUBLICACION = fecha_publicacion;
             b.ID_AUTOR = idautor;
             this.context.LibrosDef.Add(b);
             this.context.SaveChangesAsync();
         }
-        public void UpdateLibro(int id, string nombre, int numpag, IFormFile imagen, string urlcompra, string descripcion, string idioma, DateTime fecha_publicacion, int idautor)
+        public void UpdateLibro(int id, string nombre, int numpag, string imagen, string urlcompra, string descripcion, string idioma, DateTime fecha_publicacion, int idautor)
         {
             LibroDefault b = GetDatosLibroDef(id);
             b.NOMBRE = nombre;
@@ -407,6 +425,7 @@ namespace ProyectoBibliotecas.Repositorys
             b.IMAGEN = null;
             b.URL_COMPRA = urlcompra;
             b.DESCRIPCION = descripcion;
+            b.IMAGEN = imagen;
             b.IDIOMA = idioma;
             b.FECHA_PUBLICACION = fecha_publicacion;
             b.ID_AUTOR = idautor;
@@ -421,7 +440,7 @@ namespace ProyectoBibliotecas.Repositorys
             this.context.Autores.Remove(l);
             this.context.SaveChangesAsync();
         }
-        public void AddAutor(string nombre, string nacionalidad, DateTime fechaNac, IFormFile imagen, string descripcion, int numLibros, string wiki)
+        public void AddAutor(string nombre, string nacionalidad, DateTime fechaNac, string imagen, string descripcion, int numLibros, string wiki)
         {
             int nuevoId = this.context.Autores.Any() ? this.context.Autores.Max(x => x.ID_AUTOR) + 1 : 1;
             Autor b = new Autor();
@@ -429,20 +448,20 @@ namespace ProyectoBibliotecas.Repositorys
             b.NOMBRE = nombre;
             b.NACIONALIDAD = nacionalidad;
             b.FECHA_NACIMIENTO = fechaNac;
-            b.IMAGEN = null;
+            b.IMAGEN = imagen;
             b.HISTORIA = descripcion;
             b.NUM_LIBROS = numLibros;
             b.WIKI = wiki;
             this.context.Autores.Add(b);
             this.context.SaveChangesAsync();
         }
-        public void UpdateAutor(int id, string nombre, string nacionalidad, DateTime fechaNac, IFormFile imagen, string descripcion, int numLibros, string wiki)
+        public void UpdateAutor(int id, string nombre, string nacionalidad, DateTime fechaNac, string imagen, string descripcion, int numLibros, string wiki)
         {
             Autor b = GetDatosAutor(id);
             b.NOMBRE = nombre;
             b.NACIONALIDAD = nacionalidad;
             b.FECHA_NACIMIENTO = fechaNac;
-            b.IMAGEN = null;
+            b.IMAGEN = imagen;
             b.HISTORIA = descripcion;
             b.NUM_LIBROS = numLibros;
             b.WIKI = wiki;
