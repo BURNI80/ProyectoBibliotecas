@@ -14,7 +14,7 @@
             }
             else
             {
-                <input type="search" class="light-table-filter" data-table="order-table" placeholder="Buscar por DNI" />
+                <input type="search" class="light-table-filter searchP" data-table="order-table" placeholder="Buscar por DNI" />
                 <table class="order-table table" style="width: 100%; border-spacing: 20px;">
                     <thead>
                         <tr class="thead">
@@ -127,6 +127,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="~/lib/sweetalert.js"></script>
 <style>
+    .searchP {
+        font-family: "Poppins";
+        font-size: 15px;
+        width: 70%;
+        height: 35px;
+        border: none;
+        color: var(--text);
+        border: 1px solid var(--border);
+        background: var(--bg-card);
+        box-shadow: 0px 4px 10px -4px rgb(0 0 0 / 25%);
+        border-radius: 50px;
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+
+
     .unselect {
         -moz-user-select: none;
         -ms-user-select: none;
